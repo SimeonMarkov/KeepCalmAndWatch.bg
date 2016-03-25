@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`history` (
     FOREIGN KEY (`videos_videos_id`)
     REFERENCES `keepCalmAndWatch`.`videos` (`videos_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION));
+    ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`playlists_to_videos` (
   `playlist_id` INT NOT NULL,
@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`playlists_to_videos` (
     ON UPDATE NO ACTION);
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
+/*SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+*/
