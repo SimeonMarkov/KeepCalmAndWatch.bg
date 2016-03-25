@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`users` (
   `channel_name` VARCHAR(45) NOT NULL,
   `description` NVARCHAR(250) NULL,
   `avatar` MEDIUMBLOB NULL,
+  `registration_date` DATETIME NULL,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   PRIMARY KEY (`username`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
@@ -37,19 +38,13 @@ CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`videos` (
   `likes` INT NOT NULL,
   `dislikes` INT NOT NULL,
   `thumbnail` MEDIUMBLOB NULL,
+  `upload_date` DATETIME NULL,
   `users_username` VARCHAR(45) NOT NULL,
-  `playlists_title` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`videos_id`),
   INDEX `fk_videos_users_idx` (`users_username` ASC),
-  INDEX `fk_videos_playlists1_idx` (`playlists_title` ASC),
   CONSTRAINT `fk_videos_users`
     FOREIGN KEY (`users_username`)
     REFERENCES `keepCalmAndWatch`.`users` (`username`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_videos_playlists1`
-    FOREIGN KEY (`playlists_title`)
-    REFERENCES `keepCalmAndWatch`.`playlists` (`title`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -91,11 +86,12 @@ CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`history` (
     FOREIGN KEY (`videos_videos_id`)
     REFERENCES `keepCalmAndWatch`.`videos` (`videos_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION));
 
 CREATE TABLE IF NOT EXISTS `keepCalmAndWatch`.`playlists_to_videos` (
   `playlist_id` INT NOT NULL,
   `video_id` INT NOT NULL,
+  `date_added` DATETIME NULL,
   PRIMARY KEY (`playlist_id`, `video_id`),
   INDEX `fk_playlists_to_videos_videos1_idx` (`video_id` ASC),
   CONSTRAINT `fk_playlists_to_videos_playlists1`
