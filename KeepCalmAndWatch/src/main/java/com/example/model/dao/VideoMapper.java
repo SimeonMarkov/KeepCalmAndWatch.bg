@@ -18,8 +18,8 @@ public class VideoMapper implements RowMapper<Video>{
 		video.setLikes(0);
 		video.setDislikes(0);
 		video.setThumbnail(rs.getBytes("thumbnail"));
-		video.setUploadDate(rs.getDate("registration_date").toLocalDate());
-		video.setUploader(); //TODO: how to add the current logged user as an uploader
+		video.setUploadDate(rs.getDate("registration_date"));
+		video.setUploader(new DBUserDAO().getUser("nikola")); //TODO: how to add the current logged user as an uploader
 	    return video;
 	}
 
