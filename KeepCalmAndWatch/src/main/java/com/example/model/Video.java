@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Video implements Comparable<Video>{
@@ -13,7 +14,7 @@ public class Video implements Comparable<Video>{
 	private int dislikes;
 	private User uploader;
 	private byte[] thumbnail;
-	private LocalDate uplodadDate;
+	private Date uplodadDate;
 	
 	//getters and setters
 	public int getId() {
@@ -71,10 +72,10 @@ public class Video implements Comparable<Video>{
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public LocalDate getUploadDate() {
+	public Date getUploadDate() {
 		return uplodadDate;
 	}
-	public void setUploadDate(LocalDate uplodadDate) {
+	public void setUploadDate(Date uplodadDate) {
 		this.uplodadDate = uplodadDate;
 	}
 
