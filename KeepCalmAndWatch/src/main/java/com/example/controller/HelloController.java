@@ -11,10 +11,9 @@ import com.example.model.User;
 import com.example.model.dao.DBUserDAO;
 
 @Controller
-@RequestMapping(value="/index")
 public class HelloController {
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String sayHello(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userJDBCTemplate = 
@@ -26,5 +25,14 @@ public class HelloController {
 	    model.addAttribute(user);
 	    return "test";
 	}	
+	
+	@RequestMapping(value="/register", method = RequestMethod.GET)
+	public String register(Model model) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+	
+	    return "register";
+	}
+	
 
 }
+
