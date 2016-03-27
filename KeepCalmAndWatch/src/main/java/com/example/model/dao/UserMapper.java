@@ -18,7 +18,7 @@ public class UserMapper implements RowMapper<User>{
 		user.setChannelName(rs.getString("channel_name"));
 		user.setDescription(rs.getString("description"));
 		user.setAvatar(rs.getBytes("avatar"));
-		user.setRegistrationDate(rs.getDate("registration_date").toLocalDate());
+		user.setRegistrationDate(rs.getDate("registration_date"));
 	    return user;
 	}
 

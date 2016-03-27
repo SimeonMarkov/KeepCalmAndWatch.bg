@@ -17,7 +17,7 @@ public class User {
 	private HashSet<User> subscribers;
 	private HashSet<User> subscriptions;
 	private TreeMap<Comment, LocalDateTime> comments;
-	private LocalDate registrationDate;
+	private Date registrationDate;
 	private TreeMap<LocalDateTime, Video> history;
 	private HashSet<Playlist> playlists;
 	private Playlist favorites;
@@ -103,11 +103,11 @@ public class User {
 		this.comments = comments;
 	}
 
-	public LocalDate getRegistrationDate() {
+	public Date getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(LocalDate registrationDate) {
+	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

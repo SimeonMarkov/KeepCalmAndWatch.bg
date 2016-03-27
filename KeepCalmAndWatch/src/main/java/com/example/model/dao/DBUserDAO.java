@@ -21,8 +21,10 @@ public class DBUserDAO implements IUserDAO {
 
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String query = "INSERT INTO keepcalmandwatch.users (username, password, email, channel_name, description, avatar, registration_date) VALUES(?, ?, ?, ?, ?, ?, ?);";		
+		jdbcTemplateObject.update(query, user.getUsername(), user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate());
+		return true;
 	}
 
 	@Override
@@ -33,6 +35,7 @@ public class DBUserDAO implements IUserDAO {
 		return user;
 	}
 
+	
 	@Override
 	public List<User> listUsers() throws SQLException {
 		String query = "select * from users";

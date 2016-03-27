@@ -68,40 +68,40 @@
 			    		<h3 class="panel-title">Регистрация на потребител</h3>
 			 			</div>
 			 			<div class="panel-body">
-			    		<form role="form">
+			    		<form:form method="POST" action="/KeepCalmAndWatch/registerUser" role="form">
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			                <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Потребителско име">
+			               				<form:input path="username" type="text" name="username" id="username" class="form-control input-sm" placeholder="Потребителско име"/>
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Имейл адрес">
+			    						<form:input path="email" type="email" name="email" id="email" class="form-control input-sm" placeholder="Имейл адрес"/>
 			    					</div>
 			    				</div>
 			    			</div>
 
 			    			<div class="form-group">
-			    				<input type="text" name="channel_name" id="channel_name" class="form-control input-sm" placeholder="Име на канала">
+			    				<form:input path="channelName" type="text" name="channelName" id="channelName" class="form-control input-sm" placeholder="Име на канала"/>
 			    			</div>
 
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Парола">
+			    						<form:input path="password" type="password" name="password" id="password" class="form-control input-sm" placeholder="Парола"/>
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Потвърдете паролата">
+			    						<input path="passwordconfirmation" type="password" name="passwordconfirmation" id="password_confirmation" class="form-control input-sm" placeholder="Потвърдете паролата">
 			    					</div>
 			    				</div>
 			    			</div>
 			    			
 			    			<input type="submit" value="Регистрация" class="btn btn-primary btn-block">
 			    		
-			    		</form>
+			    		</form:form>
 			    	</div>
 	    		</div>
     		</div>
