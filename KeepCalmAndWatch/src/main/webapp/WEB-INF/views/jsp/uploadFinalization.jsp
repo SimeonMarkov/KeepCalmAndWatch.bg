@@ -102,7 +102,7 @@ a:hover {
 					</button>
 				</span>
 			</div>
-			<p>Качването премина успешно!</p>
+			<p>${message}</p>
 		</div>
 	</div>
 </body>

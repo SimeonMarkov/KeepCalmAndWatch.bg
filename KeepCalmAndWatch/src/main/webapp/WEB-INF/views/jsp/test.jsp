@@ -51,36 +51,69 @@ footer {
 a:hover {
 	text-decoration: none;
 }
+
+.input-group {
+	width: 500px;
+	position: absolute;
+	top: 10px;
+	left: 400px;
+}
+
+#upload {
+	position: absolute;
+	top: 5px;
+	right: 50px;
+}
+
+#avatar {
+	position: absolute;
+	top: 5px;
+	right: 25px;
+}
 </style>
 </head>
 <body>
-	
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
-
-				<h4>John's Blog</h4>
+				<a href="#"> <span class="glyphicon glyphicon-align-justify"></span>
+				</a>
 				<ul class="nav nav-pills nav-stacked">
 					<li class="active"><a href="#section1">Начална страница</a></li>
 					<li><a href="#section2">Моят канал</a></li>
 					<li><a href="#section3">Абонаменти</a></li>
 					<li><a href="#section3">История</a></li>
 				</ul>
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search Blog..">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
+
+			</div>
+			<div id="logo">
+				<a href="/KeepCalmAndWatch"><img
+					src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif"
+					width="50px" height="50px" /></a>
+			</div>
+
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search Blog..">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+			<div id="upload">
+				<a href="upload" class="btn btn-primary btn-sm" id="upload"
+					type="submit">Качване</a>
+			</div>
+			<div id="avatar">
+				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
+					src="http://www.forplay.bg/forums/avs/avatar_114_1446077663.png" />
 			</div>
 
 			<div class="col-sm-10">
 
-				
+
 				<c:out value="${user.channelName}" />
-				 
+
 			</div>
 		</div>
 	</div>

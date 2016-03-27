@@ -108,8 +108,11 @@ a:hover {
 				<br>
 				<form:form commandName="">
 					<label>Здравейте,${user.channelName}!Изберете видео
-						файл,който искате да качите:</label><br> <input type="file" /> <input
-						type="submit" value="Качи">
+						файл,който искате да качите:</label><br> <input type="file" name="videoPath"> <br><br>
+						<input type="text" name="title" placeholder="Insert video title..."> <br><br>
+						<input type="text" name="description" placeholder="Add description..."> <br><br>
+						<input type="file" name="thumbnail"><br><br>
+						<input type="submit" value="Качи">
 				</form:form>
 			</div>
 		</div>
