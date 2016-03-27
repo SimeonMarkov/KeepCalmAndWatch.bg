@@ -38,8 +38,7 @@ public class UploadController {
 	 public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("thumbnail") byte[] thumbnail , @RequestParam("videoPath") String videoPath) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 				  ModelAndView mav = new ModelAndView("uploadFinalization");
-				  User user = ((DBUserDAO) context.getBean("DBUserDAO")).getUser("nikola");
-				  mav.addObject("message", "User with channel name " + user.getChannelName() + "uploaded a video with path " +  videoPath + ",title " + title + " and description " + description +  " was sucessfully uploaded!");
+				  
 				  DBVideoDAO videoJDBCTemplate = 
 					      (DBVideoDAO)context.getBean("DBVideoDAO");
 				  Video video = new Video();
@@ -53,8 +52,10 @@ public class UploadController {
 					video.setDislikes(0);
 					video.setThumbnail(thumbnail);
 					video.setUploadDate(Date.valueOf(LocalDate.now()));
+					User user = ((DBUserDAO) context.getBean("DBUserDAO")).getUser("nikola");
 					video.setUploader(user); //TODO: how to add the current logged user as an uploader
 					videoJDBCTemplate.addVideo(video);
+					mav.addObject("message", "User with channel name " + user.getChannelName() + "uploaded a video with path " +  videoPath + ",title " + title + " and description " + description +  " was sucessfully uploaded on " + video.getUploadDate());
 //			      model.addAttribute("name", video.getTitle());
 //			      model.addAttribute("name", video.getDescription());
 //			      model.addAttribute("name", video.getPath());
