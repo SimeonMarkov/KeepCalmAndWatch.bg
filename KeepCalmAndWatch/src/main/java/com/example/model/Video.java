@@ -71,10 +71,10 @@ public class Video implements Comparable<Video>{
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public LocalDate getUplodadDate() {
+	public LocalDate getUploadDate() {
 		return uplodadDate;
 	}
-	public void setUplodadDate(LocalDate uplodadDate) {
+	public void setUploadDate(LocalDate uplodadDate) {
 		this.uplodadDate = uplodadDate;
 	}
 
