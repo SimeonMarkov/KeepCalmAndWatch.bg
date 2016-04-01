@@ -55,7 +55,7 @@ public class UploadController {
 					User user = ((DBUserDAO) context.getBean("DBUserDAO")).getUser("nikola");
 					video.setUploader(user); //TODO: how to add the current logged user as an uploader
 					videoJDBCTemplate.addVideo(video);
-					mav.addObject("message", "User with channel name " + user.getChannelName() + "uploaded a video with path " +  videoPath + ",title " + title + " and description " + description +  " was sucessfully uploaded on " + video.getUploadDate());
+					mav.addObject("message", "User with channel name " + user.getChannelName() + " uploaded a video with path " +  videoPath + ",title " + title + " and description " + description +  " was sucessfully uploaded on " + video.getUploadDate());
 //			      model.addAttribute("name", video.getTitle());
 //			      model.addAttribute("name", video.getDescription());
 //			      model.addAttribute("name", video.getPath());
