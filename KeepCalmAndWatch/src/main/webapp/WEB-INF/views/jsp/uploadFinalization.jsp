@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Качване</title>
+<title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -54,20 +55,20 @@ a:hover {
 
 .input-group {
 	width: 500px;
-	position: relative;
-	top: 10px;
-	left: 250px;
+	position: absolute;
+	top: 5px;
+	left: 400px;
 }
 
 #upload {
 	position: absolute;
 	top: 10px;
-	right: 150px;
+	right: 100px;
 }
 
 #avatar {
 	position: absolute;
-	top: 10px;
+	top: 5px;
 	right: 25px;
 }
 </style>
@@ -89,10 +90,11 @@ a:hover {
 
 			</div>
 			<a href="/KeepCalmAndWatch"><img
-				src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif" /></a>
-			<a href="upload" class="btn btn-primary btn-sm" id="upload"
-				type="submit">Качване</a> <img class="img-circle" id="avatar"
-				alt="Cinque Terre" width="50" height="50"
+				src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif"
+				width="50px" height="50px" /></a> <a href="upload"
+				class="btn btn-primary btn-sm" id="upload" type="submit">Качване</a>
+			<img class="img-circle" id="avatar" alt="Cinque Terre" width="50"
+				height="50"
 				src="http://www.forplay.bg/forums/avs/avatar_114_1446077663.png" />
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search Blog..">
@@ -102,7 +104,10 @@ a:hover {
 					</button>
 				</span>
 			</div>
+			<div>
 			<p>${message}</p>
+				<br>
+			</div>
 		</div>
 	</div>
 </body>
