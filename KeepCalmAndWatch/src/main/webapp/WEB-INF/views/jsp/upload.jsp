@@ -72,6 +72,30 @@ a:hover {
 	right: 25px;
 }
 </style>
+<script>
+	$(document).ready(function() {
+		$('#videoUpload').change(function() {
+			var val = $(this).val().toLowerCase();
+			var regex = new RegExp("(.*?)\.(ogv|mp4)$");
+			if (!(regex.test(val))) {
+				$(this).val('');
+				alert('Please select a file with extension either .ogv or .mp4 for a video!');
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('#thumbnailUpload').change(function() {
+			var val = $(this).val().toLowerCase();
+			var regex = new RegExp("(.*?)\.(jpg|png)$");
+			if (!(regex.test(val))) {
+				$(this).val('');
+				alert('Please select a file with extension either .jpg or .png for a thumbnail!');
+			}
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -108,11 +132,22 @@ a:hover {
 				<br>
 				<form:form commandName="">
 					<label>Здравейте,${user.channelName}!Изберете видео
-						файл,който искате да качите:</label><br> <input type="file" name="videoPath"> <br><br>
-						<input type="text" name="title" placeholder="Insert video title..."> <br><br>
-						<input type="text" name="description" placeholder="Add description..."> <br><br>
-						<input type="file" name="thumbnail"><br><br>
-						<input type="submit" value="Качи">
+						файл,който искате да качите:</label>
+					<br>
+					<input type="file" id="videoUpload" name="videoPath">
+					<br>
+					<br>
+					<input type="text" name="title" placeholder="Insert video title...">
+					<br>
+					<br>
+					<input type="text" name="description"
+						placeholder="Add description...">
+					<br>
+					<br>
+					<input type="file" id="thumbnailUpload" name="thumbnail">
+					<br>
+					<br>
+					<input type="submit" value="Качи">
 				</form:form>
 			</div>
 		</div>
