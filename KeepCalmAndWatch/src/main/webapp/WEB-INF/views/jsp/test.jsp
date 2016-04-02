@@ -7,6 +7,7 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/png" />
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script
@@ -88,7 +89,7 @@ a:hover {
 			</div>
 			<div id="logo">
 				<a href="/KeepCalmAndWatch"><img
-					src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif"
+					src="${pageContext.request.contextPath}/img/logo.jpg"
 					width="50px" height="50px" /></a>
 			</div>
 
