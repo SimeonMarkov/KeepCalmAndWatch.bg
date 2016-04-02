@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.model.User;
 import com.example.model.dao.DBUserDAO;
 
 @Controller
-public class HelloController {
+public class RegistrationLoginController {
 
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String sayHello(Model model) {
@@ -42,14 +43,32 @@ public class HelloController {
 	
 
 	  @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	   public String registerUser(@ModelAttribute("SpringWeb")User user, 
-	   ModelMap model) {
+	   public String registerUser(@ModelAttribute("SpringWeb")User user, ModelMap model, final RedirectAttributes redirectAttributes) {
 		  ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		  user.setRegistrationDate(Date.valueOf(LocalDate.now()));
 		  DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
+		  String fail = "";
+		  if(dbUserDao.emailExist(user.getEmail())){
+			  fail = "Имейл адресът е вече зает!";
+			  redirectAttributes.addFlashAttribute("fail", fail);
+			  return "redirect:/register";
+		  }else if(dbUserDao.channelExist(user.getChannelName())){
+			  fail = "Канал с такова име вече съществува!";
+			  redirectAttributes.addFlashAttribute("fail", fail);
+			  return "redirect:/register";
+		  }else if(dbUserDao.userExist(user.getUsername())){
+			  fail = "Потребителското име е вече заето!";
+			  redirectAttributes.addFlashAttribute("fail", fail);
+			  return "redirect:/register";
+		  } else if(user.getPassword().length()<6){
+			  fail = "Паролата съдържа по-малко от 6 символа!";
+			  redirectAttributes.addFlashAttribute("fail", fail);
+			  return "redirect:/register";
+		  }else {
 		  dbUserDao.addUser(user);
 		  model.addAttribute(user);
 	      return "test";
+	      }
 	   }
 }
 

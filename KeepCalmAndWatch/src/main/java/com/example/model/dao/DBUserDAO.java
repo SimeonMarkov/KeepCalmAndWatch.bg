@@ -1,10 +1,12 @@
 package com.example.model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.model.User;
@@ -44,4 +46,34 @@ public class DBUserDAO implements IUserDAO {
 	      return users;
 	}
 
+	public boolean userExist(String username){
+		String query = "SELECT username FROM keepcalmandwatch.users WHERE username = ?";
+			try {
+				String s = jdbcTemplateObject.queryForObject(query, String.class, username);
+			} catch (EmptyResultDataAccessException e) {
+				return false;
+			}
+			return true;
+	}
+	
+	public boolean channelExist(String channel){
+		String query = "SELECT email FROM keepcalmandwatch.users WHERE email = ?;";
+		try {
+			String s = jdbcTemplateObject.queryForObject(query, String.class, channel);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean emailExist(String email){
+		String query = "SELECT channel_name FROM keepcalmandwatch.users WHERE channel_name = ?;";
+		
+		try {
+			String s = jdbcTemplateObject.queryForObject(query, String.class, email);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		return true;
+	}
 }

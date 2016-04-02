@@ -96,6 +96,7 @@ footer {
 					class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
 					<div class="panel panel-default">
 						<div class="panel-heading">
+						<p><color="red">${fail}</color></p>
 							<h3 class="panel-title">Регистрация на потребител</h3>
 						</div>
 						<div class="panel-body">
