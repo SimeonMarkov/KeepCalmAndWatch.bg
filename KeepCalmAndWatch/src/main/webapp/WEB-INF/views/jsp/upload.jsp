@@ -94,6 +94,10 @@ a:hover {
 				$(this).val('');
 				alert('Please select a file with extension either .jpg or .png for a thumbnail!');
 			}
+			if(val == null || val == ""){
+				$(this).val('');
+				alert('Please select a file to upload!');
+			}
 		});
 	});
 </script>
