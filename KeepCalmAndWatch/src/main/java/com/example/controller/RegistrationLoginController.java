@@ -48,6 +48,8 @@ public class RegistrationLoginController {
 		  user.setRegistrationDate(Date.valueOf(LocalDate.now()));
 		  DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
 		  String fail = "";
+		  
+		  
 		  if(dbUserDao.emailExist(user.getEmail())){
 			  fail = "Имейл адресът е вече зает!";
 			  redirectAttributes.addFlashAttribute("fail", fail);
