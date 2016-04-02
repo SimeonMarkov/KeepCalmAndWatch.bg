@@ -16,6 +16,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/validateRegistration.js"></script>
 <style>
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {
@@ -98,7 +99,7 @@ footer {
 							<h3 class="panel-title">Регистрация на потребител</h3>
 						</div>
 						<div class="panel-body">
-							<form:form method="POST" action="/KeepCalmAndWatch/registerUser"
+							<form:form name="regform" onsubmit="return validateForm()" method="POST" action="/KeepCalmAndWatch/registerUser"
 								role="form">
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6">
