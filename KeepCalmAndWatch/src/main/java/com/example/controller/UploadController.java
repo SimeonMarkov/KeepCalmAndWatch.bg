@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.User;
@@ -20,6 +21,7 @@ import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
 @Controller
+@SessionAttributes("LoggedUser")
 @RequestMapping("/upload")
 public class UploadController {
 	
@@ -52,10 +54,10 @@ public class UploadController {
 					video.setDislikes(0);
 					video.setThumbnail(thumbnail);
 					video.setUploadDate(Date.valueOf(LocalDate.now()));
-					User user = ((DBUserDAO) context.getBean("DBUserDAO")).getUser("nikola");
+					User user = (User) model.get("LoggedUser");
 					video.setUploader(user); //TODO: how to add the current logged user as an uploader
 					videoJDBCTemplate.addVideo(video);
-					mav.addObject("message", "User with channel name " + user.getChannelName() + " uploaded a video with path " +  videoPath + ",title " + title + " and description " + description +  " was sucessfully uploaded on " + video.getUploadDate());
+					mav.addObject("message", ((User)model.get("LoggedUser")).getChannelName()  + ",Вие успешно качихте клип,намиращ се в директорията " +  videoPath + ",който е със заглавие: " + title + " и описание: " + description +  " на дата " + video.getUploadDate());
 //			      model.addAttribute("name", video.getTitle());
 //			      model.addAttribute("name", video.getDescription());
 //			      model.addAttribute("name", video.getPath());
