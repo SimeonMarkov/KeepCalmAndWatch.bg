@@ -40,6 +40,9 @@ public class RegistrationLoginController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView getToLoginPage(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		if(model.containsAttribute("LoggedUser")){
+			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
+		}
 		return new ModelAndView("login", "command", new User());
 	}	
 	
@@ -58,9 +61,11 @@ public class RegistrationLoginController {
 	
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 
-	public ModelAndView register() {
+	public ModelAndView register(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
+		if(model.containsAttribute("LoggedUser")){
+			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
+		}
 		return new ModelAndView("register", "command", new User());
 	}
 
