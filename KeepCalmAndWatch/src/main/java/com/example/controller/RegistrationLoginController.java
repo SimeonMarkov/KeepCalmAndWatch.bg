@@ -67,6 +67,7 @@ public class RegistrationLoginController {
 			redirectAttributes.addFlashAttribute("fail", fail);
 			return "redirect:/register";
 		} else {
+			user.setPassword(encodePassword(user.getPassword()));
 			dbUserDao.addUser(user);
 			model.addAttribute(user);
 			return "test";
