@@ -31,6 +31,9 @@ public class DBUserDAO implements IUserDAO {
 
 	@Override
 	public User getUser(String username) {
+		if(!userExist(username)){
+			return null;
+		}
 		String query = "select * from users where username = ?";
 		User user = jdbcTemplateObject.queryForObject(query,
 				new Object[] { username }, new UserMapper());

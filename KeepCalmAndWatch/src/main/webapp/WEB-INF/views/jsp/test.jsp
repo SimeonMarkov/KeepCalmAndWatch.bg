@@ -113,7 +113,7 @@ a:hover {
 			<div class="col-sm-10">
 
 
-				<c:out value="${user.channelName}" />
+				<c:out value="Hello,${LoggedUser.channelName}" />
 
 			</div>
 		</div>

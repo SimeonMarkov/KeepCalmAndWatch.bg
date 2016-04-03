@@ -14,6 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,21 +23,41 @@ import com.example.model.User;
 import com.example.model.dao.DBUserDAO;
 
 @Controller
+@SessionAttributes("LoggedUser")
 public class RegistrationLoginController {
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String sayHello(Model model) {
+	@RequestMapping(value="/index", method = RequestMethod.GET)
+	public String loadHomePage(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		DBUserDAO userJDBCTemplate = (DBUserDAO) context.getBean("DBUserDAO");
-		User user = userJDBCTemplate.getUser("nikola");
-		System.out.print("Channel name : " + user.getChannelName());
-		System.out.print(", Email : " + user.getEmail());
-		System.out.println(", Registered on : " + user.getRegistrationDate());
-		model.addAttribute(user);
-		return "test";
+		DBUserDAO userJDBCTemplate = 
+			      (DBUserDAO)context.getBean("DBUserDAO");
+		if(model.containsAttribute("LoggedUser")){
+			return "test";
+		}
+	    return "redirect:/login";
+	}	
+	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public ModelAndView getToLoginPage(Model model) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		return new ModelAndView("login", "command", new User());
+	}	
+	
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public String submitLogin(Model model, @ModelAttribute("SpringWeb")User user, @RequestParam String username, @RequestParam String password, final RedirectAttributes redirectAttributes) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
+		user = dbUserDao.getUser(username);
+		if(user == null || !(user.getPassword().equals(password))){
+			redirectAttributes.addFlashAttribute("fail","Грешно потребителско име или парола!");
+			return "redirect:/login";
+		}
+		model.addAttribute("LoggedUser",user);
+	    return "redirect:/index";
 	}
+	
+	@RequestMapping(value="/register", method = RequestMethod.GET)
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
