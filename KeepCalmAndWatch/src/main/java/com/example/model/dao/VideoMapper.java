@@ -1,5 +1,6 @@
 package com.example.model.dao;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -7,9 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.example.model.User;
 import com.example.model.Video;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class VideoMapper implements RowMapper<Video>{
 
+	@SuppressWarnings("restriction")
 	@Override
 	public Video mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Video video = new Video();
@@ -18,7 +21,9 @@ public class VideoMapper implements RowMapper<Video>{
 		video.setViews(0);
 		video.setLikes(0);
 		video.setDislikes(0);
-		video.setThumbnail(rs.getBytes("thumbnail"));
+		Blob blob = rs.getBlob("thumbnail");
+		byte[] bdata = blob.getBytes(1, (int) blob.length());
+		video.setThumbnail(Base64.encode(bdata));
 		video.setUploadDate(rs.getDate("upload_date"));
 		User user = new User();
 		user.setUsername(rs.getString("users_username"));

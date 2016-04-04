@@ -56,8 +56,8 @@
 			<table>
 				<tr>
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<td><c:out value="${video.thumbnail} " /><br/>
-						<c:out value="${video.title}" />
+						<td><a href="${video.path}"><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /></a><br/>
+						<c:out value="${video.title}" /><br/>
 						</td>
 					</c:forEach>
 					

@@ -13,7 +13,7 @@ public class Video implements Comparable<Video>{
 	private int likes;
 	private int dislikes;
 	private User uploader;
-	private byte[] thumbnail;
+	private String thumbnail;
 	private Date uplodadDate;
 	
 	//getters and setters
@@ -66,10 +66,10 @@ public class Video implements Comparable<Video>{
 	public void setUploader(User uploader) {
 		this.uploader = uploader;
 	}
-	public byte[] getThumbnail() {
+	public String getThumbnail() {
 		return thumbnail;
 	}
-	public void setThumbnail(byte[] thumbnail) {
+	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 	public Date getUploadDate() {
