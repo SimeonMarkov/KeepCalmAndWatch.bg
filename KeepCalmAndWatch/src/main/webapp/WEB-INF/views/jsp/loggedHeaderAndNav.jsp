@@ -53,9 +53,16 @@
 					<li><a href="#section3">История</a></li>
 				</ul>
 			</div>
-			<c:forEach var="video" items="${sessionScope.AllVideos}">
-				<c:out value="${video.title} " /><br/>
-			</c:forEach>
+			<table>
+				<tr>
+					<c:forEach var="video" items="${sessionScope.AllVideos}">
+						<td><c:out value="${video.thumbnail} " /><br/>
+						<c:out value="${video.title}" />
+						</td>
+					</c:forEach>
+					
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>
