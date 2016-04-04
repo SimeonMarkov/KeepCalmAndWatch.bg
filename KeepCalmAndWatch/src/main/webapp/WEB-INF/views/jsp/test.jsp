@@ -14,87 +14,17 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<style>
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {
-	height: 1500px
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-	background-color: #f1f1f1;
-	height: 100%;
-	width: 200px;
-}
-
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
-	.row.content {
-		height: auto;
-	}
-}
-
-.form-control {
-	resize: vertical;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.input-group {
-	width: 500px;
-	position: absolute;
-	top: 10px;
-	left: 400px;
-}
-
-#upload {
-	position: absolute;
-	top: 5px;
-	right: 50px;
-}
-
-#avatar {
-	position: absolute;
-	top: 5px;
-	right: 25px;
-}
-</style>
+<link href="${pageContext.request.contextPath}/css/headerAndSidenav.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row content">
-			<div class="col-sm-3 sidenav">
-				<a href="#"> <span class="glyphicon glyphicon-align-justify"></span>
-				</a>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#section1">Начална страница</a></li>
-					<li><a href="#section2">Моят канал</a></li>
-					<li><a href="#section3">Абонаменти</a></li>
-					<li><a href="#section3">История</a></li>
-				</ul>
-
-			</div>
 			<div id="logo">
 				<a href="/KeepCalmAndWatch"><img
 					src="${pageContext.request.contextPath}/img/logo.jpg"
-					width="50px" height="50px" /></a>
+					width="200px" height="70px" /></a>
 			</div>
 
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search Blog..">
+				<input type="text" class="form-control" placeholder="Търсене..">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">
 						<span class="glyphicon glyphicon-search"></span>
@@ -109,6 +39,19 @@ a:hover {
 				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
 					src="http://www.forplay.bg/forums/avs/avatar_114_1446077663.png" />
 			</div>
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="col-sm-3 sidenav">
+				<br>
+				<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#section1">Начална страница</a></li>
+					<li><a href="#section2">Моят канал</a></li>
+					<li><a href="#section3">Абонаменти</a></li>
+					<li><a href="#section3">История</a></li>
+				</ul>
+
+			</div>
+
 
 			<div class="col-sm-10">
 
