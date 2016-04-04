@@ -32,16 +32,16 @@ public class RegistrationLoginController {
 		DBUserDAO userJDBCTemplate = 
 			      (DBUserDAO)context.getBean("DBUserDAO");
 		if(model.containsAttribute("LoggedUser")){
-			return "test";
+			return "loggedHeaderAndNav";
 		}
-	    return "redirect:/login";
+	    return "unloggedHeaderAndNav";
 	}	
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView getToLoginPage(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		if(model.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
+			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", model.asMap().get("LoggedUser"));
 		}
 		return new ModelAndView("login", "command", new User());
 	}	
@@ -64,7 +64,7 @@ public class RegistrationLoginController {
 	public ModelAndView register(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		if(model.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
+			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", model.asMap().get("LoggedUser"));
 		}
 		return new ModelAndView("register", "command", new User());
 	}

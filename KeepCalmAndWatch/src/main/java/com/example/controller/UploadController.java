@@ -27,12 +27,12 @@ public class UploadController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String goToUpload(Model model){
-		System.out.println("Going to upload...");
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userJDBCTemplate = 
 			      (DBUserDAO)context.getBean("DBUserDAO");
-		User user = userJDBCTemplate.getUser("nikola");
-		model.addAttribute(user);
+		if(!model.containsAttribute("LoggedUser")){
+			return "redirect:/login";
+		}
 		return "upload";
 	}
 	
