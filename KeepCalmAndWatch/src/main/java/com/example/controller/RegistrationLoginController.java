@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -21,17 +22,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.model.User;
 import com.example.model.dao.DBUserDAO;
+import com.example.model.dao.DBVideoDAO;
 
 @Controller
-@SessionAttributes("LoggedUser")
+@SessionAttributes(value={"LoggedUser","AllVideos"})
 public class RegistrationLoginController {
 
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String loadHomePage(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		DBUserDAO userJDBCTemplate = 
-			      (DBUserDAO)context.getBean("DBUserDAO");
+		DBVideoDAO dbVideoDao = 
+			      (DBVideoDAO)context.getBean("DBVideoDAO");
 		if(model.containsAttribute("LoggedUser")){
+			try {
+				model.addAttribute("AllVideos",dbVideoDao.listVideos());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return "loggedHeaderAndNav";
 		}
 	    return "unloggedHeaderAndNav";
@@ -41,7 +49,7 @@ public class RegistrationLoginController {
 	public ModelAndView getToLoginPage(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		if(model.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", model.asMap().get("LoggedUser"));
+			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
 		}
 		return new ModelAndView("login", "command", new User());
 	}	
