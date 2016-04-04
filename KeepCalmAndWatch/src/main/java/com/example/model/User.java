@@ -12,7 +12,7 @@ public class User {
 	private String email;
 	private String channelName;
 	private String description;
-	private byte[] avatar;
+	private String avatar;
 	private TreeSet<Video> uploaded;
 	private HashSet<User> subscribers;
 	private HashSet<User> subscriptions;
@@ -63,11 +63,11 @@ public class User {
 		this.description = description;
 	}
 
-	public byte[] getAvatar() {
+	public String getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(byte[] avatar) {
+	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
 

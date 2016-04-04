@@ -40,7 +40,7 @@
 	</div>
 	<div id="avatar">
 		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="http://www.forplay.bg/forums/avs/avatar_114_1446077663.png" />
+			src="data:image/gif;base64,${LoggedUser.avatar}" />
 	</div>
 	<div class="container-fluid">
 		<div class="row content">
@@ -53,6 +53,7 @@
 					<li><a href="#section3">История</a></li>
 				</ul>
 			</div>
+			<p>Hello,${LoggedUser.channelName}</p>
 			<table>
 				<tr>
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
