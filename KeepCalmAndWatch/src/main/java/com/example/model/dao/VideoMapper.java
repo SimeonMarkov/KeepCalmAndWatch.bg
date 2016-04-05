@@ -18,9 +18,9 @@ public class VideoMapper implements RowMapper<Video>{
 		Video video = new Video();
 		video.setTitle(rs.getString("title"));
 		video.setDescription(rs.getString("description"));
-		video.setViews(0);
-		video.setLikes(0);
-		video.setDislikes(0);
+		video.setViews(rs.getInt("views"));
+		video.setLikes(rs.getInt("likes"));
+		video.setDislikes(rs.getInt("dislikes"));
 		Blob blob = rs.getBlob("thumbnail");
 		byte[] bdata = blob.getBytes(1, (int) blob.length());
 		video.setThumbnail(Base64.encode(bdata));

@@ -68,8 +68,8 @@
 			<table>
 				<tr>
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<td><a href="${video.path}"><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /></a><br/>
-						<a href="${video.path}"><c:out value="${video.title}" /></a><br/>
+						<td><a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /></a><br/>
+						<a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><c:out value="${video.title}" /></a><br/>
 						</td>
 					</c:forEach>
 					

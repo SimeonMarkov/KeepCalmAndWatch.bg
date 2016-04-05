@@ -42,5 +42,4 @@ public class DBVideoDAO implements IVideoDAO{
 	                                new VideoMapper());
 	      return videos;
 	}
-
 }
