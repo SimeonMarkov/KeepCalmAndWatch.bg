@@ -100,7 +100,7 @@ footer {
 							<h3 class="panel-title">Влизане</h3>
 						</div>
 						<div class="panel-body">
-							<form:form method="POST" action="/KeepCalmAndWatch/login"
+							<form:form name="loginForm" onsubmit="return validateLogin()" method="POST" action="/KeepCalmAndWatch/login"
 								role="form">
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6">
