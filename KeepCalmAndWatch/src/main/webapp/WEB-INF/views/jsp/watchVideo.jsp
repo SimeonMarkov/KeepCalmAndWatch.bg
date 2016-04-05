@@ -19,8 +19,6 @@
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
 <style>
-
-
 .form-control {
 	display: block;
 	overflow: hidden;
@@ -109,10 +107,12 @@ a:hover {
 			</button>
 		</span>
 	</div>
-	<div id="avatar">
-		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="data:image/gif;base64,${LoggedUser.avatar}" />
-	</div>
+	<c:if test="${not empty sessionScope.LoggedUser}">
+		<div id="avatar">
+			<img class="img-circle" alt="N/A" width="50" height="50"
+				src="data:image/gif;base64,${LoggedUser.avatar}" />
+		</div>
+	</c:if>
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button"
 			id="menu1" data-toggle="dropdown">
@@ -120,14 +120,22 @@ a:hover {
 		</button>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">Начална страница</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">Моят канал</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">Абонаменти</a></li>
-			<li role="presentation" class="divider"></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="${pageContext.request.contextPath}/logout">Изход</a></li>
+				href="${pageContext.request.contextPath}/index">Начална страница</a></li>
+			<c:if test="${not empty sessionScope.LoggedUser}">
+				<li role="presentation"><a role="menuitem" tabindex="-1"
+					href="#">Моят канал</a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1"
+					href="#">Абонаменти</a></li>
+
+				<li role="presentation" class="divider"></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1"
+					href="${pageContext.request.contextPath}/logout">Изход</a></li>
+			</c:if>
+			<c:if test="${empty sessionScope.LoggedUser}">
+				<li role="presentation" class="divider"></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1"
+					href="${pageContext.request.contextPath}/login">Влез</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<div style="position: relative; top: 50px;">
@@ -135,9 +143,12 @@ a:hover {
 			style="width: 940px; height: 590px; border: 1px solid black;">
 			<video width="940" height="590" controls tabindex="0"
 				poster="D:/picthas/source.jpg">
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.ogv" type="video/ogg" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/mp4" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/webm" />
+				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.ogv"
+					type="video/ogg" />
+				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4"
+					type="video/mp4" />
+				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4"
+					type="video/webm" />
 			</video>
 			<div>
 				<h2>Some video</h2>
@@ -197,24 +208,26 @@ a:hover {
 
 
 		<div class="suggestions">
-			
+
 			<c:forEach var="video" items="${sessionScope.AllVideos}">
-			<a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}">
-				<table>
-					<tr>
-						<td><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /><br/>
-						<div>
-							<span class="mealName">${video.title}</span>
-						</div>
-						<div class="divIngredients">
-								<span class="mealIngredients">${video.views}</span>
-							</div>
-						</td>
-					</tr>
-					
-				</table>
-			</a><br> 
-			</c:forEach>	
+				<a
+					href="${pageContext.request.contextPath}/watchVideo?v=${video.id}">
+					<table>
+						<tr>
+							<td><img src="data:image/gif;base64,${video.thumbnail}"
+								width="50px" height="50px" /><br />
+								<div>
+									<span class="mealName">${video.title}</span>
+								</div>
+								<div class="divIngredients">
+									<span class="mealIngredients">${video.views}</span>
+								</div></td>
+						</tr>
+
+					</table>
+				</a>
+				<br>
+			</c:forEach>
 		</div>
 	</div>
 

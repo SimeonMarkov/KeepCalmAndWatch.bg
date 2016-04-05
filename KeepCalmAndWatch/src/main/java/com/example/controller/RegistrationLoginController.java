@@ -1,10 +1,13 @@
 package com.example.controller;
 
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
+
+import javax.servlet.http.HttpSession;
 
 import org.bouncycastle.jcajce.provider.digest.SHA3.DigestSHA3;
 import org.springframework.context.ApplicationContext;
@@ -29,13 +32,13 @@ import com.example.model.dao.DBVideoDAO;
 public class RegistrationLoginController {
 
 	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public String loadHomePage(Model model) {
+	public String loadHomePage(ModelMap modelMap ,HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBVideoDAO dbVideoDao = 
 			      (DBVideoDAO)context.getBean("DBVideoDAO");
-		if(model.containsAttribute("LoggedUser")){
+		if(session.getAttribute("LoggedUser") != null){
 			try {
-				model.addAttribute("AllVideos",dbVideoDao.listVideos());
+				modelMap.addAttribute("AllVideos",dbVideoDao.listVideos());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,16 +49,16 @@ public class RegistrationLoginController {
 	}	
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public ModelAndView getToLoginPage(Model model) {
+	public ModelAndView getToLoginPage(ModelMap modelMap, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		if(model.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/index", "command", model.asMap().get("LoggedUser"));
+		if(session.getAttribute("LoggedUser") != null){
+			return new ModelAndView("redirect:/index", "command", session.getAttribute("LoggedUser"));
 		}
 		return new ModelAndView("login", "command", new User());
 	}	
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String submitLogin(Model model, @ModelAttribute("SpringWeb")User user, @RequestParam String username, @RequestParam String password, final RedirectAttributes redirectAttributes) {
+	public String submitLogin(ModelMap modelMap, HttpSession session, @ModelAttribute("SpringWeb")User user, @RequestParam String username, @RequestParam String password, final RedirectAttributes redirectAttributes) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
 		user = dbUserDao.getUser(username);
@@ -63,22 +66,23 @@ public class RegistrationLoginController {
 			redirectAttributes.addFlashAttribute("fail","Грешно потребителско име или парола!");
 			return "redirect:/login";
 		}
-		model.addAttribute("LoggedUser",user);
+		modelMap.addAttribute("LoggedUser",user);
+		session.setAttribute("LoggedUser", user);
 	    return "redirect:/index";
 	}
 	
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 
-	public ModelAndView register(Model model) {
+	public ModelAndView register(ModelMap modelMap, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		if(model.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", model.asMap().get("LoggedUser"));
+		if(modelMap.containsAttribute("LoggedUser")){
+			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", session.getAttribute("LoggedUser"));
 		}
 		return new ModelAndView("register", "command", new User());
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute("SpringWeb") User user, ModelMap model,
+	public String registerUser(@ModelAttribute("SpringWeb") User user, ModelMap modelMap,
 			final RedirectAttributes redirectAttributes) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		user.setRegistrationDate(Date.valueOf(LocalDate.now()));
@@ -104,9 +108,16 @@ public class RegistrationLoginController {
 		} else {
 			user.setPassword(encodePassword(user.getPassword()));
 			dbUserDao.addUser(user);
-			model.addAttribute(user);
+			modelMap.addAttribute(user);
 			return "test";
 		}
+	}
+	
+	@RequestMapping(value="/logout")
+	public String logoutUser(ModelMap modelMap, HttpSession session){
+		modelMap.remove("LoggedUser", modelMap.get("LoggedUser"));
+		session.removeAttribute("LoggedUser");
+		return "unloggedHeaderAndNav";
 	}
 	
 	

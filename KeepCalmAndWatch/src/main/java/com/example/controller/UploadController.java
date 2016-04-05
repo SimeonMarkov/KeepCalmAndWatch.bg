@@ -3,6 +3,8 @@ package com.example.controller;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,23 +23,22 @@ import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
 @Controller
-@SessionAttributes("LoggedUser")
 @RequestMapping("/upload")
 public class UploadController {
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String goToUpload(Model model){
+	public String goToUpload(ModelMap modelMap, HttpSession session){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userJDBCTemplate = 
 			      (DBUserDAO)context.getBean("DBUserDAO");
-		if(!model.containsAttribute("LoggedUser")){
+		if(!(session.getAttribute("LoggedUser") != null)){
 			return "redirect:/login";
 		}
 		return "upload";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	 public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail , @RequestParam("videoPath") String videoPath) {
+	 public ModelAndView confirmUpload(ModelMap modelMap, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail , @RequestParam("videoPath") String videoPath) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 				  ModelAndView mav = new ModelAndView("uploadFinalization");
 				  
@@ -54,10 +55,10 @@ public class UploadController {
 					video.setDislikes(0);
 					video.setThumbnail(thumbnail);
 					video.setUploadDate(Date.valueOf(LocalDate.now()));
-					User user = (User) model.get("LoggedUser");
+					User user = (User) modelMap.get("LoggedUser");
 					video.setUploader(user); //TODO: how to add the current logged user as an uploader
 					videoJDBCTemplate.addVideo(video);
-					mav.addObject("message", ((User)model.get("LoggedUser")).getChannelName()  + ",Вие успешно качихте клип,намиращ се в директорията " +  videoPath + ",който е със заглавие: " + title + " и описание: " + description +  " на дата " + video.getUploadDate());
+					mav.addObject("message", ((User)modelMap.get("LoggedUser")).getChannelName()  + ",Вие успешно качихте клип,намиращ се в директорията " +  videoPath + ",който е със заглавие: " + title + " и описание: " + description +  " на дата " + video.getUploadDate());
 //			      model.addAttribute("name", video.getTitle());
 //			      model.addAttribute("name", video.getDescription());
 //			      model.addAttribute("name", video.getPath());

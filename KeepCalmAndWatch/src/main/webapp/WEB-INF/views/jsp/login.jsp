@@ -65,9 +65,7 @@ footer {
 				<h4>John's Blog</h4>
 				<ul class="nav nav-pills nav-stacked">
 					<li class="active"><a href="#section1">Начална страница</a></li>
-					<li><a href="#section2">Моят канал</a></li>
-					<li><a href="#section3">Абонаменти</a></li>
-					<li><a href="#section3">История</a></li>
+					<li><a href="#section2">Най-популярни</a></li>
 				</ul>
 				
 			</div>
