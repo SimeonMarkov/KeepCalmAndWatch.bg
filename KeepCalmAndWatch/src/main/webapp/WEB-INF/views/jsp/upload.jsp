@@ -183,7 +183,7 @@ a:hover {
 						файл,който искате да качите:</h3>
 						</div>
 				<div class="panel-body">
-				<form:form commandName="">
+				<form action="upload" method="POST" enctype="multipart/form-data">
 					<br>
 					<input type="file" id="videoUpload" name="videoPath"
 						required="required" />
@@ -206,7 +206,7 @@ a:hover {
 					</div>
 					<input type="submit" value="Качи"
 									class="btn btn-primary">
-				</form:form>
+				</form>
 			</div>
 			</div>
 			</div>
