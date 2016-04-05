@@ -42,6 +42,17 @@
 		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
 			src="data:image/gif;base64,${LoggedUser.avatar}" />
 	</div>
+	<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Начална страница</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Моят канал</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Абонаменти</a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/logout">Изход</a></li>
+    </ul>
+  </div>
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
@@ -58,7 +69,7 @@
 				<tr>
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
 						<td><a href="${video.path}"><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /></a><br/>
-						<c:out value="${video.title}" /><br/>
+						<a href="${video.path}"><c:out value="${video.title}" /></a><br/>
 						</td>
 					</c:forEach>
 					

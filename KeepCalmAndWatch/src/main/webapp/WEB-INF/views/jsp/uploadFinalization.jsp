@@ -8,9 +8,12 @@
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/png" />
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico"
+	type="image/png" />
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="${pageContext.request.contextPath}/css/headerAndSidenav.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script
@@ -64,10 +67,16 @@ a:hover {
 #upload {
 	position: absolute;
 	top: 10px;
-	right: 100px;
+	right: 70px;
 }
 
 #avatar {
+	position: absolute;
+	top: 5px;
+	right: 65px;
+}
+
+.dropdown{
 	position: absolute;
 	top: 5px;
 	right: 25px;
@@ -94,9 +103,27 @@ a:hover {
 				src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif"
 				width="50px" height="50px" /></a> <a href="upload"
 				class="btn btn-primary btn-sm" id="upload" type="submit">Качване</a>
-			<img class="img-circle" id="avatar" alt="Cinque Terre" width="50"
-				height="50"
-				src="http://www.forplay.bg/forums/avs/avatar_114_1446077663.png" />
+			<div id="avatar">
+				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
+					src="data:image/gif;base64,${LoggedUser.avatar}" />
+			</div>
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="menu1" data-toggle="dropdown">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#">Начална страница</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#">Моят канал</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="#">Абонаменти</a></li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1"
+						href="${pageContext.request.contextPath}/logout">Изход</a></li>
+				</ul>
+			</div>
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search Blog..">
 				<span class="input-group-btn">
@@ -106,7 +133,7 @@ a:hover {
 				</span>
 			</div>
 			<div>
-			<p>${message}</p>
+				<p>${message}</p>
 				<br>
 			</div>
 		</div>

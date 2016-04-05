@@ -46,10 +46,16 @@ a:hover {
 #upload {
 	position: absolute;
 	top: 5px;
-	right: 50px;
+	right: 70px;
 }
 
 #avatar {
+	position: absolute;
+	top: 5px;
+	right: 65px;
+}
+
+.dropdown{
 	position: absolute;
 	top: 5px;
 	right: 25px;
