@@ -37,7 +37,7 @@ public class UploadController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	 public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("thumbnail") byte[] thumbnail , @RequestParam("videoPath") String videoPath) {
+	 public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail , @RequestParam("videoPath") String videoPath) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 				  ModelAndView mav = new ModelAndView("uploadFinalization");
 				  
