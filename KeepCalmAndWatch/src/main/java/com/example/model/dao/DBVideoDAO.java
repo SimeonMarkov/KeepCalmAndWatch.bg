@@ -6,7 +6,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import com.example.model.Comment;
+import com.example.model.CommentMapper;
 import com.example.model.Video;
 
 public class DBVideoDAO implements IVideoDAO{
@@ -36,10 +39,26 @@ public class DBVideoDAO implements IVideoDAO{
 	}
 
 	@Override
+	public List<Video> getAllVideosLike(String videoTitle){
+		String query = "select * from videos where title like :ptitle ";
+		String title= "%" + videoTitle + "%";
+		MapSqlParameterSource namedParams= new MapSqlParameterSource();
+		namedParams.addValue("pname", title);
+		List<Video> videos = jdbcTemplateObject.query(query, new VideoMapper());
+		return videos;
+	}
+	@Override
 	public List<Video> listVideos() throws SQLException {
 		String query = "select * from videos";
 	      List <Video> videos = jdbcTemplateObject.query(query, 
 	                                new VideoMapper());
 	      return videos;
+	}
+	
+	@Override
+	public List<Comment> getCommentsForSingleVideo(int videoId){
+		String query = "select * from comments C inner join videos V on C.videos_videos_id = V.videos_id where C.videos_videos_id = " + videoId + " order by date desc;";
+		List<Comment> comments = jdbcTemplateObject.query(query, new CommentMapper());
+		return comments;
 	}
 }

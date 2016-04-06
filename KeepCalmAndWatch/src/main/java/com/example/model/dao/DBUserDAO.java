@@ -1,8 +1,9 @@
 package com.example.model.dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -38,6 +39,12 @@ public class DBUserDAO implements IUserDAO {
 		User user = jdbcTemplateObject.queryForObject(query,
 				new Object[] { username }, new UserMapper());
 		return user;
+	}
+	
+	public List<User> getAllUsersByChannelName(String channelName){
+		String query = "select * from users where channel_name like '%" + channelName +"%'";
+		List<User> users = jdbcTemplateObject.query(query, new UserMapper());
+		return users;
 	}
 
 	
