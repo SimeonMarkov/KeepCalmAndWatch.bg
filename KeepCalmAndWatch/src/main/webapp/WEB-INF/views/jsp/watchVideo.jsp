@@ -138,17 +138,16 @@ a:hover {
 			</c:if>
 		</ul>
 	</div>
+	
+	<c:out value="${video.path}"></c:out>
 	<div style="position: relative; top: 50px;">
 		<div class="currentVideo"
 			style="width: 940px; height: 590px; border: 1px solid black;">
 			<video width="940" height="590" controls tabindex="0"
 				poster="D:/picthas/source.jpg">
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.ogv"
-					type="video/ogg" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4"
-					type="video/mp4" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4"
-					type="video/webm" />
+				<source src="${video.path}" type="video/mp4" />
+				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/mp4" />
+				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/webm" />
 			</video>
 			<div>
 				<h2>Some video</h2>
@@ -173,7 +172,7 @@ a:hover {
 					<br> <br>
 
 					<p>
-						<span class="badge">${video.comments}</span> Comments:
+						<span class="badge"></span> Comments:
 					</p>
 					<br>
 					<div class="dropdown">
