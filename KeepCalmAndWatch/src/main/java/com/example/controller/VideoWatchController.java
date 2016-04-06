@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.model.Comment;
 import com.example.model.Video;
 import com.example.model.dao.DBVideoDAO;
 
@@ -22,7 +25,9 @@ public class VideoWatchController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = videoJDBCTemplate.getVideo(id);
+		List<Comment> commentsToCurrentVideo = videoJDBCTemplate.getCommentsForSingleVideo(id);
 		model.addAttribute("video", video);
+		model.addAttribute("comments", commentsToCurrentVideo);
 		return "watchVideo";
 	}
 	

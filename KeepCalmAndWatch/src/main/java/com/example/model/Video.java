@@ -40,7 +40,12 @@ public class Video implements Comparable<Video>{
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		if(description.isEmpty()){
+			this.description = "No description is set...";
+		}
+		else{
+			this.description = description;
+		}
 	}
 	public int getViews() {
 		return views;
