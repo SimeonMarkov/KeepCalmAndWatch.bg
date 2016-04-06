@@ -32,6 +32,7 @@ import com.example.model.User;
 import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 @Controller
 @SessionAttributes("LoggedUser")
@@ -50,26 +51,29 @@ public class UploadController{
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title,
-			@RequestParam("description") String description,  @RequestParam("videoPath") MultipartFile file, @RequestParam("thumbnail") MultipartFile thumbnail) {
+			@RequestParam("description") String description,  @RequestParam("videoPath") MultipartFile file, 
+			 @RequestParam("thumbnail") MultipartFile thumbnail) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
-
+		
+		
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = new Video();
+		//set amazon username and pass
 		AWSCredentials credentials = new BasicAWSCredentials("AKIAIDEAOQSKMINEQSVA", "o94Ozi37icf6+HoROskITlkAvdwRdphYXsPmrya4"); 
 		AmazonS3Client s3client = new AmazonS3Client(credentials);
 			
+		//amazon folder
 		String bucketName = "keep-calm-videos";
 		s3client.createBucket(bucketName);
 		
 		File convFile = new File(file.hashCode() + file.getOriginalFilename());
 		File convThumbnail = new File(file.hashCode() + thumbnail.getOriginalFilename());
 		try {
+			//converts to files in order to upload to amazon s3
 			convFile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(convFile); 
 		    fos.write(file.getBytes());
-		    FileOutputStream fosThumb = new FileOutputStream(convThumbnail); 
-		    fos.write(thumbnail.getBytes());
 		    fos.close(); 
 		} catch (IOException e1) {
 			System.out.println("File could not be created");
@@ -77,7 +81,8 @@ public class UploadController{
 		}
 		
 		s3client.putObject(new PutObjectRequest(bucketName, convFile.getName(), convFile).withCannedAcl(CannedAccessControlList.PublicRead));
-		//s3client.putObject(new PutObjectRequest(bucketName, convThumbnail.getName(), convThumbnail).withCannedAcl(CannedAccessControlList.PublicRead));
+		
+		
 		String videoPath = s3client.getResourceUrl(bucketName, convFile.getName());
 		String thumbnailPath = s3client.getResourceUrl(bucketName, convThumbnail.getName());
 		
@@ -87,7 +92,12 @@ public class UploadController{
 		video.setViews(0);
 		video.setLikes(0);
 		video.setDislikes(0);
-		video.setThumbnail(thumbnailPath);
+		try {
+			video.setThumbnail(Base64.encode(thumbnail.getBytes()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		video.setUploadDate(Date.valueOf(LocalDate.now()));
 		User user = (User) model.get("LoggedUser");
 		video.setUploader((User) model.get("LoggedUser")); 

@@ -61,7 +61,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     public CommonsMultipartResolver getResolver() throws IOException{
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         //Set the maximum allowed size (in bytes) for each individual file.
-        resolver.setMaxUploadSizePerFile(52428800);//5MB
+        resolver.setMaxUploadSizePerFile(1024*1024*100);//100MB
         return resolver;
     }
 	
