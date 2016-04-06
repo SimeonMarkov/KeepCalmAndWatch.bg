@@ -42,56 +42,60 @@ public class UploadController{
 	public String goToUpload(Model model) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userJDBCTemplate = (DBUserDAO) context.getBean("DBUserDAO");
-//		if (!model.containsAttribute("LoggedUser")) {
-//			return "redirect:/login";
-//		}
+		if (!model.containsAttribute("LoggedUser")) {
+			return "redirect:/login";
+		}
 		return "upload";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title,
-			@RequestParam("description") String description,  @RequestParam("videoPath") MultipartFile file) {
+			@RequestParam("description") String description,  @RequestParam("videoPath") MultipartFile file, @RequestParam("thumbnail") MultipartFile thumbnail) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
 
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = new Video();
 		AWSCredentials credentials = new BasicAWSCredentials("AKIAIDEAOQSKMINEQSVA", "o94Ozi37icf6+HoROskITlkAvdwRdphYXsPmrya4"); 
-		AmazonS3 s3client = new AmazonS3Client(credentials);
+		AmazonS3Client s3client = new AmazonS3Client(credentials);
 			
 		String bucketName = "keep-calm-videos";
 		s3client.createBucket(bucketName);
 		
 		File convFile = new File(file.hashCode() + file.getOriginalFilename());
+		File convThumbnail = new File(file.hashCode() + thumbnail.getOriginalFilename());
 		try {
 			convFile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(convFile); 
 		    fos.write(file.getBytes());
+		    FileOutputStream fosThumb = new FileOutputStream(convThumbnail); 
+		    fos.write(thumbnail.getBytes());
 		    fos.close(); 
 		} catch (IOException e1) {
 			System.out.println("File could not be created");
 			e1.printStackTrace();
 		}
 		
-		s3client.putObject(new PutObjectRequest(bucketName,convFile.hashCode() + convFile.getName(), convFile).withCannedAcl(CannedAccessControlList.PublicRead));
+		s3client.putObject(new PutObjectRequest(bucketName, convFile.getName(), convFile).withCannedAcl(CannedAccessControlList.PublicRead));
+		String videoPath = s3client.getResourceUrl(bucketName, convFile.getName());
+		String thumbnailPath = s3client.getResourceUrl(bucketName, convThumbnail.getName());
 		
+		video.setTitle(title);
+		video.setDescription(description);
+		video.setPath(videoPath);
+		video.setViews(0);
+		video.setLikes(0);
+		video.setDislikes(0);
+		video.setThumbnail(thumbnailPath);
+		video.setUploadDate(Date.valueOf(LocalDate.now()));
+		User user = (User) model.get("LoggedUser");
+		video.setUploader((User) model.get("LoggedUser")); 
 		
-//		video.setTitle(title);
-//		video.setDescription(description);
-//		video.setPath("TO DO!!!");
-//		video.setViews(0);
-//		video.setLikes(0);
-//		video.setDislikes(0);
-//		video.setThumbnail(thumbnail);
-//		video.setUploadDate(Date.valueOf(LocalDate.now()));
-//		User user = (User) model.get("LoggedUser");
-//		video.setUploader(user); // TODO: how to add the current logged user as
-//									// an uploader
-//		videoJDBCTemplate.addVideo(video);
-//		mav.addObject("message",
-//				((User) model.get("LoggedUser")).getChannelName()
-//						+ ",Вие успешно качихте клип, намиращ се в директорията " + "path" + ", който е със заглавие: "
-//						+ title + " и описание: " + description + " на дата " + video.getUploadDate());
+		videoJDBCTemplate.addVideo(video);
+		mav.addObject("message",
+				((User) model.get("LoggedUser")).getChannelName()
+						+ ",Вие успешно качихте клип, намиращ се в директорията " + "path" + ", който е със заглавие: "
+						+ title + " и описание: " + description + " на дата " + video.getUploadDate());
 
 
 
