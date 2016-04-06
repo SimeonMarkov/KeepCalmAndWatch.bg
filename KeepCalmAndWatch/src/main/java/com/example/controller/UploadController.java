@@ -77,6 +77,7 @@ public class UploadController{
 		}
 		
 		s3client.putObject(new PutObjectRequest(bucketName, convFile.getName(), convFile).withCannedAcl(CannedAccessControlList.PublicRead));
+		//s3client.putObject(new PutObjectRequest(bucketName, convThumbnail.getName(), convThumbnail).withCannedAcl(CannedAccessControlList.PublicRead));
 		String videoPath = s3client.getResourceUrl(bucketName, convFile.getName());
 		String thumbnailPath = s3client.getResourceUrl(bucketName, convThumbnail.getName());
 		

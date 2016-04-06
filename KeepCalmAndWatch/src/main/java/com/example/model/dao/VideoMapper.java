@@ -16,6 +16,7 @@ public class VideoMapper implements RowMapper<Video>{
 	@Override
 	public Video mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Video video = new Video();
+		video.setPath(rs.getString("path"));
 		video.setId(rs.getInt("videos_id"));
 		video.setTitle(rs.getString("title"));
 		video.setDescription(rs.getString("description"));
