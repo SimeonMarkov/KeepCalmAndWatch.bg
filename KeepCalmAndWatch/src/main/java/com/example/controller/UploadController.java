@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.*;
-import java.io.FileOutputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -23,6 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.identitymanagement.model.AccessKey;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.model.User;
 import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
@@ -51,6 +56,24 @@ public class UploadController{
 
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = new Video();
+		AWSCredentials credentials = new BasicAWSCredentials("AKIAIDEAOQSKMINEQSVA", "o94Ozi37icf6+HoROskITlkAvdwRdphYXsPmrya4"); 
+		AmazonS3 s3client = new AmazonS3Client(credentials);
+			
+		String bucketName = "keep-calm-videos";
+		s3client.createBucket(bucketName);
+		
+		File convFile = new File(file.hashCode() + file.getOriginalFilename());
+		try {
+			convFile.createNewFile();
+			FileOutputStream fos = new FileOutputStream(convFile); 
+		    fos.write(file.getBytes());
+		    fos.close(); 
+		} catch (IOException e1) {
+			System.out.println("File could not be created");
+			e1.printStackTrace();
+		}
+		
+		s3client.putObject(new PutObjectRequest(bucketName,convFile.hashCode() + convFile.getName(), convFile).withCannedAcl(CannedAccessControlList.PublicRead));
 		
 		
 //		video.setTitle(title);
@@ -70,19 +93,7 @@ public class UploadController{
 //						+ ",Вие успешно качихте клип, намиращ се в директорията " + "path" + ", който е със заглавие: "
 //						+ title + " и описание: " + description + " на дата " + video.getUploadDate());
 
-		if (!file.isEmpty()) {
-			try {
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
-						new File("C:\\Users\\Pavel\\Documents\\Eclipse\\KeepCalmAndWatch" + "\\" + title + file.getOriginalFilename())));
-				FileCopyUtils.copy(file.getInputStream(), stream);
-				stream.close();
 
-			} catch (Exception e) {
-				System.out.println("Upload failed");
-			}
-
-			
-		}
 
 		return mav;
 	}
