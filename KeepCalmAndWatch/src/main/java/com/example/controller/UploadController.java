@@ -45,18 +45,13 @@ public class UploadController{
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title,
-			@RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail) {
+			@RequestParam("description") String description,  @RequestParam("videoPath") MultipartFile file) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
 
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = new Video();
 
-		
-		
-		System.out.println(title);
-		System.out.println(description);
-		System.out.println();
 		
 //		video.setTitle(title);
 //		video.setDescription(description);
@@ -75,19 +70,19 @@ public class UploadController{
 //						+ ",Вие успешно качихте клип, намиращ се в директорията " + "path" + ", който е със заглавие: "
 //						+ title + " и описание: " + description + " на дата " + video.getUploadDate());
 
-//		if (!file.isEmpty()) {
-//			try {
-//				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
-//						new File("C:\\Users\\Pavel\\Documents\\Eclipse\\KeepCalmAndWatch" + "\\" + title)));
-//				FileCopyUtils.copy(file.getInputStream(), stream);
-//				stream.close();
-//
-//			} catch (Exception e) {
-//				System.out.println("Upload failed");
-//			}
-//
-//			
-//		}
+		if (!file.isEmpty()) {
+			try {
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
+						new File("C:\\Users\\Pavel\\Documents\\Eclipse\\KeepCalmAndWatch" + "\\" + title + file.getOriginalFilename())));
+				FileCopyUtils.copy(file.getInputStream(), stream);
+				stream.close();
+
+			} catch (Exception e) {
+				System.out.println("Upload failed");
+			}
+
+			
+		}
 
 		return mav;
 	}
