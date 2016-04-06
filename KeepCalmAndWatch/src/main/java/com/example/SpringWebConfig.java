@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -56,11 +57,18 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 	
+	@Bean(name="multipartResolver") 
+    public CommonsMultipartResolver getResolver() throws IOException{
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        //Set the maximum allowed size (in bytes) for each individual file.
+        resolver.setMaxUploadSizePerFile(52428800);//5MB
+        return resolver;
+    }
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor changeInterceptor = new LocaleChangeInterceptor();
 		changeInterceptor.setParamName("language");
 		registry.addInterceptor(changeInterceptor);
 	}
-	
 }
