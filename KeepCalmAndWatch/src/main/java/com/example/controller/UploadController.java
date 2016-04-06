@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -43,8 +45,7 @@ public class UploadController{
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView confirmUpload(ModelMap model, @RequestParam("title") String title,
-			@RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail,
-			@RequestParam("videoPath") MultipartFile file) {
+			@RequestParam("description") String description, @RequestParam("thumbnail") String thumbnail) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
 
@@ -90,4 +91,7 @@ public class UploadController{
 
 		return mav;
 	}
+	
+	
+	
 }

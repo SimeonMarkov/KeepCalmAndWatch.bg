@@ -63,11 +63,4 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(changeInterceptor);
 	}
 	
-	@Bean
-	public CommonsMultipartResolver multipartResolver() {
-	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
-	    resolver.setDefaultEncoding("utf-8");
-	    return resolver;
-	}
-	
 }
