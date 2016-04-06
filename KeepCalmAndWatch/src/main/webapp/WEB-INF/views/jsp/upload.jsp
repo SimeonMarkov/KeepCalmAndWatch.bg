@@ -76,7 +76,7 @@ a:hover {
 	right: 65px;
 }
 
-.dropdown{
+.dropdown {
 	position: absolute;
 	top: 5px;
 	right: 25px;
@@ -141,8 +141,29 @@ a:hover {
 			</div>
 			<a href="/KeepCalmAndWatch"><img
 				src="${pageContext.request.contextPath}/img/logo.jpg" width="50px"
-				height="50px" /></a> <a href="upload" class="btn btn-primary btn-sm"
-				id="upload" type="submit">Качване</a>
+				height="50px" /> </a>
+				<div class="navbar-collapse collapse" id="navbar-collapsible">
+		<form action="search" method="post">
+			<div class="form-group" style="display: inline;">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<select class="btn btn-info dropdown-toggle"
+							data-toggle="dropdown">
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						<option value="videos">Клипове</option>
+							<option value="users">Потребители</option>
+						</select>
+					</div>
+					<input type="text" class="form-control"
+						placeholder="What are searching for?"> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-search"></span> </span>
+				</div>
+			</div>
+		</form>
+	</div>
+				 <a href="upload" class="btn btn-primary btn-sm" id="upload"
+				type="submit">Качване</a>
 			<div id="avatar">
 				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
 					src="data:image/gif;base64,${LoggedUser.avatar}" />
@@ -164,54 +185,36 @@ a:hover {
 						href="${pageContext.request.contextPath}/logout">Изход</a></li>
 				</ul>
 			</div>
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search Blog..">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-			</div>
-			<br>
-			<br>
+
+			<br> <br>
 			<div class="row centered-form">
-			<div
+				<div
 					class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
-			<div class="panel panel-default">
-			<div class="panel-heading">
-							<h3 class="panel-title">Здравейте,${LoggedUser.channelName}!Изберете видео
-						файл,който искате да качите:</h3>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Здравейте,${LoggedUser.channelName}!Изберете
+								видео файл,който искате да качите:</h3>
 						</div>
-				<div class="panel-body">
-				<form action="upload" method="POST" enctype="multipart/form-data">
-					<br>
-					<input type="file" id="videoUpload" name="videoPath"
-						required="required" />
-					<br>
-					<br>
-					<input type="text" name="title" placeholder="Insert video title..."
-						required="required" />
-					<br>
-					<br>
-					<input type="text" name="description"
-						placeholder="Add description..." />
-					<br>
-					<br>
-					<div class="form-group">
-					
-					<input type="file" id="thumbnailUpload" name="thumbnail"
-						required="required" />
-					<br>
-					<br>
+						<div class="panel-body">
+							<form action="upload" method="POST" enctype="multipart/form-data">
+								<br> <input type="file" id="videoUpload" name="videoPath"
+									required="required" /> <br> <br> <input type="text"
+									name="title" placeholder="Insert video title..."
+									required="required" /> <br> <br> <input type="text"
+									name="description" placeholder="Add description..." /> <br>
+								<br>
+								<div class="form-group">
+
+									<input type="file" id="thumbnailUpload" name="thumbnail"
+										required="required" /> <br> <br>
+								</div>
+								<input type="submit" value="Качи" class="btn btn-primary">
+							</form>
+						</div>
 					</div>
-					<input type="submit" value="Качи"
-									class="btn btn-primary">
-				</form>
+				</div>
 			</div>
-			</div>
-			</div>
-			</div>
-				
+
 		</div>
 	</div>
 </body>

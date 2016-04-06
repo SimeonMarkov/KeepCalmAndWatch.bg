@@ -76,7 +76,7 @@ a:hover {
 	right: 65px;
 }
 
-.dropdown{
+.dropdown {
 	position: absolute;
 	top: 5px;
 	right: 25px;
@@ -100,9 +100,31 @@ a:hover {
 
 			</div>
 			<a href="/KeepCalmAndWatch"><img
-				src="https://www.partsriver.com/skin/frontend/enterprise/partsriverOnly/images/logo_youtube_small.gif"
-				width="50px" height="50px" /></a> <a href="upload"
-				class="btn btn-primary btn-sm" id="upload" type="submit">Качване</a>
+				src="${pageContext.request.contextPath}/img/logo.jpg"
+				width="50px" height="50px" /></a>
+			<div class="navbar-collapse collapse" id="navbar-collapsible">
+				<form action="search" method="post">
+					<div class="form-group" style="display: inline;">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<select class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown">
+									<span class="glyphicon glyphicon-chevron-down"></span>
+									<option value="videos">Клипове</option>
+									<option value="users">Потребители</option>
+								</select>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="What are searching for?"> <span
+								class="input-group-addon"><span
+								class="glyphicon glyphicon-search"></span> </span>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<a href="upload" class="btn btn-primary btn-sm" id="upload"
+				type="submit">Качване</a>
 			<div id="avatar">
 				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
 					src="data:image/gif;base64,${LoggedUser.avatar}" />

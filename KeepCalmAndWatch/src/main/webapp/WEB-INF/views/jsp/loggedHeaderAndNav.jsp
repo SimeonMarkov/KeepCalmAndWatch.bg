@@ -26,14 +26,27 @@
 			height="70px" /></a>
 	</div>
 
-	<div class="input-group">
-		<input type="text" class="form-control" placeholder="Търсене..">
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="button">
-				<span class="glyphicon glyphicon-search"></span>
-			</button>
-		</span>
+	<div class="navbar-collapse collapse" id="navbar-collapsible">
+		<form action="search" method="post">
+			<div class="form-group" style="display: inline;">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<select class="btn btn-info dropdown-toggle"
+							data-toggle="dropdown">
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						<option value="videos">Клипове</option>
+							<option value="users">Потребители</option>
+						</select>
+					</div>
+					<input type="text" class="form-control"
+						placeholder="What are searching for?"> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-search"></span> </span>
+				</div>
+			</div>
+		</form>
 	</div>
+
 	<div id="upload">
 		<a href="upload" class="btn btn-primary btn-sm" id="upload"
 			type="submit">Качване</a>
@@ -43,16 +56,22 @@
 			src="data:image/gif;base64,${LoggedUser.avatar}" />
 	</div>
 	<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Начална страница</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Моят канал</a></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Абонаменти</a></li>
-      <li role="presentation" class="divider"></li>
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/logout">Изход</a></li>
-    </ul>
-  </div>
+		<button class="btn btn-default dropdown-toggle" type="button"
+			id="menu1" data-toggle="dropdown">
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+			<li role="presentation"><a role="menuitem" tabindex="-1"
+				href="#">Начална страница</a></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1"
+				href="#">Моят канал</a></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1"
+				href="#">Абонаменти</a></li>
+			<li role="presentation" class="divider"></li>
+			<li role="presentation"><a role="menuitem" tabindex="-1"
+				href="${pageContext.request.contextPath}/logout">Изход</a></li>
+		</ul>
+	</div>
 	<div class="container-fluid">
 		<div class="row content">
 			<div class="col-sm-3 sidenav">
@@ -68,11 +87,14 @@
 			<table>
 				<tr>
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<td><a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><img src="data:image/gif;base64,${video.thumbnail}" width="50px" height="50px" /></a><br/>
-						<a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><c:out value="${video.title}" /></a><br/>
-						</td>
+						<td><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><img
+								src="data:image/gif;base64,${video.thumbnail}" width="50px"
+								height="50px" /></a><br /> <a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><c:out
+									value="${video.title}" /></a><br /></td>
 					</c:forEach>
-					
+
 				</tr>
 			</table>
 		</div>

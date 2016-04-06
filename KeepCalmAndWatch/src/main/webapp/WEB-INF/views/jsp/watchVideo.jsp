@@ -99,13 +99,25 @@ a:hover {
 			height="70px" /></a>
 	</div>
 
-	<div class="input-group">
-		<input type="text" class="form-control" placeholder="Търсене..">
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="button">
-				<span class="glyphicon glyphicon-search"></span>
-			</button>
-		</span>
+	<div class="navbar-collapse collapse" id="navbar-collapsible">
+		<form action="search" method="post">
+			<div class="form-group" style="display: inline;">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<select class="btn btn-info dropdown-toggle"
+							data-toggle="dropdown">
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						<option value="videos">Клипове</option>
+							<option value="users">Потребители</option>
+						</select>
+					</div>
+					<input type="text" class="form-control"
+						placeholder="What are searching for?"> <span
+						class="input-group-addon"><span
+						class="glyphicon glyphicon-search"></span> </span>
+				</div>
+			</div>
+		</form>
 	</div>
 	<c:if test="${not empty sessionScope.LoggedUser}">
 		<div id="avatar">
@@ -138,21 +150,21 @@ a:hover {
 			</c:if>
 		</ul>
 	</div>
-	
+
 	<c:out value="${video.path}"></c:out>
 	<div style="position: relative; top: 50px;">
 		<div class="currentVideo"
 			style="width: 940px; height: 590px; border: 1px solid black;">
 			<video width="940" height="590" controls tabindex="0"
-				poster="D:/picthas/source.jpg">
+				poster="D:/picthas/source.jpg" autoplay>
 				<source src="${video.path}" type="video/mp4" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/mp4" />
-				<source src="C:\Users\Simo\Desktop\otkrihmeYoutube\snoop.mp4" type="video/webm" />
+				<source src="${video.path}" type="video/mp4" />
+				<source src="${video.path}" type="video/webm" />
 			</video>
 			<div>
-				<h2>Some video</h2>
+				<h2>${video.title}</h2>
 			</div>
-			<div class="description">Description of the video</div>
+			<div class="description">${video.description}</div>
 		</div>
 
 		<div class="container-fluid">
@@ -187,19 +199,19 @@ a:hover {
 					</div>
 
 					<div class="row">
-						<div class="col-sm-2 text-center">
-							<img src="bandmember.jpg" class="img-circle" height="65"
-								width="65" alt="Avatar">
-						</div>
-						<div class="col-sm-10">
-							<h4>
-								Anja <small>Sep 29, 2015, 9:12 PM</small>
-							</h4>
-							<p>Keep up the GREAT work! I am cheering for you!! Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-							<br>
-						</div>
+						<c:forEach var="comment" items="${requestScope.comments}">
+							<div class="col-sm-2 text-center">
+								<img src="data:image/gif;base64,${comment.user.avatar}" class="img-circle" height="65"
+									width="65" alt="Avatar">
+							</div>
+							<div class="col-sm-10">
+								<h4>
+									${comment.user.channelName} <small>${comment.datetime}</small>
+								</h4>
+								<p>${comment.text}</p>
+								<br>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
