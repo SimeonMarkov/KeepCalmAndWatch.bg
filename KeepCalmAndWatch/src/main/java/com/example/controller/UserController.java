@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.model.User;
@@ -23,5 +24,16 @@ public class UserController {
 		User user = (User) session.getAttribute("LoggedUser");
 		model.addAttribute(user);
 		return "profile";
+	}
+	
+	@RequestMapping(value = "/channel", method = RequestMethod.GET)
+	//Model model, @RequestParam("channel") String channel
+	public String channel(HttpSession session){
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"beans.xml");
+		User user = (User) session.getAttribute("LoggedUser");
+		
+		
+		return "channel";
 	}
 }

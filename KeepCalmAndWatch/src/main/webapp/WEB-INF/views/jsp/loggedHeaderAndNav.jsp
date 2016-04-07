@@ -34,7 +34,7 @@
 						<select name="category" class="btn btn-info dropdown-toggle"
 							data-toggle="dropdown">
 							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
+							<option value="videos">Клипове</option>
 							<option value="users">Потребители</option>
 						</select>
 					</div>
