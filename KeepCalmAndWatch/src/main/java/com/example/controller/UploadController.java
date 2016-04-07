@@ -141,6 +141,7 @@ public class UploadController {
 			System.out.println("You cannot proceed with the upload!!!!!!!!!!!!!!");
 			System.out.println(FilenameUtils.getExtension(file.getOriginalFilename()));
 			System.out.println(FilenameUtils.getExtension(thumbnail.getOriginalFilename()));
+			mav.addObject("message", "Не можете да качите файл с този формат!");
 		}
 		return mav;
 	}
