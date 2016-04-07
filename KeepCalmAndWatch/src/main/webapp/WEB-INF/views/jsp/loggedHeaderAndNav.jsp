@@ -64,7 +64,7 @@
 			<li role="presentation"><a role="menuitem" tabindex="-1"
 				href="#">Начална страница</a></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">Моят канал</a></li>
+				href="profile">Моят канал</a></li>
 			<li role="presentation"><a role="menuitem" tabindex="-1"
 				href="#">Абонаменти</a></li>
 			<li role="presentation" class="divider"></li>
