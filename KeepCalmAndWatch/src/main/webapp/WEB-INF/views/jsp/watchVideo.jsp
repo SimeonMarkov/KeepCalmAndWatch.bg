@@ -135,7 +135,7 @@ a:hover {
 				href="${pageContext.request.contextPath}/index">Начална страница</a></li>
 			<c:if test="${not empty sessionScope.LoggedUser}">
 				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">Моят канал</a></li>
+					href="${pageContext.request.contextPath}/profile">Моят канал</a></li>
 				<li role="presentation"><a role="menuitem" tabindex="-1"
 					href="#">Абонаменти</a></li>
 
