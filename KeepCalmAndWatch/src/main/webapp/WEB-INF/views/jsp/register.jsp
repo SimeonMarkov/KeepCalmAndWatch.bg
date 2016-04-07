@@ -77,11 +77,11 @@ footer {
 						height="50px" /></a>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="post">
+		<form action="search" method="get">
 			<div class="form-group" style="display: inline;">
 				<div class="input-group">
 					<div class="input-group-btn">
-						<select class="btn btn-info dropdown-toggle"
+						<select name="category" class="btn btn-info dropdown-toggle"
 							data-toggle="dropdown">
 							<span class="glyphicon glyphicon-chevron-down"></span>
 						<option value="videos">Клипове</option>
@@ -89,7 +89,7 @@ footer {
 						</select>
 					</div>
 					<input type="text" class="form-control"
-						placeholder="What are searching for?"> <span
+						placeholder="What are searching for?" name="searchBar"> <span
 						class="input-group-addon"><span
 						class="glyphicon glyphicon-search"></span> </span>
 				</div>

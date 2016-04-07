@@ -40,10 +40,7 @@ public class DBVideoDAO implements IVideoDAO{
 
 	@Override
 	public List<Video> getAllVideosLike(String videoTitle){
-		String query = "select * from videos where title like :ptitle ";
-		String title= "%" + videoTitle + "%";
-		MapSqlParameterSource namedParams= new MapSqlParameterSource();
-		namedParams.addValue("pname", title);
+		String query = "select * from videos where title like '%" + videoTitle + "%'";
 		List<Video> videos = jdbcTemplateObject.query(query, new VideoMapper());
 		return videos;
 	}

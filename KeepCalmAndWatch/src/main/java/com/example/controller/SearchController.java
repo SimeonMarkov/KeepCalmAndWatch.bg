@@ -12,29 +12,35 @@ import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
 @Controller
-@RequestMapping("/search")
 public class SearchController {
 
-	@RequestMapping(value="/users",method=RequestMethod.POST)
-	public String searchUsers(@RequestParam("searchBar") String searchUser, Model model) {
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(@RequestParam("searchBar") String searchBar,
+			@RequestParam("category") String category, Model model) {
 
-	    if(searchUser != null){
-	    	ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-	        DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
-	        model.addAttribute("ChannelNameLike",dbUserDao.getAllUsersByChannelName(searchUser));
-	    }
+		if (searchBar != null) {
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+					"beans.xml");
+			switch (category) {
+			case "videos": {
+				DBVideoDAO dbVideoDao = (DBVideoDAO) context
+						.getBean("DBVideoDAO");
+				model.addAttribute("VideoNameLike",
+						dbVideoDao.getAllVideosLike(searchBar));
+				break;
+			}
+			case "users": {
+				DBUserDAO dbUserDao = (DBUserDAO) context.getBean("DBUserDAO");
+				model.addAttribute("ChannelNameLike",
+						dbUserDao.getAllUsersByChannelName(searchBar));
+				break;
+			}
+			default: // TODO: error page
+				break;
+			}
 
-	    return "resultFromSearch";
-	}
-	@RequestMapping(value="/clips",method=RequestMethod.POST)
-	public String searchVideos(@RequestParam("searchBar") String searchVideo, Model model) {
+		}
 
-	    if(searchVideo != null){
-	    	ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-	        DBVideoDAO dbUserDao = (DBVideoDAO)context.getBean("DBVideoDAO");
-	        model.addAttribute("ChannelNameLike",dbUserDao.getAllVideosLike(searchVideo));
-	    }
-
-	    return "search";
+		return "resultFromSearch";
 	}
 }

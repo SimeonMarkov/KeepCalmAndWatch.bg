@@ -27,33 +27,36 @@
 	</div>
 
 	<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="post">
+		<form action="search" method="get">
 			<div class="form-group" style="display: inline;">
 				<div class="input-group">
 					<div class="input-group-btn">
-						<select class="btn btn-info dropdown-toggle"
+						<select name="category" class="btn btn-info dropdown-toggle"
 							data-toggle="dropdown">
 							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
+							<option value="videos">Клипове</option>
 							<option value="users">Потребители</option>
 						</select>
 					</div>
 					<input type="text" class="form-control"
-						placeholder="What are searching for?"> <span
+						placeholder="What are searching for?" name="searchBar"> <span
 						class="input-group-addon"><span
 						class="glyphicon glyphicon-search"></span> </span>
 				</div>
 			</div>
 		</form>
 	</div>
-	<div id="upload">
-		<a href="upload" class="btn btn-primary btn-sm" id="upload"
-			type="submit">Качване</a>
-	</div>
-	<div id="avatar">
-		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="data:image/gif;base64,${LoggedUser.avatar}" />
-	</div>
+	<c:if test="${not empty LoggedUser}">
+		<div id="upload">
+			<a href="upload" class="btn btn-primary btn-sm" id="upload"
+				type="submit">Качване</a>
+		</div>
+
+		<div id="avatar">
+			<img class="img-circle" alt="Cinque Terre" width="50" height="50"
+				src="data:image/gif;base64,${LoggedUser.avatar}" />
+		</div>
+	</c:if>
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button"
 			id="menu1" data-toggle="dropdown">
@@ -82,19 +85,41 @@
 					<li><a href="#section3">История</a></li>
 				</ul>
 			</div>
-			<p>Hello,${LoggedUser.channelName} deiba bonaka</p>
+			<c:if test="${not empty LoggedUser}">
+				<p>Hello,${LoggedUser.channelName}</p>
+			</c:if>
+			<br/>
 			<table>
-				
-					<c:forEach var="user" items="${requestScope.ChannelNameLike}">
-						<tr>
-						<td><a
-							href="${pageContext.request.contextPath}/watchVideo?user=${user.channelName}"><img
-								src="data:image/gif;base64,${user.avatar}" width="50px"
-								height="50px" /></a><br /><br /></td>
-						</tr>
-					</c:forEach>
 
-				
+				<c:forEach var="user" items="${requestScope.ChannelNameLike}">
+					<tr>
+					<td>
+							<p>${user.channelName}</p>
+						</td>
+						<td><a
+							href="${pageContext.request.contextPath}/search?user=${user.channelName}"><img
+								src="data:image/gif;base64,${user.avatar}" width="50px"
+								height="50px" /></a><br />
+						<br /></td>
+					</tr>
+				</c:forEach>
+
+
+			</table>
+			<table>
+
+				<c:forEach var="video" items="${requestScope.VideoNameLike}">
+					<tr>
+						<td><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><img
+								src="data:image/gif;base64,${video.thumbnail}" width="50px"
+								height="50px" /></a><br /> <a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><c:out
+									value="${video.title}" /></a><br /></td>
+					</tr>
+				</c:forEach>
+
+
 			</table>
 		</div>
 	</div>
