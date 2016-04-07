@@ -5,7 +5,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.example.model.dao.DBUserDAO;
 
 public class CommentMapper implements RowMapper<Comment> {
 
@@ -20,8 +24,10 @@ public class CommentMapper implements RowMapper<Comment> {
 		Video video = new Video();
 		video.setId(rs.getInt("videos_videos_id"));
 		comment.setVideo(video);
-		User user = new User();
-		user.setUsername(rs.getString("users_username"));
+		System.out.println(comment.getId() + "----------------------------------");
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = ((DBUserDAO)context.getBean("DBUserDAO"));
+		User user = userDao.getUserByComment(comment.getId());
 		comment.setUser(user);
 		return comment;
 	}

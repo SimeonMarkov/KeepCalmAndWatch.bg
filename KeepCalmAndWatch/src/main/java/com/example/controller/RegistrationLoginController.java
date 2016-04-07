@@ -36,13 +36,15 @@ public class RegistrationLoginController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBVideoDAO dbVideoDao = 
 			      (DBVideoDAO)context.getBean("DBVideoDAO");
-		if(session.getAttribute("LoggedUser") != null){
-			try {
-				modelMap.addAttribute("AllVideos",dbVideoDao.listVideos());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			if(session.getAttribute("AllVideos") == null){
+				session.setAttribute("AllVideos",dbVideoDao.listVideos());
 			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(session.getAttribute("LoggedUser") != null){
 			return "loggedHeaderAndNav";
 		}
 	    return "unloggedHeaderAndNav";
