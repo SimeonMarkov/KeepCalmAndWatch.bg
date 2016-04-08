@@ -55,7 +55,7 @@ public class DBUserDAO implements IUserDAO {
 	}
 
 	public User getUserByComment(int commentId){
-		String query = "select * from users U inner join comments C on U.username = C.users_username where comments_id = " + commentId + ";";
+		String query = "select username,password,email,channel_name,description,avatar,registration_date from users U inner join comments C on U.username = C.users_username where comments_id = " + commentId + ";";
 		User user = jdbcTemplateObject.queryForObject(query, new UserMapper());
 		return user;
 	}

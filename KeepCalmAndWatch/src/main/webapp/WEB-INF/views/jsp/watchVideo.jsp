@@ -153,7 +153,6 @@ a:hover {
 		</ul>
 	</div>
 
-	<c:out value="${video.path}"></c:out>
 	<div style="position: relative; top: 50px;">
 		<div class="currentVideo"
 			style="width: 940px; height: 590px; border: 1px solid black;">

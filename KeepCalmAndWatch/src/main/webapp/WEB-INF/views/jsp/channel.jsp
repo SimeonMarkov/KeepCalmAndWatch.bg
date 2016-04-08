@@ -85,7 +85,7 @@
 						<ul class="dropdown-menu dropdown-menu-right" role="menu"
 							aria-labelledby="menu1">
 							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="profile">Начална страница</a></li>
+								href="index">Начална страница</a></li>
 							<c:if test="${not empty LoggedUser}">
 							<li role="presentation"><a role="menuitem" tabindex="-1"
 								href="profile">Моят профил</a></li>
