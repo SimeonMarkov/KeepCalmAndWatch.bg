@@ -97,6 +97,7 @@ public class UploadController {
 				FileOutputStream fos = new FileOutputStream(convFile);
 				fos.write(file.getBytes());
 				fos.close();
+			
 			} catch (IOException e1) {
 				System.out.println("File could not be created");
 				e1.printStackTrace();
