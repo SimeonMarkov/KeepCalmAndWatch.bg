@@ -29,7 +29,9 @@ public class VideoMapper implements RowMapper<Video>{
 		video.setUploadDate(rs.getDate("upload_date"));
 		User user = new User();
 		user.setUsername(rs.getString("users_username"));
-		video.setUploader(user); //TODO: how to add the current logged user as an uploader
+		video.setUploader(user);
+		video.setCategory(rs.getString("category"));
+		video.setDuration(rs.getDouble("duration"));
 	    return video;
 	}
 

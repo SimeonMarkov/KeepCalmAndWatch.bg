@@ -24,8 +24,8 @@ public class DBVideoDAO implements IVideoDAO{
 
 	@Override
 	public boolean addVideo(Video video) {
-		 String query = "INSERT INTO videos (title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";        
-		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername());
+		 String query = "INSERT INTO videos (title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";        
+		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername(), video.getCategory(), video.getDuration());
 		 return true;
 
 	}

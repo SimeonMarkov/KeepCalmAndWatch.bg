@@ -15,7 +15,25 @@ public class Video implements Comparable<Video>{
 	private User uploader;
 	private String thumbnail;
 	private Date uplodadDate;
+	private String category;
+	private double duration;
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public double getDuration() {
+		return duration;
+	}
+
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
+
 	//getters and setters
 	public int getId() {
 		return id;
