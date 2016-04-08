@@ -37,7 +37,14 @@ public class DBUserDAO implements IUserDAO {
 		}
 		String query = "select * from users where username = ?";
 		User user = jdbcTemplateObject.queryForObject(query,
-				new Object[] { username }, new UserMapper());
+				new Object[] {username}, new UserMapper());
+		return user;
+	}
+	
+	@Override
+	public User getUserBChannelName(String channelName){
+		String query = "select * from users where channel_name = '" + channelName+ "';";
+		User user = jdbcTemplateObject.queryForObject(query, new UserMapper());
 		return user;
 	}
 	

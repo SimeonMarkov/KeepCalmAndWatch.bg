@@ -18,6 +18,8 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/channel.css"
+	rel="stylesheet">
 </head>
 <body>
 	<div id="logo">
@@ -84,19 +86,21 @@
 				</ul>
 			</div>
 			<p>Hello,${LoggedUser.channelName}</p>
-			<table>
-				<tr>
+			<div class="tab-pane fade in" id="tab2">
+				<ul class="list-unstyled video-list-thumbs row">
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<td><a
-							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><img
-								src="data:image/gif;base64,${video.thumbnail}" width="50px"
-								height="50px" /></a><br /> <a
-							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"><c:out
-									value="${video.title}" /></a><br /></td>
+						<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+							title="${video.title}"> <img
+								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
+								class="img-responsive" width ="auto" height="100px" />
+								<h2>${video.title}</h2> <span
+								class="glyphicon glyphicon-play-circle"></span> <span
+								class="duration">03:15</span>
+						</a></li>
 					</c:forEach>
-
-				</tr>
-			</table>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>

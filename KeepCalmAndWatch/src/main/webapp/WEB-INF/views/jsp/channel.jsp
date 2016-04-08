@@ -17,6 +17,8 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/channel.js"></script>
+<link href="${pageContext.request.contextPath}/css/.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/channel.css"
 	rel="stylesheet">
 </head>
@@ -59,7 +61,7 @@
 			</div>
 			<div class="col-md-2 col-lg-2 "></div>
 			<div class="col-md-1 col-lg-1 ">
-			<br>
+				<br>
 				<div id="upload">
 					<a href="upload" class="btn btn-primary btn-sm" id="upload"
 						type="submit">Качване</a>
@@ -68,28 +70,30 @@
 			<div class="col-md-1 col-lg-1 ">
 
 				<div id="img_container">
+				<c:if test="${not empty LoggedUser}">
 					<div id="avatar">
 						<img class="img-circle" alt="" width="50" height="51"
 							src="data:image/gif;base64,${LoggedUser.avatar}" />
 					</div>
-
+				</c:if>
 
 					<div class="dropdown">
 						<button class="btn btn-default 	" type="button"
 							data-toggle="dropdown">
-							<br>
-							<span class="caret"></span>
+							<br> <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu"
 							aria-labelledby="menu1">
 							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="profile">Наална страница</a></li>
+								href="profile">Начална страница</a></li>
+							<c:if test="${not empty LoggedUser}">
 							<li role="presentation"><a role="menuitem" tabindex="-1"
 								href="profile">Моят профил</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1"
 								href="profile">Моят канал</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1"
 								href="#">Абонаменти</a></li>
+							</c:if>
 							<li role="presentation" class="divider"></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1"
 								href="${pageContext.request.contextPath}/logout">Изход</a></li>
@@ -108,7 +112,6 @@
 			</ul>
 		</div>
 		<div class="col-md-1 col-lg-1"></div>
-
 		<div class="col-lg-8 col-md-8">
 			<div class="card hovercard">
 				<div class="card-background">
@@ -117,7 +120,7 @@
 				</div>
 				<div class="useravatar">
 					<img alt=""
-						src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/default-avatar-ponsy-deer.png">
+						src="data:image/gif;base64,${ChosenUser.avatar}">
 				</div>
 
 			</div>
@@ -146,11 +149,12 @@
 				</div>
 			</div>
 
+
 			<div class="well">
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="tab1">
 						<div class="card-info">
-							<span class="card-title"><h1>nikola</h1></span>
+							<span class="card-title"><h1>${ChosenUser.channelName}</h1></span>
 						</div>
 						<div id="subscribe">
 							<a href="subscribe" class="btn btn-primary btn-sm" id="subscribe"
@@ -160,108 +164,26 @@
 						<br>
 						<h3>Описание</h3>
 						<div class="panel panel-default">
-							<div class="panel-body">A Basic Panel flksjfas fksaj
-								fsafhsaj k fhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf
-								ajfk ashffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf ajf
-								kashffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf ajf
-								kashffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf ajfkash
-								ffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf
-								ajfkashffhsal fhsak flqgw jfbw nfash fash flksahf ksa hflwjf
-								ajfkashffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf
-								ajfkashffhsalfhsak flqgw jfbw nfash fash flksahf ksa hflwjf
-								ajfkashf l kasfjwq;f ipsj fsaj</div>
+							<div class="panel-body">${ChosenUser.description}</div>
 						</div>
 						<br>
 						<div class="card-info">
-							<span class="card-title">Регистриран на </span>
+							<span class="card-title">Регистриран на
+								${ChosenUser.registrationDate}</span>
 						</div>
 					</div>
 					<div class="tab-pane fade in" id="tab2">
 						<ul class="list-unstyled video-list-thumbs row">
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
+						<c:forEach var="video" items="${VideosForChannelName}">
+							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+								title="${video.title}">
+									<img src="data:image/gif;base64,${video.thumbnail}"
 									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
+									<h2>${video.title}</h2>
 									<span class="glyphicon glyphicon-play-circle"></span> <span
 									class="duration">03:15</span>
 							</a></li>
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">03:15</span>
-							</a></li>
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">03:15</span>
-							</a></li>
-							<li class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">03:15</span>
-							</a></li>
-							<li class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">03:15</span>
-							</a></li>
-						</ul>
-					</div>
-					<div class="tab-pane fade in" id="tab3">
-						<ul class="list-unstyled video-list-thumbs row">
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">24</span>
-							</a></li>
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">24</span>
-							</a></li>
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">24</span>
-							</a></li>
-							<li class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">24</span>
-							</a></li>
-							<li class="col-lg-3 col-md-4 col-sm-4 col-xs-6"><a href="#"
-								title="Claudio Bravo, antes su debut con el Barça en la Liga">
-									<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg"
-									alt="Barca" class="img-responsive" height="130px" />
-									<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-									<span class="glyphicon glyphicon-play-circle"></span> <span
-									class="duration">24</span>
-							</a></li>
+						</c:forEach>
 						</ul>
 					</div>
 				</div>

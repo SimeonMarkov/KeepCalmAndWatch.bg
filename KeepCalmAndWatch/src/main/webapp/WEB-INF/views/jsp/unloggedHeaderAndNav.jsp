@@ -18,6 +18,8 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/channel.css"
+	rel="stylesheet">
 </head>
 <body>
 	<div id="logo">
@@ -59,6 +61,21 @@
 					<li class="active"><a href="#section1">Начална страница</a></li>
 					<li><a href="#section2">Най-популярни</a></li>
 
+				</ul>
+			</div>
+			<div class="tab-pane fade in" id="tab2">
+				<ul class="list-unstyled video-list-thumbs row">
+					<c:forEach var="video" items="${sessionScope.AllVideos}">
+						<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+							title="${video.title}"> <img
+								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
+								class="img-responsive" width ="auto" height="100px" />
+								<h2>${video.title}</h2> <span
+								class="glyphicon glyphicon-play-circle"></span> <span
+								class="duration">03:15</span>
+						</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

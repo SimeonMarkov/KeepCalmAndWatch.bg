@@ -22,4 +22,6 @@ public interface IVideoDAO {
 
 	List<Comment> getCommentsForSingleVideo(int videoId) throws SQLException;
 
+	List<Video> getVideosForChannelName(String channelName);
+
 }

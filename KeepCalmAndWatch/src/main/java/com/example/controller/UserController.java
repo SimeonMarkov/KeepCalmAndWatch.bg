@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.model.User;
+import com.example.model.Video;
+import com.example.model.dao.DBUserDAO;
+import com.example.model.dao.DBVideoDAO;
 
 @Controller
 @SessionAttributes("LoggedUser")
@@ -21,18 +26,29 @@ public class UserController {
 	public String profile(Model model, HttpSession session){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
-		User user = (User) session.getAttribute("LoggedUser");
-		model.addAttribute(user);
+		if(session.getAttribute("LoggedUser") != null){
+			User user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+		}
 		return "profile";
 	}
 	
 	@RequestMapping(value = "/channel", method = RequestMethod.GET)
-	//Model model, @RequestParam("channel") String channel
-	public String channel(HttpSession session){
+	public String channel(Model model, @RequestParam("user") String channelName, HttpSession session){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
-		User user = (User) session.getAttribute("LoggedUser");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		if(session.getAttribute("LoggedUser") != null){
+			User user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+		}
+		User chosenUser = userDao.getUserBChannelName(channelName);
+		List<Video> videosForChannelName = videoDao.getVideosForChannelName(channelName);
 		
+		model.addAttribute("ChosenUser", chosenUser);
+		model.addAttribute("VideosForChannelName", videosForChannelName);
+		System.out.println(videosForChannelName);
 		
 		return "channel";
 	}

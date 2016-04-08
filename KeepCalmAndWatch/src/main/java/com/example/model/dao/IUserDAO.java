@@ -17,4 +17,6 @@ public interface IUserDAO {
 
 	List<User> listUsers() throws SQLException;
 
+	User getUserBChannelName(String channelName);
+
 }

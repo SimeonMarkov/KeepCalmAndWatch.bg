@@ -18,6 +18,8 @@
 <title>My video page</title>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/channel.css"
+	rel="stylesheet">
 <style>
 .form-control {
 	display: block;
@@ -156,9 +158,9 @@ a:hover {
 		<div class="currentVideo"
 			style="width: 940px; height: 590px; border: 1px solid black;">
 			<video width="940" height="590" controls tabindex="0"
-				poster="D:/picthas/source.jpg" autoplay>
+				poster="${video.thumbnail}" autoplay>
 				<source src="${video.path}" type="video/mp4" />
-				<source src="${video.path}" type="video/mp4" />
+				<source src="${video.path}" type="video/ogv" />
 				<source src="${video.path}" type="video/webm" />
 			</video>
 			<div>
@@ -219,26 +221,22 @@ a:hover {
 
 
 		<div class="suggestions">
-
-			<c:forEach var="video" items="${sessionScope.AllVideos}">
-				<a
-					href="${pageContext.request.contextPath}/watchVideo?v=${video.id}">
-					<table>
-						<tr>
-							<td><img src="data:image/gif;base64,${video.thumbnail}"
-								width="50px" height="50px" /><br />
-								<div>
-									<span class="mealName">${video.title}</span>
-								</div>
-								<div class="divIngredients">
-									<span class="mealIngredients">${video.views}</span>
-								</div></td>
-						</tr>
-
-					</table>
-				</a>
-				<br>
-			</c:forEach>
+	
+		<div class="tab-pane fade in" id="tab2">
+				<ul class="list-unstyled video-list-thumbs row">
+					<c:forEach var="video" items="${sessionScope.AllVideos}">
+						<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+							title="${video.title}"> <img
+								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
+								class="img-responsive" width ="auto" height="100px" />
+								<h2>${video.title}</h2> <span
+								class="glyphicon glyphicon-play-circle" ></span> <span
+								class="duration">03:15</span>
+						</a></li>
+					</c:forEach>
+				</ul>
+			</div>
 		</div>
 	</div>
 

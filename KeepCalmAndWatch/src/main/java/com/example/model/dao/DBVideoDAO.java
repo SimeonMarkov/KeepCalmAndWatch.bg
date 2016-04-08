@@ -37,6 +37,13 @@ public class DBVideoDAO implements IVideoDAO{
 				new Object[] { video_id }, new VideoMapper());
 		return video;
 	}
+	
+	@Override
+	public List<Video> getVideosForChannelName(String channelName){
+		String query = "select * from videos V inner join users U on V.users_username = U.username where channel_name = '" + channelName + "';";
+		List<Video> videos = jdbcTemplateObject.query(query, new VideoMapper());
+		return videos;
+	}
 
 	@Override
 	public List<Video> getAllVideosLike(String videoTitle){
