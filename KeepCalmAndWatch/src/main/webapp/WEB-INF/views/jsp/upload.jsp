@@ -208,6 +208,12 @@ a:hover {
 									<input type="file" id="thumbnailUpload" name="thumbnail"
 										required="required" /> <br> <br>
 								</div>
+								<div>
+									<select name="category">
+										<option value="option1">option1</option>
+										<option value="option2">option2</option>
+									</select>
+								</div>
 								<input type="submit" value="Качи" class="btn btn-primary">
 							</form>
 						</div>

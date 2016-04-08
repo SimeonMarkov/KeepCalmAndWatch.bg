@@ -35,6 +35,7 @@ import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.xuggle.xuggler.IContainer;
 
 @Controller
 @RequestMapping("/upload")
@@ -57,7 +58,8 @@ public class UploadController {
 			@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("videoPath") MultipartFile file,
-			@RequestParam("thumbnail") MultipartFile thumbnail) {
+			@RequestParam("thumbnail") MultipartFile thumbnail,
+			@RequestParam("category") String category) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
@@ -118,16 +120,16 @@ public class UploadController {
 			video.setViews(0);
 			video.setLikes(0);
 			video.setDislikes(0);
-			try {
-				video.setThumbnail(Base64.encode(thumbnail.getBytes()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			video.setThumbnail(thumbnail.getOriginalFilename());
 			video.setUploadDate(Date.valueOf(LocalDate.now()));
 			User user = (User) model.get("LoggedUser");
 			video.setUploader((User) model.get("LoggedUser"));
-
+			video.setCategory(category);
+			final String filename = video.getPath();
+			IContainer container = IContainer.make();
+			int result = container.open(filename, IContainer.Type.READ, null);
+			long duration = container.getDuration();
+			video.setDuration(duration);
 			videoJDBCTemplate.addVideo(video);
 			mav.addObject(
 					"message",
