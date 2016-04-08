@@ -21,6 +21,7 @@ public class User {
 	private TreeMap<LocalDateTime, Video> history;
 	private HashSet<Playlist> playlists;
 	private Playlist favorites;
+	private String background;
 	
 	//getters and setters
 	public String getUsername() {
@@ -133,6 +134,14 @@ public class User {
 
 	public void setFavorites(Playlist favorites) {
 		this.favorites = favorites;
+	}
+
+	public String getBackground() {
+		return background;
+	}
+	
+	public void setBackground(String background) {
+		this.background = background;
 	}
 
 

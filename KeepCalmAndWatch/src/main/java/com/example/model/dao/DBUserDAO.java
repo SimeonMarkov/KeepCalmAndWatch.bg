@@ -24,9 +24,10 @@ public class DBUserDAO implements IUserDAO {
 
 	@Override
 	public boolean addUser(User user) {
-		
-		String query = "INSERT INTO keepcalmandwatch.users (username, password, email, channel_name, description, avatar, registration_date) VALUES(?, ?, ?, ?, ?, ?, ?);";		
-		jdbcTemplateObject.update(query, user.getUsername(), user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate());
+		String query = "INSERT INTO keepcalmandwatch.users (username, password, email, channel_name, description, avatar, registration_date, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";		
+		user.setAvatar("https://s3.eu-central-1.amazonaws.com/keep-calm-avatars/default-avatar-ponsy-deer.jpg");
+		user.setBackground("https://s3.eu-central-1.amazonaws.com/keep-calm-backgrounds/defaultbackground.jpg");
+		jdbcTemplateObject.update(query, user.getUsername(), user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate(), user.getBackground());
 		return true;
 	}
 
