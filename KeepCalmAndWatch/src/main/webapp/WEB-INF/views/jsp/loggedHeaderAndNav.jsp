@@ -55,7 +55,7 @@
 	</div>
 	<div id="avatar">
 		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="data:image/gif;base64,${LoggedUser.avatar}" />
+			src="${LoggedUser.avatar }" />
 	</div>
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button"
