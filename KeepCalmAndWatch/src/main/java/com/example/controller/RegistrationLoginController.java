@@ -64,6 +64,7 @@ public class RegistrationLoginController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO dbUserDao = (DBUserDAO)context.getBean("DBUserDAO");
 		user = dbUserDao.getUser(username);
+		password = encodePassword(password);
 		if(user == null || !(user.getPassword().equals(password))){
 			redirectAttributes.addFlashAttribute("fail","Грешно потребителско име или парола!");
 			return "redirect:/login";
