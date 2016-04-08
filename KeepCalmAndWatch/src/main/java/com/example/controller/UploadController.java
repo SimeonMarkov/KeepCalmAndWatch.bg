@@ -35,6 +35,8 @@ import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.xuggle.xuggler.IContainer;
+import com.xuggle.xuggler.IContainerFormat;
 
 @Controller
 @RequestMapping("/upload")
@@ -85,7 +87,9 @@ public class UploadController {
 
 			// amazon folder
 			String bucketName = "keep-calm-videos";
-			s3client.createBucket(bucketName);
+			String thumbnailbucket = "keep-calm-thumbnails";
+//			s3client.createBucket(bucketName);
+//			s3client.createBucket(thumbnailbucket);
 
 			File convFile = new File(file.hashCode()
 					+ file.getOriginalFilename());
@@ -97,7 +101,14 @@ public class UploadController {
 				FileOutputStream fos = new FileOutputStream(convFile);
 				fos.write(file.getBytes());
 				fos.close();
-			
+				convThumbnail.createNewFile();
+				FileOutputStream thumbfos = new FileOutputStream(convThumbnail);
+				thumbfos.write(thumbnail.getBytes());
+				thumbfos.close();
+				IContainer container = IContainer.make();
+				int result = container.open(fos, IContainerFormat.make());
+				long duration = container.getDuration();
+				System.out.println(duration);
 			} catch (IOException e1) {
 				System.out.println("File could not be created");
 				e1.printStackTrace();
@@ -106,10 +117,13 @@ public class UploadController {
 			s3client.putObject(new PutObjectRequest(bucketName, convFile
 					.getName(), convFile)
 					.withCannedAcl(CannedAccessControlList.PublicRead));
-
+			s3client.putObject(new PutObjectRequest(thumbnailbucket, convThumbnail
+					.getName(), convThumbnail)
+					.withCannedAcl(CannedAccessControlList.PublicRead));
+			
 			String videoPath = s3client.getResourceUrl(bucketName,
 					convFile.getName());
-			String thumbnailPath = s3client.getResourceUrl(bucketName,
+			String thumbnailPath = s3client.getResourceUrl(thumbnailbucket,
 					convThumbnail.getName());
 
 			video.setTitle(title);
@@ -118,16 +132,12 @@ public class UploadController {
 			video.setViews(0);
 			video.setLikes(0);
 			video.setDislikes(0);
-			try {
-				video.setThumbnail(Base64.encode(thumbnail.getBytes()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			video.setThumbnail(thumbnailPath);
 			video.setUploadDate(Date.valueOf(LocalDate.now()));
 			User user = (User) model.get("LoggedUser");
 			video.setUploader((User) model.get("LoggedUser"));
-
+			video.setCategory("Music");
+			
 			videoJDBCTemplate.addVideo(video);
 			mav.addObject(
 					"message",
