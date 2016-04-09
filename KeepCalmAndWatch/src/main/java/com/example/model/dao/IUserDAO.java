@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.example.model.Comment;
 import com.example.model.User;
 
 public interface IUserDAO {
@@ -18,5 +19,7 @@ public interface IUserDAO {
 	List<User> listUsers() throws SQLException;
 
 	User getUserBChannelName(String channelName);
+
+	boolean addComment(Comment comment);
 
 }

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.model.Comment;
+import com.example.model.User;
 import com.example.model.Video;
+import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
 @Controller
@@ -41,5 +44,20 @@ public class VideoWatchController {
 		}
 		return "watchVideo";
 	}
-	
+	@RequestMapping(method=RequestMethod.POST)
+	public String submitComment(@RequestParam("username") String channelName, @RequestParam("text") String text, @RequestParam("videoId") int videoId){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		Comment comment = new Comment();
+		comment.setText(text);
+		comment.setDatetime(LocalDateTime.now());
+		comment.setLikes(0);
+		comment.setDislikes(0);
+		User user = userDao.getUserBChannelName(channelName);
+		comment.setUser(user);
+		Video video = videoDao.getVideo(videoId);
+		comment.setVideo(video);
+		return "watchVideo?v=" + videoId;
+	}
 }

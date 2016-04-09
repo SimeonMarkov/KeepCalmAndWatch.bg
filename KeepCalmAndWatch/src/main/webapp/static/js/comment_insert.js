@@ -10,24 +10,38 @@ $(document).ready(function() {
 function comment_post_btn_click() {
 
 	// Text within textarea which the person has entered
-	var _comment = $('#comment-post-text').val();
-	var _channelName = $('#channelName').val();
+	var _channelName = $("#channelName").val();
+	var _text = $("#comment-post-text").val();
+	$.urlParam = function(name){
+		var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		return results[1] || 0;
+	}
+	var _videoId = $.urlParam('v');
+	//var _comment = $('#comment-post-text').val();
+	//var _channelName = $('#channelName').val();
+	
+	
 
 	if (_channelName != "") {
-		if (_comment.length > 0) {
+		if (_text.length > 0) {
 			$('.comment-insert-container').css('border', '1px solid #e1e1e1');
 
 			$.ajax({
 				task : "comment_insert",
 				channelName : _channelName,
-				comment : _comment
+				comment : _text,
+				videoId: _videoId,
 			}
 
 			).error(function() {
 				console.log("Error: ");
+				console.log("ResponseText: " + _text + ";" + _channelName + " " + _videoId);
+				console.log("video is:" + $.urlParam('v'));
 			}).success(function() {
-				comment_insert(_comment, _channelName);
-				console.log("ResponseText: " + _comment + ";" + _channelName);
+				comment_insert(_text, _channelName);
+				comment_submit();
+				console.log("Success!");
+				console.log("ResponseText: " + _text + ";" + _channelName + ";" + _videoId);
 			});
 			// proceed with out ajax callback
 		} else {
@@ -59,4 +73,8 @@ function comment_insert(_comment, _channel) {
 	t += '</div>';
 
 	$('#newest').prepend(t);
+}
+
+function comment_submit(){
+	
 }

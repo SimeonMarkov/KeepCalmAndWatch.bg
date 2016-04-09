@@ -83,9 +83,6 @@ a:hover {
 		this.rows = minRows + rows;
 	});
 </script>
-<script>
-	
-</script>
 </head>
 <body>
 	<div id="logo">
@@ -172,7 +169,7 @@ a:hover {
 				<h3 class="comment-title">Коментари...</h3>
 				<div class="comment-insert">
 					<h3 class="who-says">
-						<span>${LoggedUser.channelName}<span>
+						<span id="logged">${LoggedUser.channelName}</span>
 					</h3>
 					<div class="comment-insert-container">
 						<textarea id="comment-post-text" class="comment-insert-text"></textarea>

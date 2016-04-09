@@ -1,15 +1,14 @@
 package com.example.model.dao;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.example.model.Comment;
 import com.example.model.User;
 
 public class DBUserDAO implements IUserDAO {
@@ -28,6 +27,13 @@ public class DBUserDAO implements IUserDAO {
 		user.setAvatar("https://s3.eu-central-1.amazonaws.com/keep-calm-avatars/default-avatar-ponsy-deer.jpg");
 		user.setBackground("https://s3.eu-central-1.amazonaws.com/keep-calm-backgrounds/defaultbackground.jpg");
 		jdbcTemplateObject.update(query, user.getUsername(), user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate(), user.getBackground());
+		return true;
+	}
+	
+	@Override
+	public boolean addComment(Comment comment){
+		String query = "INSERT INTO keepcalmandwatch.comments (text,date,likes,dislikes,videos_videos_id,users_username) VALUES (?,?,?,?,?,?,?);";
+		jdbcTemplateObject.update(query, comment.getText(), comment.getDatetime(), comment.getLikes(), comment.getDislikes(), comment.getVideo(), comment.getUser());
 		return true;
 	}
 
