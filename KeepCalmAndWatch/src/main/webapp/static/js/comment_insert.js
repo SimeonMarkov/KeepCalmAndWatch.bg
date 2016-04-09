@@ -33,10 +33,10 @@ function comment_post_btn_click() {
 		} else {
 			// the textarea is empty,lets but a red border on it
 			$('.comment-insert-container').css('border', '1px solid #ff0000');
+			alert('Sorry,you cannot submit an empty comment');
 			console.log("The text area was empty");
 		}
 	} else {
-		alert("Please log in in order to comment!");
 	}
 	// remove the text from the textarea, ready for another comment
 	// possibly

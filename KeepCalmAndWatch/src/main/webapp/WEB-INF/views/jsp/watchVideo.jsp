@@ -178,39 +178,34 @@ a:hover {
 						<textarea id="comment-post-text" class="comment-insert-text"></textarea>
 					</div>
 
-					<div id="comment-post-btn" class="comment-post-btn-wrapper">
+					<div id="comment-post-btn" class="comment-post-btn-wrapper" data-toggle="modal" data-target="#myModal">
 						Post</div>
-					<c:if test="${empty LoggedUser}">
-						<div class="modal fade" id="myModal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-
-										</button>
-										<h4 class="modal-title">Modal title</h4>
-
-									</div>
-									<div class="modal-body">
-										<p>One fine body&hellip;</p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
-									</div>
-								</div>
-								<!-- /.modal-content -->
-							</div>
-							<!-- /.modal-dialog -->
-						</div>
-						<!-- /.modal -->
-						<!--End Modal-->
-					</c:if>
-
+<c:if test="${empty LoggedUser}">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: #b30000;">Uh-uh</h4>
+        </div>
+        <div class="modal-body">
+        <c:if test=""></c:if>
+          <p style="color: black;">Please log in first in order to write a comment!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </c:if>
+  
+</div>
+					
 				</div>
 				<div class="comments-list">
 					<ul class="comments-holder-ul">
