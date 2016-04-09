@@ -45,7 +45,6 @@ function comment_post_btn_click() {
 
 function comment_insert(_comment, _channel) {
 	var t = '';
-	t += '<li class="comment-holder" id="_1">';
 	t += '<div class="user-img">';
 	t += '<img src="images/photo.png" class="user-img-pic" />';
 	t += '</div>';
@@ -58,7 +57,6 @@ function comment_insert(_comment, _channel) {
 	t += '</div>';
 	t += '</div>';
 	t += '</div>';
-	t += '</li>';
 
-	$('.comments-holder-ul').prepend(t);
+	$('#newest').prepend(t);
 }

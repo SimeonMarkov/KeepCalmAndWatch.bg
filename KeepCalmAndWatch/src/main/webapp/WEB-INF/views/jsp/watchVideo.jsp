@@ -209,27 +209,21 @@ a:hover {
 				</div>
 				<div class="comments-list">
 					<ul class="comments-holder-ul">
+						<li class="comments-holder-ul" id="newest">
+							
+						</li>
+						<c:forEach var="comment" items="${requestScope.comments}">
 						<li class="comment-holder" id="_1">
 							<div class="user-img">
 								<img src="images/photo.png" class="user-img-pic" />
 							</div>
 							<div class="coment-body">
-								<h3 class="username-field">David Thorn</h3>
-								<div class="comment-text">The comment of the person will
-									go here The comment of the person will go here</div>
+								<h3 class="username-field">${comment.user.channelName}</h3>
+								<div class="comment-text">${comment.text}</div>
 							</div>
 						</li>
-						<li class="comment-holder" id="_1">
-							<div class="user-img">
-								<img src="images/photo.png" class="user-img-pic" />
-							</div>
-							<div class="coment-body">
-								<h3 class="username-field">David Thorn</h3>
-								<div class="comment-text">The comment of the person will
-									go here</div>
-							</div>
-
-						</li>
+						</c:forEach>
+						
 					</ul>
 				</div>
 			</div>
