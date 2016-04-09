@@ -11,6 +11,8 @@
 	type="image/png" />
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/comment_insert.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script
@@ -20,22 +22,13 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/channel.css"
 	rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/comment_insert.js"></script>
 <style>
-.form-control {
-	display: block;
-	overflow: hidden;
-	resize: none;
-	padding: 10px;
-	width: 640px;
-	font-size: 14px;
-	border-radius: 8px;
-}
-
 .suggestions {
 	position: absolute;
-	top: 10px;
-	width: 380px;
+	top: 130px;
 	right: 10px;
+	width: 380px;
 	border: 1px solid black;
 }
 
@@ -77,12 +70,12 @@ a:hover {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
-	$(document).one('focus.textarea', '.form-control', function() {
+	$(document).one('focus.textarea', '.comment-insert-text', function() {
 		var savedValue = this.value;
 		this.value = '';
 		this.baseScrollHeight = this.scrollHeight;
 		this.value = savedValue;
-	}).on('input.textarea', '.form-control', function() {
+	}).on('input.textarea', '.comment-insert-text', function() {
 		var minRows = this.getAttribute('data-min-rows') | 0, rows;
 		this.rows = minRows;
 		console.log(this.scrollHeight, this.baseScrollHeight);
@@ -109,7 +102,7 @@ a:hover {
 						<select name="category" class="btn btn-info dropdown-toggle"
 							data-toggle="dropdown">
 							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
+							<option value="videos">Клипове</option>
 							<option value="users">Потребители</option>
 						</select>
 					</div>
@@ -167,77 +160,107 @@ a:hover {
 			</div>
 			<div class="description">${video.description}</div>
 		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container-fluid">
+		<div class="row content">
+			<div class="comment-wrapper">
+				<h3 class="comment-title">Коментари...</h3>
+				<div class="comment-insert">
+					<h3 class="who-says">
+						<span>${LoggedUser.channelName}<span>
+					</h3>
+					<div class="comment-insert-container">
+						<textarea id="comment-post-text" class="comment-insert-text"></textarea>
+					</div>
 
-		<div class="container-fluid">
-			<div class="row content">
+					<div id="comment-post-btn" class="comment-post-btn-wrapper">
+						Post</div>
+					<c:if test="${empty LoggedUser}">
+						<div class="modal fade" id="myModal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
 
+										</button>
+										<h4 class="modal-title">Modal title</h4>
 
-				<div class="col-sm-9">
-
-					<h4>Leave a Comment:</h4>
-					<form>
-						<div class="form-group">
-							<textarea class="form-control" rows="2" data-min-rows='2'
-								placeholder="Напишете коментар..." required></textarea>
+									</div>
+									<div class="modal-body">
+										<p>One fine body&hellip;</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Save
+											changes</button>
+									</div>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
 						</div>
-						<button type="submit" class="btn btn-success">Submit</button>
-					</form>
-					<br> <br>
+						<!-- /.modal -->
+						<!--End Modal-->
+					</c:if>
 
-					<p>
-						<span class="badge"></span> Comments:
-					</p>
-					<br>
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button"
-							data-toggle="dropdown">
-							Сортирай по <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="#">Най-харесвани</a></li>
-							<li><a href="#">Най-нови</a></li>
-						</ul>
-					</div>
+				</div>
+				<div class="comments-list">
+					<ul class="comments-holder-ul">
+						<li class="comment-holder" id="_1">
+							<div class="user-img">
+								<img src="images/photo.png" class="user-img-pic" />
+							</div>
+							<div class="coment-body">
+								<h3 class="username-field">David Thorn</h3>
+								<div class="comment-text">The comment of the person will
+									go here The comment of the person will go here</div>
+							</div>
+						</li>
+						<li class="comment-holder" id="_1">
+							<div class="user-img">
+								<img src="images/photo.png" class="user-img-pic" />
+							</div>
+							<div class="coment-body">
+								<h3 class="username-field">David Thorn</h3>
+								<div class="comment-text">The comment of the person will
+									go here</div>
+							</div>
 
-					<div class="row">
-						<c:forEach var="comment" items="${requestScope.comments}">
-							<div class="col-sm-2 text-center">
-								<img src="data:image/gif;base64,${comment.user.avatar}" class="img-circle" height="65"
-									width="65" alt="Avatar">
-							</div>
-							<div class="col-sm-10">
-								<h4>
-									${comment.user.channelName} <small>${comment.datetime}</small>
-								</h4>
-								<p>${comment.text}</p>
-								<br>
-							</div>
-						</c:forEach>
-					</div>
+						</li>
+					</ul>
 				</div>
 			</div>
-		</div>
 
 
-		<div class="suggestions">
-	
-		<div class="tab-pane fade in" id="tab2">
-				<ul class="list-unstyled video-list-thumbs row">
-					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<li class="col-lg-3 col-sm-4 col-xs-6"><a
-							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
-							title="${video.title}"> <img
-								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
-								class="img-responsive" width ="auto" height="100px" />
-								<h2>${video.title}</h2> <span
-								class="glyphicon glyphicon-play-circle" ></span> <span
-								class="duration">03:15</span>
-						</a></li>
-					</c:forEach>
-				</ul>
-			</div>
 		</div>
 	</div>
 
+	<div class="suggestions">
+
+		<div class="tab-pane fade in" id="tab2">
+			<ul class="list-unstyled video-list-thumbs row">
+				<c:forEach var="video" items="${sessionScope.AllVideos}">
+					<li class="col-lg-3 col-sm-4 col-xs-6"><a
+						href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+						title="${video.title}"> <img src="${video.thumbnail}"
+							alt="Barca" class="img-responsive" width="auto" height="100px" />
+							<h2>${video.title}</h2> <span
+							class="glyphicon glyphicon-play-circle"></span> <span
+							class="duration">03:15</span>
+					</a></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+
+	<input type="hidden" id="channelName" value="${LoggedUser.channelName}" />
 </body>
 </html>
