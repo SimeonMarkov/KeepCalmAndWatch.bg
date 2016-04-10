@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import com.example.model.Comment;
-import com.example.model.CommentMapper;
 import com.example.model.Video;
 
 public class DBVideoDAO implements IVideoDAO{

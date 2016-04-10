@@ -177,41 +177,41 @@ a:hover {
 						<textarea id="comment-post-text" class="comment-insert-text"></textarea>
 					</div>
 
-					<div id="comment-post-btn" class="comment-post-btn-wrapper" data-toggle="modal" data-target="#myModal">
-						Post</div>
-<c:if test="${empty LoggedUser}">
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="color: #b30000;">Uh-uh</h4>
-        </div>
-        <div class="modal-body">
-        <c:if test=""></c:if>
-          <p style="color: black;">Please log in first in order to write a comment!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  </c:if>
-  
-</div>
-					
+					<div id="comment-post-btn" class="comment-post-btn-wrapper"
+						data-toggle="modal" data-target="#myModal">Post</div>
+					<c:if test="${empty LoggedUser}">
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title" style="color: #b30000;">Uh-uh</h4>
+									</div>
+									<div class="modal-body">
+										<c:if test=""></c:if>
+										<p style="color: black;">Please log in first in order to
+											write a comment!</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</c:if>
+
 				</div>
-				<div class="comments-list">
-					<ul class="comments-holder-ul">
-						<li class="comments-holder-ul" id="newest">
-							
-						</li>
-						<c:forEach var="comment" items="${requestScope.comments}">
+
+			</div>
+			<div class="comments-list">
+				<ul class="comments-holder-ul">
+					<li class="comments-holder-ul" id="newest"></li>
+					<c:forEach var="comment" items="${requestScope.comments}">
 						<li class="comment-holder" id="_1">
 							<div class="user-img">
 								<img src="images/photo.png" class="user-img-pic" />
@@ -221,14 +221,14 @@ a:hover {
 								<div class="comment-text">${comment.text}</div>
 							</div>
 						</li>
-						</c:forEach>
-						
-					</ul>
-				</div>
+					</c:forEach>
+
+				</ul>
 			</div>
-
-
 		</div>
+
+
+	</div>
 	</div>
 
 	<div class="suggestions">
@@ -236,14 +236,16 @@ a:hover {
 		<div class="tab-pane fade in" id="tab2">
 			<ul class="list-unstyled video-list-thumbs row">
 				<c:forEach var="video" items="${sessionScope.AllVideos}">
-					<li class="col-lg-3 col-sm-4 col-xs-6"><a
-						href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
-						title="${video.title}"> <img src="${video.thumbnail}"
-							alt="Barca" class="img-responsive" width="auto" height="100px" />
-							<h2>${video.title}</h2> <span
-							class="glyphicon glyphicon-play-circle"></span> <span
-							class="duration">03:15</span>
-					</a></li>
+					<div class="row">
+						<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+							title="${video.title}"> <img src="${video.thumbnail}"
+								alt="Barca" class="img-responsive" width="auto" height="100px" />
+								<h2>${video.title}</h2> <span
+								class="glyphicon glyphicon-play-circle"></span> <span
+								class="duration">03:15</span>
+						</a></li>
+					</div>
 				</c:forEach>
 			</ul>
 		</div>
