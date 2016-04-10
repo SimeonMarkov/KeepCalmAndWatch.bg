@@ -12,15 +12,14 @@ function comment_post_btn_click() {
 	// Text within textarea which the person has entered
 	var _channelName = $("#channelName").val();
 	var _text = $("#comment-post-text").val();
-	$.urlParam = function(name){
-		var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	$.urlParam = function(name) {
+		var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+				.exec(window.location.href);
 		return results[1] || 0;
 	}
 	var _videoId = $.urlParam('v');
-	//var _comment = $('#comment-post-text').val();
-	//var _channelName = $('#channelName').val();
-	
-	
+	// var _comment = $('#comment-post-text').val();
+	// var _channelName = $('#channelName').val();
 
 	if (_channelName != "") {
 		if (_text.length > 0) {
@@ -29,19 +28,23 @@ function comment_post_btn_click() {
 			$.ajax({
 				channelName : _channelName,
 				comment : _text,
-				videoId: _videoId,
+				videoId : _videoId,
 			}
 
-			).error(function() {
-				console.log("Error: ");
-				console.log("ResponseText: " + _text + ";" + _channelName + " " + _videoId);
-				console.log("video is:" + $.urlParam('v'));
-			}).success(function() {
-				comment_insert(_text, _channelName);
-				comment_submit(_text,_channelName,_videoId);
-				console.log("Success!");
-				console.log("ResponseText: " + _text + ";" + _channelName + ";" + _videoId);
-			});
+			).error(
+					function() {
+						console.log("Error: ");
+						console.log("ResponseText: " + _text + ";"
+								+ _channelName + " " + _videoId);
+						console.log("video is:" + $.urlParam('v'));
+					}).success(
+					function() {
+						comment_insert(_text, _channelName);
+						comment_submit(_text, _channelName, _videoId);
+						console.log("Success!");
+						console.log("ResponseText: " + _text + ";"
+								+ _channelName + ";" + _videoId);
+					});
 			// proceed with out ajax callback
 		} else {
 			// the textarea is empty,lets but a red border on it
@@ -74,34 +77,46 @@ function comment_insert(_comment, _channel) {
 	$('#newest').prepend(t);
 }
 
-function comment_submit(text,channelName,videoId){
+function comment_submit(text, channelName, videoId) {
 	// Text within textarea which the person has entered
 	var _channelName = $("#channelName").val();
 	var _text = $("#comment-post-text").val();
-	$.urlParam = function(name){
-		var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	$.urlParam = function(name) {
+		var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+				.exec(window.location.href);
 		return results[1] || 0;
 	}
 	var _videoId = $.urlParam('v');
-	//var _comment = $('#comment-post-text').val();
-	//var _channelName = $('#channelName').val();
-	dataString={"text":text,"channelName":channelName,"videoId":videoId};
+	// var _comment = $('#comment-post-text').val();
+	// var _channelName = $('#channelName').val();
+	dataString = {
+		"text" : text,
+		"channelName" : channelName,
+		"videoId" : videoId
+	};
 	$.ajax({
-		url: "submitComment",
-		type:"POST",
-		data: dataString,
-		contentType:"application/json",
-		dataType:"json"
-		
+		url : "submitComment",
+		type : "POST",
+		data : JSON.stringify({
+			"text" : text,
+			"channelName" : channelName,
+			"videoId" : videoId
+		}),
+		datatype : "json",
+		contentType : "application/json; charset=UTF-8",
+	// dataType:"json"
+
 	}
 
 	).error(function(data) {
 		console.log("Error from submit: ");
 		console.log("ResponseText: " + data.text);
 		console.log("video is:" + $.urlParam('v'));
-	}).success(function(data) {
-		console.log("Success with submit!");
-		console.log("ResponseText: " + data.text + ";" + data.channelName + ";" + data.videoId);
-	});
-	
+	}).success(
+			function(data) {
+				console.log("Success with submit!");
+				console.log("ResponseText: " + data.text + ";"
+						+ data.channelName + ";" + data.videoId);
+			});
+
 }

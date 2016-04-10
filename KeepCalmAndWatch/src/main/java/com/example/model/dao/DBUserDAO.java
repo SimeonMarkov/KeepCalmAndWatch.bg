@@ -1,6 +1,7 @@
 package com.example.model.dao;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.model.Comment;
+import com.example.model.CommentMapper;
 import com.example.model.User;
 
 public class DBUserDAO implements IUserDAO {
@@ -32,8 +34,8 @@ public class DBUserDAO implements IUserDAO {
 	
 	@Override
 	public boolean addComment(Comment comment){
-		String query = "INSERT INTO keepcalmandwatch.comments (text,date,likes,dislikes,videos_videos_id,users_username) VALUES (?,?,?,?,?,?,?);";
-		jdbcTemplateObject.update(query, comment.getText(), comment.getDatetime(), comment.getLikes(), comment.getDislikes(), comment.getVideo(), comment.getUser());
+		String query = "INSERT INTO keepcalmandwatch.comments (text, date, likes,dislikes,videos_videos_id,users_username) VALUES (?,?,?,?,?,?);";
+		jdbcTemplateObject.update(query, comment.getText(), new Date(), comment.getLikes(), comment.getDislikes(), comment.getVideo().getId(), comment.getUser().getUsername());
 		return true;
 	}
 

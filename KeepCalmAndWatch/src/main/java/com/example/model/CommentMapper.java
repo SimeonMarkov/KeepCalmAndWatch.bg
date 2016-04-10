@@ -18,7 +18,7 @@ public class CommentMapper implements RowMapper<Comment> {
 		Comment comment = new Comment();
 		comment.setId(rs.getInt("comments_id"));
 		comment.setText(rs.getString("text"));
-		comment.setDatetime(LocalDateTime.ofInstant(rs.getTimestamp("date").toInstant(),ZoneOffset.ofHours(0)));
+		comment.setDatetime(LocalDateTime.ofInstant(rs.getTimestamp("date").toInstant(),ZoneOffset.ofHours(3)));
 		comment.setLikes(rs.getInt("likes"));
 		comment.setDislikes(rs.getInt("dislikes"));
 		Video video = new Video();

@@ -23,12 +23,12 @@
 		<java.version>1.8</java.version>
 	</properties>
 
- <repositories>
-  <repository>
-   <id>xuggle repo</id>
-   <url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
-  </repository>
- </repositories>
+	<repositories>
+		<repository>
+			<id>xuggle repo</id>
+			<url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -56,12 +56,12 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version><!--$NO-MVN-MAN-VER$-->
+			<version>5.1.6</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.2.5.RELEASE</version><!--$NO-MVN-MAN-VER$-->
+			<version>4.2.5.RELEASE</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,9 +72,9 @@
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
 		<dependency>
-		<groupId>org.bouncycastle</groupId>
-		<artifactId>bcprov-jdk15on</artifactId>
-		<version>1.54</version>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.54</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -92,15 +92,21 @@
 			<version>1.10.66</version>
 		</dependency>
 		<dependency>
-		   <groupId>xuggle</groupId>
-		   <artifactId>xuggle-xuggler</artifactId>
-		   <version>5.4</version>
+			<groupId>xuggle</groupId>
+			<artifactId>xuggle-xuggler</artifactId>
+			<version>5.4</version>
 		</dependency>
 		<dependency>
-			 <groupId>xuggle</groupId>
-			   <artifactId>xuggle-utils</artifactId>
-			   <version>1.22</version>
- 		 </dependency>
+			<groupId>xuggle</groupId>
+			<artifactId>xuggle-utils</artifactId>
+			<version>1.22</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
