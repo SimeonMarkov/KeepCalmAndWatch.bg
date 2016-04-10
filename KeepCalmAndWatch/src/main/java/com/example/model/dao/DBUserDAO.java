@@ -10,7 +10,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.model.Comment;
-import com.example.model.CommentMapper;
 import com.example.model.User;
 
 public class DBUserDAO implements IUserDAO {

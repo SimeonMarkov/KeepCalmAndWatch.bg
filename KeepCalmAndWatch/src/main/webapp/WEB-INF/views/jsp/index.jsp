@@ -58,7 +58,7 @@
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 							title="${video.title}"> <img
 								src="${video.thumbnail}" 
-								class="img-responsive" width="auto" height="150px" />
+								class="img-responsive" width="auto" height="50px" />
 								<h2>${video.title}</h2> <span
 								class="glyphicon glyphicon-play-circle"></span> <span
 								class="duration">03:15</span>
