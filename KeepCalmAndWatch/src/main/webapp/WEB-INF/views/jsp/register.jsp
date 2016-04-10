@@ -69,50 +69,47 @@ footer {
 					<li><a href="#section3">Абонаменти</a></li>
 					<li><a href="#section3">История</a></li>
 				</ul>
-				
+
 			</div>
 			<div id="logo">
-					<a href="/KeepCalmAndWatch"><img
-						src="${pageContext.request.contextPath}/img/logo.jpg" width="50px"
-						height="50px" /></a>
-				</div>
-				<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="get">
-			<div class="form-group" style="display: inline;">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<select name="category" class="btn btn-info dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
-							<option value="users">Потребители</option>
-						</select>
-					</div>
-					<input type="text" class="form-control"
-						placeholder="What are searching for?" name="searchBar"> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-search"></span> </span>
-				</div>
+				<a href="/KeepCalmAndWatch"><img
+					src="${pageContext.request.contextPath}/img/logo.jpg" width="50px"
+					height="50px" /></a>
 			</div>
-		</form>
-	</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+			<div class="navbar-collapse collapse" id="navbar-collapsible">
+				<form action="search" method="get">
+					<div class="form-group" style="display: inline;">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<select name="category" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown">
+									<span class="glyphicon glyphicon-chevron-down"></span>
+									<option value="videos">Клипове</option>
+									<option value="users">Потребители</option>
+								</select>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="What are searching for?" name="searchBar">
+							<span class="input-group-addon"><span
+								class="glyphicon glyphicon-search"></span> </span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<br> <br> <br> <br> <br> <br> <br>
 			<div class="row centered-form">
 				<div
 					class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-						<p><color="red">${fail}</color></p>
+							<p>
+								<color="red">${fail}</color>
+							</p>
 							<h3 class="panel-title">Регистрация на потребител</h3>
 						</div>
 						<div class="panel-body">
-							<form:form name="regform" onsubmit="return validateForm()" method="POST" action="/KeepCalmAndWatch/registerUser"
+							<form:form name="regform" onsubmit="return validateForm()"
+								method="POST" action="/KeepCalmAndWatch/registerUser"
 								role="form">
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6">
@@ -163,6 +160,26 @@ footer {
 				</div>
 			</div>
 		</div>
+	</div>
+
+
+	<div id="small-dialog3" class="mfp-hide">
+
+
+		<div class="signup">
+			<form>
+				<input type="text" class="email" placeholder="Email"
+					required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
+					title="Enter a valid email" /> <input type="password"
+					placeholder="Password" required="required" pattern=".{6,}"
+					title="Minimum 6 characters required" autocomplete="off" /> <input
+					type="text" class="email" placeholder="Mobile Number"
+					maxlength="10" pattern="[1-9]{1}\d{9}"
+					title="Enter a valid mobile number" /> <input type="submit"
+					value="Sign Up" />
+			</form>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 
 	<footer class="container-fluid">

@@ -31,8 +31,11 @@ public class UserController {
 		if(session.getAttribute("LoggedUser") != null){
 			User user = (User) session.getAttribute("LoggedUser");
 			model.addAttribute(user);
+			return "profile";
+		} else{
+			return "redirect:login";
 		}
-		return "profile";
+		
 	}
 	
 	@RequestMapping(value = "/channel", method = RequestMethod.GET)

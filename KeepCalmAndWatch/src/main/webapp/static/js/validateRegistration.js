@@ -31,3 +31,13 @@ function validateLogin(){
     	return false;
     } 
 }
+
+function validateLogin2(){
+	var username = document.forms["loginForm2"]["username"].value;
+    var password = document.forms["loginForm2"]["password"].value;
+    
+    if(username == "" || password == ""){
+    	alert("Моля попълнете всички полета!");
+    	return false;
+    } 
+}

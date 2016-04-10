@@ -45,9 +45,9 @@ public class RegistrationLoginController {
 			e1.printStackTrace();
 		}
 		if(session.getAttribute("LoggedUser") != null){
-			return "loggedHeaderAndNav";
+			return "index";
 		}
-	    return "unloggedHeaderAndNav";
+	    return "index";
 	}	
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -79,7 +79,7 @@ public class RegistrationLoginController {
 	public ModelAndView register(ModelMap modelMap, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		if(modelMap.containsAttribute("LoggedUser")){
-			return new ModelAndView("redirect:/loggedHeaderAndNav", "command", session.getAttribute("LoggedUser"));
+			return new ModelAndView("redirect:/index", "command", session.getAttribute("LoggedUser"));
 		}
 		return new ModelAndView("register", "command", new User());
 	}
@@ -120,7 +120,8 @@ public class RegistrationLoginController {
 	public String logoutUser(ModelMap modelMap, HttpSession session){
 		modelMap.remove("LoggedUser", modelMap.get("LoggedUser"));
 		session.removeAttribute("LoggedUser");
-		return "unloggedHeaderAndNav";
+		session.invalidate();
+		return "index";
 	}
 	
 	
