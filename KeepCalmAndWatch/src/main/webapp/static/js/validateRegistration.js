@@ -48,7 +48,7 @@ function validateUpdate(){
     var email = document.forms["updateForm"]["email"].value;
     var newPassword = document.forms["updateForm"]["newPassword"].value;
     var newPasswordConf = document.forms["updateForm"]["newPasswordConf"].value;
-    
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
     if(channelName == "" || password == "" || email == ""){
     	alert("Моля попълнете всички полета!");
@@ -60,4 +60,8 @@ function validateUpdate(){
         	return false;
     	}
     }
+    if(!re.test(email)){
+    	alert("Въведете валиден имейл!");
+    	return false;
+    } 
 }
