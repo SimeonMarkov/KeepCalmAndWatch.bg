@@ -233,14 +233,15 @@ a:hover {
 
 	<div class="suggestions">
 
-		<div class="tab-pane fade in" id="tab2">
-			<ul class="list-unstyled video-list-thumbs row">
+		<div class="col-sm-3 col-md-2 col-lg-2 sidenav">
+			<ul class="nav nav-pills nav-stacked signin">
 				<c:forEach var="video" items="${sessionScope.AllVideos}">
 					<div class="row">
 						<li class="col-lg-3 col-sm-4 col-xs-6"><a
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
-							title="${video.title}"> <img src="${video.thumbnail}"
-								alt="Barca" class="img-responsive" width="auto" height="100px" />
+							title="${video.title}"> <img
+								src="${video.thumbnail}" 
+								class="img-responsive" width="auto" height="50px" />
 								<h2>${video.title}</h2> <span
 								class="glyphicon glyphicon-play-circle"></span> <span
 								class="duration">03:15</span>
