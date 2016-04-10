@@ -45,7 +45,12 @@
 					<li><a href="#section3">Новини</a></li>
 				</ul>
 			</div>
+			<c:if test="${not empty LoggedUser}">
 			<p><h2>Здравейте, ${LoggedUser.channelName}!</h2></p>
+			</c:if>
+			<c:if test="${empty LoggedUser}">
+			<br><br>
+			</c:if>
 			<div class="tab-pane fade in" id="tab2">
 				<ul class="list-unstyled video-list-thumbs row">
 					<c:forEach var="video" items="${sessionScope.AllVideos}">

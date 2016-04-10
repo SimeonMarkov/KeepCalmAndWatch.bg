@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Вашият профил</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,25 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
-</head>
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$('#avatarUpdate')
+								.change(
+										function() {
+											var val = $(this).val()
+													.toLowerCase();
+											var regex = new RegExp(
+													"(.*?)\.(jpg|png)$");
+											if (!(regex.test(val))) {
+												$(this).val('');
+												alert('Аватарът може да бъде само с разширение .jpg или .png!');
+											}
+										});
+					});
+</script>
 </head>
 <body>
 
@@ -36,7 +54,10 @@
      	 <img src="${LoggedUser.avatar}" class="avatar img-circle img-thumbnail" alt="" />
       </c:if>
         <h6>Качване на друга снимка</h6>
-        <input type="file" class="text-center center-block well well-sm">
+        <form name="avatarUpdate" action="" method="POST"  enctype="multipart/form-data">
+        <input type="file" class="text-center center-block well well-sm" id="avatarUpdate" name="avatar">
+        <input class="btn btn-primary" value="Запазете промените" type="submit">
+        </form>
       </div>
     </div>
 
@@ -46,47 +67,48 @@
         <i class="fa fa-coffee"></i>
         
       
-      <form class="form-horizontal" role="form">
+      <form name="updateForm" class="form-horizontal" role="form" method="POST" onsubmit="return validateUpdate()">
         <div class="form-group">
           <label class="col-lg-3 control-label">Име на канала:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${user.channelName }" type="text">
+            <input name="channelName" class="form-control" value="${user.channelName }" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Описание на канала:</label>
           <div class="col-lg-8">
-            <textarea class="form-control" rows="4" cols="50">${user.description }</textarea>
+            <textarea form="updateForm" class="form-control" rows="4" cols="50">${user.description }</textarea>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Имейл:</label>
           <div class="col-lg-8">
-            <input class="form-control" value="${user.email }" type="text">
+            <input name="email" class="form-control" value="${user.email }" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Нова парола:</label>
           <div class="col-md-8">
-            <input class="form-control" type="password">
+            <input class="form-control" type="password" name="newPassword">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Потвърдете новата парола:</label>
           <div class="col-md-8">
-            <input class="form-control" type="password">
+            <input class="form-control" type="password" name="newPasswordConf">
           </div>
         </div>
            <div class="form-group">
           <label class="col-md-3 control-label">Стара парола:</label>
           <div class="col-md-8">
-            <input class="form-control" type="password">
+            <input class="form-control" type="password" name="password">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input class="btn btn-primary" value="Запазете промените" type="button"></div>
+            <input class="btn btn-primary" value="Запазете промените" type="submit">
+            </div>
         </div>
       </form>
     </div>

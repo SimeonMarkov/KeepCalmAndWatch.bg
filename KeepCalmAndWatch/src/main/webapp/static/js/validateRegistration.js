@@ -41,3 +41,23 @@ function validateLogin2(){
     	return false;
     } 
 }
+
+function validateUpdate(){
+	var channelName = document.forms["updateForm"]["channelName"].value;
+    var password = document.forms["updateForm"]["password"].value;
+    var email = document.forms["updateForm"]["email"].value;
+    var newPassword = document.forms["updateForm"]["newPassword"].value;
+    var newPasswordConf = document.forms["updateForm"]["newPasswordConf"].value;
+    
+    
+    if(channelName == "" || password == "" || email == ""){
+    	alert("Моля попълнете всички полета!");
+    	return false;
+    } 
+    if(newPassword != "" || newPasswordConf != ""){
+    	if(newPassword != newPasswordConf){
+    		alert("Новите пароли не съвпадат!");
+        	return false;
+    	}
+    }
+}
