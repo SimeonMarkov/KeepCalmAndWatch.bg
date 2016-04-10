@@ -131,6 +131,8 @@ form.navbar-form.navbar-right {
 }
 .signin a:focus {
     outline: none;
+    background: #0080ff;
+    color:#272C2E;
 }
 .main {
     padding: 5em 0 0 0;

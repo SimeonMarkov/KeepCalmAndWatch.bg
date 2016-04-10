@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Example</title>
+<title>Начална страница</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon"
@@ -30,11 +30,19 @@
 		<div class="row content">
 			<div class="col-sm-3 col-md-2 col-lg-2 sidenav">
 				<br>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#section1">Начална страница</a></li>
+				<ul class="nav nav-pills nav-stacked signin">
+					<li><a href="#section1">Начална страница</a></li>
+					<c:if test="${not empty LoggedUser}">
 					<li><a href="#section2">Моят канал</a></li>
 					<li><a href="#section3">Абонаменти</a></li>
 					<li><a href="#section3">История</a></li>
+					</c:if>
+					<li><a class="divider"></a></li>
+					<li><a href="#section3">Музика</a></li>
+					<li><a href="#section3">Игри</a></li>
+					<li><a href="#section3">Спорт</a></li>
+					<li><a href="#section3">Забавни</a></li>
+					<li><a href="#section3">Новини</a></li>
 				</ul>
 			</div>
 			<p><h2>Здравейте, ${LoggedUser.channelName}!</h2></p>
