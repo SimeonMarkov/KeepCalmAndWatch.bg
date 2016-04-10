@@ -7,6 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${video.title}</title>
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico"
 	type="image/png" />
@@ -115,7 +116,7 @@ a:hover {
 	<c:if test="${not empty sessionScope.LoggedUser}">
 		<div id="avatar">
 			<img class="img-circle" alt="N/A" width="50" height="50"
-				src="data:image/gif;base64,${LoggedUser.avatar}" />
+				src="${LoggedUser.avatar}" />
 		</div>
 	</c:if>
 	<div class="dropdown">

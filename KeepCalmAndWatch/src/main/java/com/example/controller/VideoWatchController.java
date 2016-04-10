@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,10 +26,9 @@ import com.example.model.dao.DBVideoDAO;
 
 @Controller
 @SessionAttributes(value="{LoggedUser,AllVideos}")
-@RequestMapping("/watchVideo")
 public class VideoWatchController {
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/watchVideo", method=RequestMethod.GET)
 	public String watchVideo(Model model, @RequestParam("v") int id, HttpSession session){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
@@ -53,11 +53,13 @@ public class VideoWatchController {
 		}
 		return "watchVideo";
 	}
-	@RequestMapping(method=RequestMethod.POST)
-	public String submitComment(@RequestParam("username") String channelName, @RequestParam("text") String text, @RequestParam("videoId") int videoId){
+	
+	@RequestMapping(value="/submitComment", method=RequestMethod.POST)
+	public String submitComment(@RequestParam("channelName") String channelName, @RequestParam("text") String text, @RequestParam("videoId") int videoId){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		System.out.println("I'm here!!!!!!!!!!!!!");
 		Comment comment = new Comment();
 		comment.setText(text);
 		comment.setDatetime(LocalDateTime.now());
