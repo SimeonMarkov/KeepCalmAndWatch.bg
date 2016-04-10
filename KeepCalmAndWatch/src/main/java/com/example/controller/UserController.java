@@ -1,10 +1,14 @@
 package com.example.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,12 +21,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.model.User;
 import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
+import com.xuggle.xuggler.IContainer;
+import com.xuggle.xuggler.IContainerFormat;
 
 @Controller
 @SessionAttributes("LoggedUser")
@@ -131,11 +143,51 @@ public class UserController {
 	
 	@RequestMapping(value = "/avatarUpdate", method = RequestMethod.POST)
 	public String updateUser(ModelMap modelMap, HttpSession session, WebRequest webRequest,
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes, @RequestParam("avatar") MultipartFile avatar) {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"beans.xml");
 		String fail = "";
-		
-		
-		redirectAttributes.addFlashAttribute("message", fail);
-		return "redirect:profile";
+		if(FilenameUtils.getExtension(avatar.getOriginalFilename()).equals("jpg") ||
+				FilenameUtils.getExtension(avatar.getOriginalFilename()).equals("png")){
+			
+			User user = (User) session.getAttribute("LoggedUser");
+			AWSCredentials credentials = new BasicAWSCredentials(
+					"AKIAIDEAOQSKMINEQSVA",
+					"o94Ozi37icf6+HoROskITlkAvdwRdphYXsPmrya4");
+			AmazonS3Client s3client = new AmazonS3Client(credentials);
+
+			// amazon folder
+			String bucketName = "keep-calm-avatars";
+			
+			File convFile = new File(avatar.hashCode()
+					+ avatar.getOriginalFilename());
+			
+			try {
+				// converts to files in order to upload to amazon s3
+				convFile.createNewFile();
+				FileOutputStream fos = new FileOutputStream(convFile);
+				fos.write(avatar.getBytes());
+				fos.close();
+			} catch (IOException e1) {
+				System.out.println("File could not be created");
+				e1.printStackTrace();
+			}
+			
+			s3client.putObject(new PutObjectRequest(bucketName, convFile
+					.getName(), convFile)
+					.withCannedAcl(CannedAccessControlList.PublicRead));
+			String avatarPath = s3client.getResourceUrl(bucketName,
+					convFile.getName());
+			user.setAvatar(avatarPath);
+			DBUserDAO dbUserDao = (DBUserDAO) context.getBean("DBUserDAO");
+			dbUserDao.updateUser(user);
+			fail = "Успешно редактирахте профила си!";
+			redirectAttributes.addFlashAttribute("message", fail);
+			return "redirect:profile";
+		} else {
+			fail="Аватарът може да бъде само от тип jpg или png!";
+			redirectAttributes.addFlashAttribute("message", fail);
+			return "redirect:profile";
+		}
 	}
 }
