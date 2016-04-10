@@ -33,6 +33,10 @@
 												$(this).val('');
 												alert('Аватарът може да бъде само с разширение .jpg или .png!');
 											}
+											if (val == null || val == "") {
+												$(this).val('');
+												alert('Не сте избрали файл!');
+											}
 										});
 					});
 </script>
@@ -42,7 +46,7 @@
 <%@include file="header.jsp"%>
 
 <div class="container">
-  <h1 class="page-header">${user.username }</h1>
+  <h1 class="page-header">${user.username } <font color="red"><h4>${message }</h4></font></h1> 
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -56,7 +60,7 @@
         <h6>Качване на друга снимка</h6>
         <form name="avatarUpdate" action="" method="POST"  enctype="multipart/form-data">
         <input type="file" class="text-center center-block well well-sm" id="avatarUpdate" name="avatar">
-        <input class="btn btn-primary" value="Запазете промените" type="submit">
+        <input class="btn btn-primary" value="Обновяване на аватар" type="submit">
         </form>
       </div>
     </div>
@@ -67,7 +71,7 @@
         <i class="fa fa-coffee"></i>
         
       
-      <form name="updateForm" class="form-horizontal" role="form" method="POST" onsubmit="return validateUpdate()">
+      <form name="updateForm" class="form-horizontal" role="form" method="POST" onsubmit="return validateUpdate()" action="updateUser">
         <div class="form-group">
           <label class="col-lg-3 control-label">Име на канала:</label>
           <div class="col-lg-8">
@@ -77,7 +81,7 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Описание на канала:</label>
           <div class="col-lg-8">
-            <textarea form="updateForm" class="form-control" rows="4" cols="50">${user.description }</textarea>
+            <textarea name="description" form="updateForm" class="form-control" rows="4" cols="50">${user.description }</textarea>
           </div>
         </div>
         <div class="form-group">

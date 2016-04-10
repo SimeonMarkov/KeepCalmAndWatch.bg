@@ -27,6 +27,7 @@ import com.example.model.User;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
+
 @Controller
 @SessionAttributes(value={"LoggedUser","AllVideos"})
 public class RegistrationLoginController {
@@ -92,6 +93,8 @@ public class RegistrationLoginController {
 		DBUserDAO dbUserDao = (DBUserDAO) context.getBean("DBUserDAO");
 		String fail = "";
 
+		
+		
 		if (dbUserDao.emailExist(user.getEmail())) {
 			fail = "Имейл адресът е вече зает!";
 			redirectAttributes.addFlashAttribute("fail", fail);
@@ -106,6 +109,10 @@ public class RegistrationLoginController {
 			return "redirect:/register";
 		} else if (user.getPassword().length() < 6) {
 			fail = "Паролата съдържа по-малко от 6 символа!";
+			redirectAttributes.addFlashAttribute("fail", fail);
+			return "redirect:/register";
+		} else if (!isValidEmailAddress(user.getEmail())) {
+			fail = "Невалиден имейл адрес!";
 			redirectAttributes.addFlashAttribute("fail", fail);
 			return "redirect:/register";
 		} else {
@@ -126,10 +133,17 @@ public class RegistrationLoginController {
 	
 	
 	
-	private String encodePassword(String passwod){
+	public static String encodePassword(String passwod){
 		DigestSHA3 passdigesst = new DigestSHA3(256);
 		passdigesst.update(passwod.getBytes());
 		byte[] digest = passdigesst.digest();
 		return Base64.getEncoder().encodeToString(digest);		//encodes to base64 string to fit in 45 character restriction
+	}
+	
+	public static boolean isValidEmailAddress(String email) {
+		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		java.util.regex.Matcher m = p.matcher(email);
+		return m.matches();
 	}
 }
