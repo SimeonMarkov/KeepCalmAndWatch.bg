@@ -71,7 +71,7 @@
         <i class="fa fa-coffee"></i>
         
       
-      <form name="updateForm" class="form-horizontal" role="form" method="POST" onsubmit="return validateUpdate()" action="updateUser">
+      <form name="updateForm" id="updateForm" class="form-horizontal" role="form" method="POST" onsubmit="return validateUpdate()" action="updateUser">
         <div class="form-group">
           <label class="col-lg-3 control-label">Име на канала:</label>
           <div class="col-lg-8">

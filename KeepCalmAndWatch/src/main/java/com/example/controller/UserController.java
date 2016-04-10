@@ -86,17 +86,6 @@ public class UserController {
 			fail = "Канал с такова име вече съществува!";
 			redirectAttributes.addFlashAttribute("message", fail);
 			return "redirect:profile";
-		} else if (newPassword != "" || newPasswordConf != "") {
-			if (newPassword.length() < 6 || newPasswordConf.length() < 6) {
-				fail = "Новата парола съдържа по-малко от 6 символа!";
-				redirectAttributes.addFlashAttribute("message", fail);
-				return "redirect:profile";
-			}
-			if (!newPassword.equals(newPasswordConf)) {
-				fail = "Паролите са различни!";
-				redirectAttributes.addFlashAttribute("message", fail);
-				return "redirect:profile";
-			}
 		} else if (!RegistrationLoginController.isValidEmailAddress(email)) {
 			fail = "Невалиден имейл адрес!";
 			redirectAttributes.addFlashAttribute("message", fail);
@@ -105,11 +94,47 @@ public class UserController {
 			fail = "Грешна парола!";
 			redirectAttributes.addFlashAttribute("message", fail);
 			return "redirect:profile";
-		} else {
+		} else if (newPassword != "" || newPasswordConf != "") {
+			if (newPassword.length() < 6 || newPasswordConf.length() < 6) {
+				fail = "Новата парола съдържа по-малко от 6 символа!";
+				redirectAttributes.addFlashAttribute("message", fail);
+				return "redirect:profile";
+			} else if (!newPassword.equals(newPasswordConf)) {
+				fail = "Паролите са различни!";
+				redirectAttributes.addFlashAttribute("message", fail);
+				return "redirect:profile";
+			} else { 
+				user.setDescription(description);
+				user.setEmail(email);
+				user.setChannelName(channelName);
+				if(newPassword != "" && newPassword.length() >= 6 && newPassword.equals(newPasswordConf)){
+					user.setPassword(RegistrationLoginController.encodePassword(newPassword));
+				}
+				dbUserDao.updateUser(user);
+				fail = "Успешно редактирахте профила си!";
+				redirectAttributes.addFlashAttribute("message", fail);
+				return "redirect:profile";
+			}
+		}else { 
+			user.setDescription(description);
+			user.setEmail(email);
+			user.setChannelName(channelName);
+			if(newPassword != "" && newPassword.length() >= 6 && newPassword.equals(newPasswordConf)){
+				user.setPassword(RegistrationLoginController.encodePassword(newPassword));
+			}
+			dbUserDao.updateUser(user);
 			fail = "Успешно редактирахте профила си!";
 			redirectAttributes.addFlashAttribute("message", fail);
 			return "redirect:profile";
 		}
+	}
+	
+	@RequestMapping(value = "/avatarUpdate", method = RequestMethod.POST)
+	public String updateUser(ModelMap modelMap, HttpSession session, WebRequest webRequest,
+			final RedirectAttributes redirectAttributes) {
+		String fail = "";
+		
+		
 		redirectAttributes.addFlashAttribute("message", fail);
 		return "redirect:profile";
 	}

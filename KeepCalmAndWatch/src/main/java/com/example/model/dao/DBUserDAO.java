@@ -107,4 +107,10 @@ public class DBUserDAO implements IUserDAO {
 		}
 		return true;
 	}
+	
+	public boolean updateUser(User user){
+		String query = "UPDATE keepcalmandwatch.users SET password=?, email=?, channel_name=?, description=?, avatar=?, registration_date=?, background=? WHERE username = ?;";
+		jdbcTemplateObject.update(query, user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate(), user.getBackground(), user.getUsername());
+		return true;
+	}
 }
