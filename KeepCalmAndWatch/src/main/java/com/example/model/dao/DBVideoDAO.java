@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
@@ -31,10 +32,11 @@ public class DBVideoDAO implements IVideoDAO{
 	}
 
 	@Override
-	public Video getVideo(int video_id) {
+	public Video getVideo(int video_id){
 		String query = "select * from videos where videos_id = ?";
-		Video video = jdbcTemplateObject.queryForObject(query,
-				new Object[] { video_id }, new VideoMapper());
+		Video video = null;
+		video = jdbcTemplateObject.queryForObject(query,
+		new Object[] { video_id }, new VideoMapper());
 		return video;
 	}
 	

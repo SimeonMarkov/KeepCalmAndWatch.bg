@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,14 @@ public class UserController {
 			User user = (User) session.getAttribute("LoggedUser");
 			model.addAttribute(user);
 		}
-		User chosenUser = userDao.getUserBChannelName(channelName);
+		User chosenUser = null;
+		try{
+			chosenUser = userDao.getUserBChannelName(channelName);
+		}
+		catch(EmptyResultDataAccessException e){
+			model.addAttribute("noSuchUser",HttpStatus.NOT_FOUND);
+			return "error";
+		}
 		List<Video> videosForChannelName = videoDao.getVideosForChannelName(channelName);
 		
 		model.addAttribute("ChosenUser", chosenUser);

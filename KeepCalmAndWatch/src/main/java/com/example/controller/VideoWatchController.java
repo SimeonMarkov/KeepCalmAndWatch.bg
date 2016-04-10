@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +32,14 @@ public class VideoWatchController {
 	public String watchVideo(Model model, @RequestParam("v") int id, HttpSession session){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
-		Video video = videoJDBCTemplate.getVideo(id);
+		Video video = null;
+		try{
+			video = videoJDBCTemplate.getVideo(id);
+		}
+		catch(EmptyResultDataAccessException e){
+			model.addAttribute("badUrl",HttpStatus.NOT_FOUND);
+			return "error";
+		}
 		List<Comment> commentsToCurrentVideo = videoJDBCTemplate.getCommentsForSingleVideo(id);
 		model.addAttribute("video", video);
 		model.addAttribute("comments", commentsToCurrentVideo);
