@@ -23,61 +23,9 @@
 </head>
 <body>
 
-	<div id="logo">
-		<a href="/KeepCalmAndWatch"><img
-			src="${pageContext.request.contextPath}/img/logo.jpg" width="200px"
-			height="70px" /></a>
-	</div>
+<%@include file="header.jsp"%>
 
-	<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="get">
-			<div class="form-group" style="display: inline;">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<select name="category" class="btn btn-info dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
-							<option value="users">Потребители</option>
-						</select>
-					</div>
-					<input type="text" class="form-control"
-						placeholder="What are searching for?" name="searchBar"> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-search"></span> </span>
-				</div>
-			</div>
-		</form>
-	</div>
-
-	<div id="upload">
-		<a href="upload" class="btn btn-primary btn-sm" id="upload"
-			type="submit">Качване</a>
-	</div>
-	<div id="avatar">
-		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="data:image/gif;base64,${LoggedUser.avatar}" />
-	</div>
-	<div class="dropdown">
-		<button class="btn btn-default dropdown-toggle" type="button"
-			id="menu1" data-toggle="dropdown">
-			<span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="${pageContext.request.contextPath}/index">Начална страница</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="profile">Моят канал</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="#">Абонаменти</a></li>
-			<li role="presentation" class="divider"></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="${pageContext.request.contextPath}/logout">Изход</a></li>
-		</ul>
-	</div>
-
-
-<div class="container" style="padding-top: 60px;">
+<div class="container">
   <h1 class="page-header">${user.username }</h1>
   <div class="row">
     <!-- left column -->

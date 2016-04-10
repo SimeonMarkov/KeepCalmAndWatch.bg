@@ -1,32 +1,25 @@
 package com.example.controller;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.annotation.MultipartConfig;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.identitymanagement.model.AccessKey;
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -34,7 +27,6 @@ import com.example.model.User;
 import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import com.xuggle.xuggler.IContainer;
 import com.xuggle.xuggler.IContainerFormat;
 

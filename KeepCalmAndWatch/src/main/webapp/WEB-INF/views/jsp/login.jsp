@@ -60,58 +60,38 @@ footer {
 
 	<div class="container-fluid">
 		<div class="row content">
-			<div class="col-sm-3 sidenav">
 
-				<h4>John's Blog</h4>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#section1">Начална страница</a></li>
-					<li><a href="#section2">Най-популярни</a></li>
-				</ul>
-				
-			</div>
-			<div id="logo">
-					<a href="/KeepCalmAndWatch"><img
-						src="${pageContext.request.contextPath}/img/logo.jpg" width="50px"
-						height="50px" /></a>
-				</div>
-				<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="get">
-			<div class="form-group" style="display: inline;">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<select name="category" class="btn btn-info dropdown-toggle"
-							data-toggle="dropdown">
-							<span name="category" class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
-							<option value="users">Потребители</option>
-						</select>
+			<div class="navbar-collapse collapse" id="navbar-collapsible">
+				<form action="search" method="get">
+					<div class="form-group" style="display: inline;">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<select name="category" class="btn btn-info dropdown-toggle"
+									data-toggle="dropdown">
+									<span name="category" class="glyphicon glyphicon-chevron-down"></span>
+									<option value="videos">Клипове</option>
+									<option value="users">Потребители</option>
+								</select>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="What are searching for?" name="searchBar">
+							<span class="input-group-addon"><span
+								class="glyphicon glyphicon-search"></span> </span>
+						</div>
 					</div>
-					<input type="text" class="form-control"
-						placeholder="What are searching for?" name="searchBar"> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-search"></span> </span>
-				</div>
+				</form>
 			</div>
-		</form>
-	</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 			<div class="row centered-form">
 				<div
 					class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-						<p style="color: red">${fail}</p>
-							<h3 class="panel-title">Влизане</h3>
+							<p style="color: red">${fail}</p>
+							<h3 class="panel-title">Вход</h3>
 						</div>
 						<div class="panel-body">
-							<form:form name="loginForm" onsubmit="return validateLogin()" method="POST" action="/KeepCalmAndWatch/login"
-								role="form">
+							<form:form name="loginForm" onsubmit="return validateLogin()"
+								method="POST" action="/KeepCalmAndWatch/login" role="form">
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6">
 										<div class="form-group">
@@ -130,10 +110,8 @@ footer {
 										</div>
 									</div>
 								</div>
-
-								<input type="submit" value="Влизане"
+								<input type="submit" value="Вход"
 									class="btn btn-primary btn-block">
-
 							</form:form>
 						</div>
 					</div>
@@ -141,9 +119,5 @@ footer {
 			</div>
 		</div>
 	</div>
-
-	<footer class="container-fluid">
-	<p>Footer Text</p>
-	</footer>
 </body>
 </html>

@@ -55,7 +55,7 @@
 	</div>
 	<div id="avatar">
 		<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-			src="${LoggedUser.avatar}"/>
+			src="${LoggedUser.avatar}" />
 	</div>
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button"
@@ -93,7 +93,7 @@
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 							title="${video.title}"> <img
 								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
-								class="img-responsive" width ="auto" height="100px" />
+								class="img-responsive" width="auto" height="100px" />
 								<h2>${video.title}</h2> <span
 								class="glyphicon glyphicon-play-circle"></span> <span
 								class="duration">03:15</span>
