@@ -51,7 +51,8 @@ public class UploadController {
 			@RequestParam("title") String title,
 			@RequestParam("description") String description,
 			@RequestParam("videoPath") MultipartFile file,
-			@RequestParam("thumbnail") MultipartFile thumbnail) {
+			@RequestParam("thumbnail") MultipartFile thumbnail, 
+			@RequestParam("category") String category){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
 		ModelAndView mav = new ModelAndView("uploadFinalization");
@@ -128,7 +129,7 @@ public class UploadController {
 			video.setUploadDate(Date.valueOf(LocalDate.now()));
 			User user = (User) model.get("LoggedUser");
 			video.setUploader((User) model.get("LoggedUser"));
-			video.setCategory("Music");
+			video.setCategory(category);
 			
 			videoJDBCTemplate.addVideo(video);
 			mav.addObject(

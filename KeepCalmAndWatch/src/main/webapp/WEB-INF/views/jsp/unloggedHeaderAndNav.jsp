@@ -15,19 +15,14 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="js/validateRegistration.js"></script>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/channel.css"
 	rel="stylesheet">
 </head>
-<script type="application/x-javascript">
-	
-	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
-</script>
 <!-- bootstrap -->
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'
 	media="all" />
@@ -46,50 +41,39 @@
 <!-- //fonts -->
 <body>
 
-<%@include file="header.jsp"%>
+	<%@include file="header.jsp"%>
+
+	<br>
+	<br>
 
 	<div class="container-fluid">
-		<div class="navbar-collapse collapse" id="navbar-collapsible">
-			<form action="search" method="get">
-				<div class="form-group" style="display: inline;">
-					<div class="input-group">
-						<div class="input-group-btn">
-							<select name="category" class="btn btn-info dropdown-toggle"
-								data-toggle="dropdown">
-								<span class="glyphicon glyphicon-chevron-down"></span>
-								<option value="videos">Клипове</option>
-								<option value="users">Потребители</option>
-							</select>
-						</div>
-						<input type="text" class="form-control"
-							placeholder="What are searching for?" name="searchBar"> <span
-							class="input-group-addon"><span
-							class="glyphicon glyphicon-search"></span> </span>
-					</div>
+		<div class="row">
+			<div class="col-lg-12 col-sm-4 col-xs-6">
+				<div class="tab-pane fade in" id="tab2">
+<!-- 					<ul class="list-unstyled video-list-thumbs row"> -->
+<%-- 						<c:forEach var="video" items="${sessionScope.AllVideos}"> --%>
+<!-- 							<li class="col-lg-3 col-sm-4 col-xs-6"><a -->
+<%-- 								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}" --%>
+<%-- 								title="${video.title}"> <img src="${video.thumbnail}" --%>
+<!-- 									height="130px" /> -->
+<%-- 									<h2>${video.title}</h2> <span --%>
+<!-- 									class="glyphicon glyphicon-play-circle"></span> <span -->
+<!-- 									class="duration">03:15</span> -->
+<!-- 							</a></li -->
+<%-- 						</c:forEach> --%>
+<!-- 					</ul> -->
 				</div>
-			</form>
-		</div>
 
-
-		<div class="tab-pane fade in" id="tab2">
-			<ul class="list-unstyled video-list-thumbs row">
 				<c:forEach var="video" items="${sessionScope.AllVideos}">
 					<li class="col-lg-3 col-sm-4 col-xs-6"><a
 						href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
-						title="${video.title}"> <img src="${video.thumbnail}"
-							alt="Barca" class="img-responsive" width="auto" height="100px" />
-							<h2>${video.title}</h2> <span
-							class="glyphicon glyphicon-play-circle"></span> <span
-							class="duration">03:15</span>
-					</a></li>
+						title="${video.title}"> <img
+							src="https://s3.eu-central-1.amazonaws.com/keep-calm-thumbnails/mqdefault.jpg"
+							height="150px" width="150px" />
+					</a></li
 				</c:forEach>
-			</ul>
+			</div>
 		</div>
-		
-		dfsdfsdfsd
 	</div>
-
-	</div>
-
 </body>
 </html>

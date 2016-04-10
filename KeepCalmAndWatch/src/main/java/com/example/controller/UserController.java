@@ -33,7 +33,7 @@ public class UserController {
 			model.addAttribute(user);
 			return "profile";
 		} else{
-			return "login";
+			return "redirect:login";
 		}
 		
 	}

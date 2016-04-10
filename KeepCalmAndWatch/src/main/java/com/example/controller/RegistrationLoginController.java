@@ -120,6 +120,7 @@ public class RegistrationLoginController {
 	public String logoutUser(ModelMap modelMap, HttpSession session){
 		modelMap.remove("LoggedUser", modelMap.get("LoggedUser"));
 		session.removeAttribute("LoggedUser");
+		session.invalidate();
 		return "unloggedHeaderAndNav";
 	}
 	

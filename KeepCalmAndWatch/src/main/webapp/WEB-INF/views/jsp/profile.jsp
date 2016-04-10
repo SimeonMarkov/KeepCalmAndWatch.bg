@@ -15,8 +15,6 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
 </head>
@@ -35,7 +33,7 @@
         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/default-avatar-ponsy-deer.png" class="avatar img-circle img-thumbnail" alt="">
       </c:if>
       <c:if test="${not empty user.avatar}">
-     	 <img src="data:image/gif;base64,${LoggedUser.avatar}" class="avatar img-circle img-thumbnail" alt="" />
+     	 <img src="${LoggedUser.avatar}" class="avatar img-circle img-thumbnail" alt="" />
       </c:if>
         <h6>Качване на друга снимка</h6>
         <input type="file" class="text-center center-block well well-sm">

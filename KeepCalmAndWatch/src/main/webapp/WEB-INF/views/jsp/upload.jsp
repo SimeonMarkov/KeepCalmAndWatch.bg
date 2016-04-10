@@ -16,72 +16,7 @@
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<style>
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {
-	height: 1500px
-}
 
-/* Set gray background color and 100% height */
-.sidenav {
-	background-color: #f1f1f1;
-	height: 100%;
-	width: 200px;
-}
-
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
-	.row.content {
-		height: auto;
-	}
-}
-
-.form-control {
-	resize: vertical;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
-.input-group {
-	width: 500px;
-	position: absolute;
-	top: 10px;
-	left: 400px;
-}
-
-#upload {
-	position: absolute;
-	top: 10px;
-	right: 170px;
-}
-
-#avatar {
-	position: absolute;
-	top: 5px;
-	right: 65px;
-}
-
-.dropdown {
-	position: absolute;
-	top: 5px;
-	right: 25px;
-}
-</style>
 <script>
 	$(document)
 			.ready(
@@ -125,103 +60,50 @@ a:hover {
 </head>
 <body>
 
-	<div class="container-fluid">
-		<div class="row content">
-			<div class="col-sm-3 sidenav">
-
-				<a href="#"> <span class="glyphicon glyphicon-align-justify"></span>
-				</a>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#section1">Начална страница</a></li>
-					<li><a href="#section2">Моят канал</a></li>
-					<li><a href="#section3">Абонаменти</a></li>
-					<li><a href="#section3">История</a></li>
-				</ul>
-
-			</div>
-			<a href="/KeepCalmAndWatch"><img
-				src="${pageContext.request.contextPath}/img/logo.jpg" width="50px"
-				height="50px" /> </a>
-				<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="get">
-			<div class="form-group" style="display: inline;">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<select name="category" class="btn btn-info dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-						<option value="videos">Клипове</option>
-							<option value="users">Потребители</option>
-						</select>
-					</div>
-					<input type="text" class="form-control"
-						placeholder="What are searching for?" name="searchBar"> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-search"></span> </span>
+	<%@include file="header.jsp"%>
+	<br><br><br>
+	<div class="row centered-form">
+		<div
+			class="col-xs-9 col-sm-9 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Здравейте,<b> ${LoggedUser.channelName}!</b> Изберете
+						видео файл, който искате да качите:</h3>
+				</div>
+				<div class="panel-body">
+					<form action="upload" method="POST" enctype="multipart/form-data" id="uploadform">
+						<br> <input type="file" id="videoUpload" name="videoPath"
+							required="required"/> <br> <br> <input type="text"
+							name="title" placeholder="Заглавие на клипа..."
+							required="required" /> <br> <br> 
+							<textarea form="uploadform" rows="4" cols="50"
+							name="description" placeholder="Описание (500 символа)" ></textarea> <br>
+						<br>
+						<div class="form-group">
+			
+			
+							<input type="file" id="thumbnailUpload" name="thumbnail"
+								required="required" /> <br> 
+						</div>
+						<div>
+							<select name="category">
+								<option value="Music">Музика</option>
+								<option value="Games">Игри</option>
+								<option value="Sport">Спорт</option>
+								<option value="Funny">Забавни</option>
+								<option value="News">Новини</option>
+							</select>
+						</div>
+						
+						<br>
+						<input type="submit" value="Качи" class="btn btn-custom">
+					</form>
 				</div>
 			</div>
-		</form>
-	</div>
-				 <a href="upload" class="btn btn-primary btn-sm" id="upload"
-				type="submit">Качване</a>
-			<div id="avatar">
-				<img class="img-circle" alt="Cinque Terre" width="50" height="50"
-					src="data:image/gif;base64,${LoggedUser.avatar}" />
-			</div>
-			<div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button"
-					id="menu1" data-toggle="dropdown">
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Начална страница</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Моят канал</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">Абонаменти</a></li>
-					<li role="presentation" class="divider"></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="${pageContext.request.contextPath}/logout">Изход</a></li>
-				</ul>
-			</div>
-
-			<br> <br>
-			<div class="row centered-form">
-				<div
-					class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Здравейте,${LoggedUser.channelName}!Изберете
-								видео файл,който искате да качите:</h3>
-						</div>
-						<div class="panel-body">
-							<form action="upload" method="POST" enctype="multipart/form-data">
-								<br> <input type="file" id="videoUpload" name="videoPath"
-									required="required" /> <br> <br> <input type="text"
-									name="title" placeholder="Insert video title..."
-									required="required" /> <br> <br> <input type="text"
-									name="description" placeholder="Add description..." /> <br>
-								<br>
-								<div class="form-group">
-
-									<input type="file" id="thumbnailUpload" name="thumbnail"
-										required="required" /> <br> <br>
-								</div>
-								<div>
-									<select name="category">
-										<option value="option1">option1</option>
-										<option value="option2">option2</option>
-									</select>
-								</div>
-								<input type="submit" value="Качи" class="btn btn-primary">
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
+	</div>
+
+	</div>
 	</div>
 </body>
 </html>
