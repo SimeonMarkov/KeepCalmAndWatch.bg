@@ -43,7 +43,7 @@ public class DBUserDAO implements IUserDAO {
 		if(!userExist(username)){
 			return null;
 		}
-		String query = "select * from users where username = ?";
+		String query = "select username,password,email,channel_name,description,avatar,registration_date,background from users where username = ?";
 		User user = jdbcTemplateObject.queryForObject(query,
 				new Object[] {username}, new UserMapper());
 		return user;
@@ -51,13 +51,13 @@ public class DBUserDAO implements IUserDAO {
 	
 	@Override
 	public User getUserBChannelName(String channelName){
-		String query = "select * from users where channel_name = '" + channelName+ "';";
+		String query = "select username,password,email,channel_name,description,avatar,registration_date,background from users where channel_name = '" + channelName+ "';";
 		User user = jdbcTemplateObject.queryForObject(query, new UserMapper());
 		return user;
 	}
 	
 	public List<User> getAllUsersByChannelName(String channelName){
-		String query = "select * from users where channel_name like '%" + channelName +"%'";
+		String query = "select username,password,email,channel_name,description,avatar,registration_date,background from users where channel_name like '%" + channelName +"%'";
 		List<User> users = jdbcTemplateObject.query(query, new UserMapper());
 		return users;
 	}

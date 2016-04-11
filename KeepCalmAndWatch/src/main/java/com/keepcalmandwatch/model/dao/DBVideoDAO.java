@@ -52,20 +52,20 @@ public class DBVideoDAO implements IVideoDAO{
 	
 	@Override
 	public List<Video> getVideosForChannelName(String channelName){
-		String query = "select videos_id,title,V.description,path,views,likes,dislikes,thumbnail,upload_date,users_username,category,duration from videos V inner join users U on V.users_username = U.username where channel_name = '" + channelName + "';";
-		List<Video> videos = jdbcTemplateObject.query(query, new VideoMapper());
+		String query = "select videos_id,title,V.description,path,views,likes,dislikes,thumbnail,upload_date,users_username,category,duration from videos V inner join users U on V.users_username = U.username where channel_name = ?;";
+		List<Video> videos = jdbcTemplateObject.query(query,new Object[]{channelName}, new VideoMapper());
 		return videos;
 	}
 
 	@Override
 	public List<Video> getAllVideosLike(String videoTitle){
-		String query = "select * from videos where title like '%" + videoTitle + "%'";
+		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos where title like '%" + videoTitle + "%'";
 		List<Video> videos = jdbcTemplateObject.query(query, new VideoMapper());
 		return videos;
 	}
 	@Override
 	public List<Video> listVideos() throws SQLException {
-		String query = "select * from videos";
+		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos";
 	      List <Video> videos = jdbcTemplateObject.query(query, 
 	                                new VideoMapper());
 	      return videos;
