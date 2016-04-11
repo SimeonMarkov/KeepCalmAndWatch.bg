@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -8,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.model.Video;
 import com.example.model.dao.DBUserDAO;
 import com.example.model.dao.DBVideoDAO;
 
 @Controller
 public class SearchController {
-
+	private static final String VIDEO_CATEGORY = "c";
+	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam("searchBar") String searchBar,
 			@RequestParam("category") String category, Model model) {
@@ -25,7 +29,7 @@ public class SearchController {
 			case "videos": {
 				DBVideoDAO dbVideoDao = (DBVideoDAO) context
 						.getBean("DBVideoDAO");
-				model.addAttribute("VideoNameLike",
+				model.addAttribute("VideoSearch",
 						dbVideoDao.getAllVideosLike(searchBar));
 				break;
 			}
@@ -43,4 +47,16 @@ public class SearchController {
 
 		return "resultFromSearch";
 	}
+	
+	@RequestMapping(value = "/category", method=RequestMethod.GET)
+	public String searchVideoByCategory(Model model, @RequestParam(VIDEO_CATEGORY) String category){
+		System.out.println(category + " from controller");
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"beans.xml");
+		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		model.addAttribute("VideoSearch", videoDao.getVideosByCategory(category));
+		return "resultFromSearch";
+		
+	}
+	
 }

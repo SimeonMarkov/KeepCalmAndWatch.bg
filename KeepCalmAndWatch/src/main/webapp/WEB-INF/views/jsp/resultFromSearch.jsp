@@ -48,7 +48,7 @@
 			</table>
 			<div class="tab-pane fade in" id="tab2">
 				<ul class="list-unstyled video-list-thumbs row">
-					<c:forEach var="video" items="${requestScope.VideoNameLike}">
+					<c:forEach var="video" items="${requestScope.VideoSearch}">
 						<li class="col-lg-3 col-sm-4 col-xs-6"><a
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 							title="${video.title}"> <img

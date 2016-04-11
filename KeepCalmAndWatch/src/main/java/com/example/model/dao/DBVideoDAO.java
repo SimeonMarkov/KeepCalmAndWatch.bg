@@ -32,11 +32,18 @@ public class DBVideoDAO implements IVideoDAO{
 
 	@Override
 	public Video getVideo(int video_id){
-		String query = "select * from videos where videos_id = ?";
+		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos where videos_id = ?";
 		Video video = null;
 		video = jdbcTemplateObject.queryForObject(query,
 		new Object[] { video_id }, new VideoMapper());
 		return video;
+	}
+	
+	public List<Video> getVideosByCategory(String category){
+		System.out.println(category);
+		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos where category = ?";
+		List<Video> videos = jdbcTemplateObject.query(query, new Object[]{category}, new VideoMapper());
+		return videos;
 	}
 	
 	@Override
