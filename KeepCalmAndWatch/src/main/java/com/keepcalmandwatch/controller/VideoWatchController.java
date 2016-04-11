@@ -82,7 +82,7 @@ public class VideoWatchController {
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
 		JsonObject jsonObjectParsed = (JsonObject) new JsonParser().parse(json);
 		Comment comment = new Comment();
-		System.out.println("Kurec ---> "
+		System.out.println("json---> "
 				+ jsonObjectParsed.get("text").getAsString());
 		comment.setText(jsonObjectParsed.get("text").getAsString());
 		comment.setDatetime(LocalDateTime.now());

@@ -50,7 +50,6 @@ public class SearchController {
 	
 	@RequestMapping(value = "/category", method=RequestMethod.GET)
 	public String searchVideoByCategory(Model model, @RequestParam(VIDEO_CATEGORY) String category){
-		System.out.println(category + " from controller");
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");

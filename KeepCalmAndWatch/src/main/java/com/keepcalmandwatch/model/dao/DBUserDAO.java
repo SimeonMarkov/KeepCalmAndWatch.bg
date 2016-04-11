@@ -112,4 +112,26 @@ public class DBUserDAO implements IUserDAO {
 		jdbcTemplateObject.update(query, user.getPassword(), user.getEmail(), user.getChannelName(), user.getDescription(), user.getAvatar(), user.getRegistrationDate(), user.getBackground(), user.getUsername());
 		return true;
 	}
+	
+	public boolean subscribe(User subscription, User subscriber){
+		String query = "INSERT INTO keepcalmandwatch.users_subscribers (subscription, subscriber) VALUES( (SELECT username FROM users WHERE username=?), (SELECT username FROM users WHERE username=?));";
+		jdbcTemplateObject.update(query, subscription.getUsername(), subscriber.getUsername());
+		return true;
+	}
+	
+	public boolean isSubscribed(User subscription, User subscriber){
+		String query = "SELECT subscription FROM keepcalmandwatch.users_subscribers WHERE subscription=(SELECT username FROM users WHERE username=?) AND subscriber=( (SELECT username FROM users WHERE username=?));";
+		try {
+			String s = jdbcTemplateObject.queryForObject(query, String.class, subscription.getUsername(), subscriber.getUsername());
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean unSubscribe(User subscription, User subscriber) {
+		String query = "DELETE FROM keepcalmandwatch.users_subscribers WHERE subscription=(SELECT username FROM users WHERE username=?) AND subscriber=( (SELECT username FROM users WHERE username=?));";
+		jdbcTemplateObject.update(query, subscription.getUsername(), subscriber.getUsername());
+		return true;
+	}
 }

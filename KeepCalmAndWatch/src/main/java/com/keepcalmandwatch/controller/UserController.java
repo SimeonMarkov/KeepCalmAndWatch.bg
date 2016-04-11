@@ -57,9 +57,11 @@ public class UserController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		User user = null;
 		if (session.getAttribute("LoggedUser") != null) {
-			User user = (User) session.getAttribute("LoggedUser");
+			user = (User) session.getAttribute("LoggedUser");
 			model.addAttribute(user);
+			
 		}
 		User chosenUser = null;
 		try {
@@ -72,8 +74,11 @@ public class UserController {
 
 		model.addAttribute("ChosenUser", chosenUser);
 		model.addAttribute("VideosForChannelName", videosForChannelName);
-		System.out.println(videosForChannelName);
-
+		if(user != null && chosenUser != null){
+			if(userDao.isSubscribed(chosenUser, user)){
+				model.addAttribute("subscribed", true);
+			}
+		}
 		return "channel";
 	}
 
@@ -188,5 +193,63 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("message", fail);
 			return "redirect:profile";
 		}
+	}
+	
+	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
+	public String subscribe(Model model, @RequestParam("user") String channelName, HttpSession session, WebRequest webRequest){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		User user = null;
+		if (session.getAttribute("LoggedUser") != null) {
+			user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+		}else{
+			return "redirect:login";
+		}
+		User chosenUser = null;
+		try {
+			chosenUser = userDao.getUserBChannelName(channelName);
+		} catch (EmptyResultDataAccessException e) {
+			model.addAttribute("noSuchUser", HttpStatus.NOT_FOUND);
+			return "error";
+		}
+		
+		model.addAttribute("ChosenUser", chosenUser);
+		if(user != null && chosenUser != null){
+			if(!userDao.isSubscribed(chosenUser, user)){
+				userDao.subscribe(chosenUser, user);
+				model.addAttribute("subscribed", true);
+			}
+		}
+		return "channel";
+	}
+	
+	@RequestMapping(value = "/unSubscribe", method = RequestMethod.GET)
+	public String unSubscribe(Model model, @RequestParam("user") String channelName, HttpSession session, WebRequest webRequest){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		User user = null;
+		if (session.getAttribute("LoggedUser") != null) {
+			user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+		}else{
+			return "redirect:login";
+		}
+		User chosenUser = null;
+		try {
+			chosenUser = userDao.getUserBChannelName(channelName);
+		} catch (EmptyResultDataAccessException e) {
+			model.addAttribute("noSuchUser", HttpStatus.NOT_FOUND);
+			return "error";
+		}
+		
+		model.addAttribute("ChosenUser", chosenUser);
+		if(user != null && chosenUser != null){
+			if(userDao.isSubscribed(chosenUser, user)){
+				userDao.unSubscribe(chosenUser, user);
+				model.addAttribute("subscribed", null);
+			}
+		}
+		return "channel";
 	}
 }

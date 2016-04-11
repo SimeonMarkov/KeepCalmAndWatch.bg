@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
 import com.xuggle.xuggler.IContainer;
 
@@ -31,7 +33,6 @@ public class DBVideoDAO implements IVideoDAO{
 		 
 		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername(), video.getCategory(), duration);
 		 return true;
-
 	}
 
 	@Override
@@ -44,7 +45,6 @@ public class DBVideoDAO implements IVideoDAO{
 	}
 	
 	public List<Video> getVideosByCategory(String category){
-		System.out.println(category);
 		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos where category = ?";
 		List<Video> videos = jdbcTemplateObject.query(query, new Object[]{category}, new VideoMapper());
 		return videos;
@@ -77,4 +77,6 @@ public class DBVideoDAO implements IVideoDAO{
 		List<Comment> comments = jdbcTemplateObject.query(query, new CommentMapper());
 		return comments;
 	}
+	
+	
 }
