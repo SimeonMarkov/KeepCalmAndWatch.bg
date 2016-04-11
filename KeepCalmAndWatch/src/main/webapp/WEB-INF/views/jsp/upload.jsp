@@ -61,32 +61,38 @@
 <body>
 
 	<%@include file="header.jsp"%>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="row centered-form">
 		<div
 			class="col-xs-9 col-sm-9 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Здравейте,<b> ${LoggedUser.channelName}!</b> Изберете
-						видео файл, който искате да качите:</h3>
+					<h3 class="panel-title">
+						Здравейте,<b> ${LoggedUser.channelName}!</b> Изберете видео файл,
+						който искате да качите:
+					</h3>
 				</div>
 				<div class="panel-body">
-					<form action="upload" method="POST" enctype="multipart/form-data" id="uploadform">
-						<br> <input type="file" id="videoUpload" name="videoPath"
-							required="required"/> <br> <br> <input type="text"
+					<form action="upload" method="POST" enctype="multipart/form-data"
+						id="uploadform">
+						<br> Изберете клип за чакване(MP4/OGV): <br><br>
+						 <input type="file" id="videoUpload" name="videoPath"
+							required="required" /> <br> <br>  
+							<input type="text"
 							name="title" placeholder="Заглавие на клипа..."
-							required="required" /> <br> <br> 
-							<textarea form="uploadform" rows="4" cols="50"
-							name="description" placeholder="Описание (500 символа)" ></textarea> <br>
-						<br>
+							required="required" /> <br> <br>
+						<textarea form="uploadform" rows="4" cols="50" name="description"
+							placeholder="Описание (500 символа)"></textarea>
+						<br> <br>
 						<div class="form-group">
-			
-			
-							<input type="file" id="thumbnailUpload" name="thumbnail"
-								required="required" /> <br> 
+							 Изберете изображение за показване(JPG/PNG): <br><br> <input
+								type="file" id="thumbnailUpload" name="thumbnail"
+								required="required" />
 						</div>
 						<div>
-							<select name="category">
+							Изберете категория: <br> <br> <select name="category">
 								<option value="Music">Музика</option>
 								<option value="Games">Игри</option>
 								<option value="Sport">Спорт</option>
@@ -94,9 +100,8 @@
 								<option value="News">Новини</option>
 							</select>
 						</div>
-						
-						<br>
-						<input type="submit" value="Качи" class="btn btn-custom">
+
+						<br> <input type="submit" value="Качи" class="btn btn-custom">
 					</form>
 				</div>
 			</div>
