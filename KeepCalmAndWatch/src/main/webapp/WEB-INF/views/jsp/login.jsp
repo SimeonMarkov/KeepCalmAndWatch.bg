@@ -39,7 +39,7 @@
 										<div class="form-group">
 											<form:input path="username" type="text" name="username"
 												id="username" class="form-control input-sm"
-												placeholder="Потребителско име" />
+												placeholder="Потребителско име" required="required"/>
 										</div>
 									</div>
 								</div>
@@ -48,7 +48,7 @@
 										<div class="form-group">
 											<form:input path="password" type="password" name="password"
 												id="password" class="form-control input-sm"
-												placeholder="Парола" />
+												placeholder="Парола" required="required"/>
 										</div>
 									</div>
 								</div>

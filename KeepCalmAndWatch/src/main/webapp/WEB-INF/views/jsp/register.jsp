@@ -116,13 +116,13 @@ footer {
 										<div class="form-group">
 											<form:input path="username" type="text" name="username"
 												id="username" class="form-control input-sm"
-												placeholder="Потребителско име" />
+												placeholder="Потребителско име" required="required"/>
 										</div>
 									</div>
 									<div class="col-xs-6 col-sm-6 col-md-6">
 										<div class="form-group">
 											<form:input path="email" type="email" name="email" id="email"
-												class="form-control input-sm" placeholder="Имейл адрес" />
+												class="form-control input-sm" placeholder="Имейл адрес" required="required"/>
 										</div>
 									</div>
 								</div>
@@ -130,7 +130,7 @@ footer {
 								<div class="form-group">
 									<form:input path="channelName" type="text" name="channelName"
 										id="channelName" class="form-control input-sm"
-										placeholder="Име на канала" />
+										placeholder="Име на канала" reuqired="required"/>
 								</div>
 
 								<div class="row">
@@ -138,7 +138,7 @@ footer {
 										<div class="form-group">
 											<form:input path="password" type="password" name="password"
 												id="password" class="form-control input-sm"
-												placeholder="Парола" />
+												placeholder="Парола" required="required"/>
 										</div>
 									</div>
 									<div class="col-xs-6 col-sm-6 col-md-6">
@@ -146,7 +146,7 @@ footer {
 											<input path="passwordconfirmation" type="password"
 												name="passwordconfirmation" id="password_confirmation"
 												class="form-control input-sm"
-												placeholder="Потвърдете паролата">
+												placeholder="Потвърдете паролата" required="required">
 										</div>
 									</div>
 								</div>

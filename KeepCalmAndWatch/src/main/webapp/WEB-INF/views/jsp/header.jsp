@@ -135,7 +135,7 @@
 													<div class="form-group">
 														<input name="username" id="username"
 															class="form-control input-sm"
-															placeholder="Потребителско име" />
+															placeholder="Потребителско име" required="required"/>
 													</div>
 												</div>
 												<div class="col-xs-6 col-sm-6 col-md-6">
@@ -144,7 +144,7 @@
 															class="form-control input-sm" placeholder="Имейл адрес"
 															required="required"
 															pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
-															title="Невалиден имейл адрес" />
+															 required="required"/>
 													</div>
 												</div>
 											</div>
@@ -152,7 +152,7 @@
 												<div class="col-xs-6 col-sm-12 col-md-12">
 													<div class="form-group">
 														<input name="channelName" id="channelName"
-															class="form-control input-sm" placeholder="Име на канала" />
+															class="form-control input-sm" placeholder="Име на канала" required="required"/>
 													</div>
 												</div>
 											</div>
@@ -160,14 +160,14 @@
 												<div class="col-xs-6 col-sm-6 col-md-6">
 													<div class="form-group">
 														<input type="password" name="password" id="password"
-															class="form-control input-sm" placeholder="Парола" />
+															class="form-control input-sm" placeholder="Парола" required="required"/>
 													</div>
 												</div>
 												<div class="col-xs-6 col-sm-6 col-md-6">
 													<div class="form-group">
 														<input type="password" name="passwordconfirmation"
 															id="password_confirmation" class="form-control input-sm"
-															placeholder="Потвърдете паролата">
+															placeholder="Потвърдете паролата" required="required" />
 													</div>
 												</div>
 											</div>
