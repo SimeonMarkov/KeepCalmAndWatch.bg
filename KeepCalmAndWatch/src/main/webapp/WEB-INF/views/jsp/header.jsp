@@ -55,7 +55,7 @@
 				<div class="searchbar">
 					<div class="col-md-4 col-lg-4 ">
 						<div class="navbar-collapse collapse" id="navbar-collapsible">
-							<form action="search" method="get">
+							<form action="search" method="get" accept-charset="UTF-8">
 								<div class="form-group" style="display: inline;">
 									<div class="input-group">
 										<div class="input-group-btn">
@@ -129,7 +129,7 @@
 									<h3>Нов потребител</h3>
 									<div class="signup">
 										<form name="regform" onsubmit="return validateForm()"
-											method="POST" action="/KeepCalmAndWatch/registerUser">
+											method="POST" accept-charset="UTF-8" action="/KeepCalmAndWatch/registerUser">
 											<div class="row">
 												<div class="col-xs-6 col-sm-6 col-md-6">
 													<div class="form-group">
@@ -210,7 +210,7 @@
 
 									<div class="signup">
 										<form name="loginForm" onsubmit="return validateLogin()"
-											method="POST" action="/KeepCalmAndWatch/login">
+											method="POST" action="/KeepCalmAndWatch/login" accept-charset="UTF-8">
 											<input name="username" id="username" class="form-control"
 												placeholder="Потребителско име" required="required" /> <br>
 											<input name="password" id="password" type="password"

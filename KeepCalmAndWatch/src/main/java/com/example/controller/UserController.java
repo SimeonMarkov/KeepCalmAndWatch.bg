@@ -50,7 +50,6 @@ public class UserController {
 		} else {
 			return "redirect:login";
 		}
-
 	}
 
 	@RequestMapping(value = "/channel", method = RequestMethod.GET)

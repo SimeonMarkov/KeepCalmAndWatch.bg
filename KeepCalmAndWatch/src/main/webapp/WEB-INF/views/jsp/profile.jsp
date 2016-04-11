@@ -58,7 +58,7 @@
      	 <img src="${LoggedUser.avatar}" class="avatar img-circle img-thumbnail" alt="" />
       </c:if>
         <h6>Качване на друга снимка</h6>
-        <form name="avatarUpdate" action="avatarUpdate" method="POST"  enctype="multipart/form-data">
+        <form name="avatarUpdate" action="avatarUpdate" method="POST"  enctype="multipart/form-data" accept-charset="UTF-8">
         <input type="file" class="text-center center-block well well-sm" id="avatarUpdate" name="avatar">
         <input class="btn btn-primary" value="Обновяване на аватар" type="submit">
         </form>

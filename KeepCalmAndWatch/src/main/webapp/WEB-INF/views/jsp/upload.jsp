@@ -76,7 +76,7 @@
 				</div>
 				<div class="panel-body">
 					<form action="upload" method="POST" enctype="multipart/form-data"
-						id="uploadform">
+						id="uploadform" accept-charset="UTF-8">
 						<br> Изберете клип за чакване(MP4/OGV): <br><br>
 						 <input type="file" id="videoUpload" name="videoPath"
 							required="required" /> <br> <br>  

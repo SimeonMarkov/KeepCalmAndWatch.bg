@@ -33,7 +33,7 @@
 						</div>
 						<div class="panel-body">
 							<form:form name="loginForm2" onsubmit="return validateLogin2()"
-								method="POST" action="/KeepCalmAndWatch/login" role="form">
+								method="POST" action="/KeepCalmAndWatch/login" role="form" accept-charset="UTF-8">
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6">
 										<div class="form-group">
