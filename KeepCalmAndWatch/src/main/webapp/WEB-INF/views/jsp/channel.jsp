@@ -72,17 +72,18 @@
 					<div class="card-info">
 						<span class="card-title"><h1>${ChosenUser.channelName}</h1></span>
 					</div>
-					<div id="subscribe">
-						<c:if test="${empty subscribed}">
-						<a href="subscribe?user=${ChosenUser.channelName}"
-							class="btn btn-primary btn-sm" id="subscribe" type="submit">Абониране</a>
-							</c:if>
-							<c:if test="${not empty subscribed}">
-						<a href="unSubscribe?user=${ChosenUser.channelName}"
-							class="btn btn-primary btn-sm" id="subscribe" type="submit">Отписване</a>
-							</c:if>
-					</div>
-
+					<c:if test="${not empty LoggedUser && ChosenUser.channelName ne LoggedUser.channelName}">
+						<div id="subscribe">
+							<c:if test="${empty subscribed}">
+							<a href="subscribe?user=${ChosenUser.channelName}"
+								class="btn btn-primary btn-sm" id="subscribe" type="submit">Абониране</a>
+								</c:if>
+								<c:if test="${not empty subscribed}">
+							<a href="unSubscribe?user=${ChosenUser.channelName}"
+								class="btn btn-primary btn-sm" id="subscribe" type="submit">Отписване</a>
+								</c:if>
+						</div>
+					</c:if>
 					<br>
 					<h3>Описание</h3>
 					<div class="panel panel-default">
