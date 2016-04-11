@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.example")
+@ComponentScan("com.keepcalmandwatch")
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	
     @Override
