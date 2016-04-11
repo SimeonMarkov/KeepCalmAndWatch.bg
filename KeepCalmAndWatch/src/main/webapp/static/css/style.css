@@ -2911,6 +2911,12 @@ body {
     margin-right: 2px;
 }
 
+.video-title {
+   position:absolute; 
+    left:15;
+    top: 80px;
+}
+
 .btn-custom {
   background-color: hsl(195, 100%, 59%) !important;
   background-repeat: repeat-x;

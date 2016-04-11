@@ -88,7 +88,8 @@ a:hover {
 <body>
 
 	<%@include file="header.jsp"%>
-	<h2>${video.title}</h2>
+	<br><br>
+	<h2 class="video-title">${video.title}</h2>
 
 	<div style="position: relative; top: 50px;">
 		<div class="currentVideo"
