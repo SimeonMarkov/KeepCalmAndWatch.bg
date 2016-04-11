@@ -55,7 +55,7 @@
 				<div class="searchbar">
 					<div class="col-md-4 col-lg-4 ">
 						<div class="navbar-collapse collapse" id="navbar-collapsible">
-							<form action="search" method="get" accept-charset="UTF-8">
+							<form action="search" method="get">
 								<div class="form-group" style="display: inline;">
 									<div class="input-group">
 										<div class="input-group-btn">
@@ -101,6 +101,7 @@
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="index">Начална страница</a></li>
 								<li><a href="profile">Моят профил</a></li>
+								<li><a href="${pageContext.request.contextPath}/channel?user=${LoggedUser.channelName}">Моят канал</a></li>
 								<li><a href="#">Абонаменти</a></li>
 								<li><a class="divider"></a></li>
 								<li><a href="${pageContext.request.contextPath}/logout">Изход
@@ -129,7 +130,7 @@
 									<h3>Нов потребител</h3>
 									<div class="signup">
 										<form name="regform" onsubmit="return validateForm()"
-											method="POST" accept-charset="UTF-8" action="/KeepCalmAndWatch/registerUser">
+											method="POST" action="/KeepCalmAndWatch/registerUser">
 											<div class="row">
 												<div class="col-xs-6 col-sm-6 col-md-6">
 													<div class="form-group">
@@ -210,7 +211,7 @@
 
 									<div class="signup">
 										<form name="loginForm" onsubmit="return validateLogin()"
-											method="POST" action="/KeepCalmAndWatch/login" accept-charset="UTF-8">
+											method="POST" action="/KeepCalmAndWatch/login">
 											<input name="username" id="username" class="form-control"
 												placeholder="Потребителско име" required="required" /> <br>
 											<input name="password" id="password" type="password"
