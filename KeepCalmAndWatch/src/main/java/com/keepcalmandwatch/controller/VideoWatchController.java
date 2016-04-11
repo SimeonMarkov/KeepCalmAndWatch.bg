@@ -1,8 +1,10 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,15 +23,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.model.Comment;
-import com.example.model.User;
-import com.example.model.Video;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
 @Controller
 @SessionAttributes(value = "{LoggedUser,AllVideos}")
@@ -51,17 +53,15 @@ public class VideoWatchController {
 		}
 		List<Comment> commentsToCurrentVideo = videoJDBCTemplate
 				.getCommentsForSingleVideo(id);
+		
+		//get all videos from the same category
+		List<Video> suggestedVideos = videoJDBCTemplate.getVideosByCategory(video.getCategory());
+		suggestedVideos.remove(video);
+		Collections.reverse(suggestedVideos);
+		suggestedVideos.add(video);
 		model.addAttribute("video", video);
 		model.addAttribute("comments", commentsToCurrentVideo);
-		try {
-			if (session.getAttribute("AllVideos") == null) {
-				session.setAttribute("AllVideos",
-						videoJDBCTemplate.listVideos());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		model.addAttribute("SuggestedVideos", suggestedVideos);
 		return "watchVideo";
 	}
 

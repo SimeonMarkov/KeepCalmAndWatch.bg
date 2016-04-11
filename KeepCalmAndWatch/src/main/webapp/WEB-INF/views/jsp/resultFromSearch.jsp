@@ -46,6 +46,9 @@
 
 
 			</table>
+			<br>
+			<br>
+			<p style="font-size: 30px;">${Category}</p>
 			<div class="tab-pane fade in" id="tab2">
 				<ul class="list-unstyled video-list-thumbs row">
 					<c:forEach var="video" items="${requestScope.VideoSearch}">

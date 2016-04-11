@@ -1,4 +1,4 @@
-package com.example.model;
+package com.keepcalmandwatch.model;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -110,6 +110,16 @@ public class Video implements Comparable<Video>{
 		} else{
 			return this.uplodadDate.compareTo(o.uplodadDate);
 		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+	
+	@Override
+	public boolean equals(Object video) {
+		return this.id == ((Video) video).id;
 	}
 	
 }

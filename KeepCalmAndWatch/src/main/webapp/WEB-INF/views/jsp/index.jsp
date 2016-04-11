@@ -60,7 +60,8 @@
 								src="${video.thumbnail}" 
 								class="img-responsive" width="auto" height="50px" />
 								<h2>${video.title}</h2> <span
-								class="glyphicon glyphicon-play-circle"></span> <span
+								class="glyphicon glyphicon-play-circle"></span> 
+								<span
 								class="duration">03:15</span>
 						</a></li>
 					</c:forEach>

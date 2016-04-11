@@ -1,4 +1,4 @@
-package com.example;
+package com.keepcalmandwatch;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.example")
+@ComponentScan("com.keepcalmandwatch")
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	
     @Override

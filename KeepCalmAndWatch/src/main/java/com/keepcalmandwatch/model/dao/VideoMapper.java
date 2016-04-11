@@ -1,4 +1,4 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.Blob;
 import java.sql.ResultSet;
@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.example.model.User;
-import com.example.model.Video;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class VideoMapper implements RowMapper<Video>{

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 
 import java.sql.Date;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.model.User;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
 
 @Controller

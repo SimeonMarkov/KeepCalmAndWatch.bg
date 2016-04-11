@@ -1,4 +1,4 @@
-package com.example.model;
+package com.keepcalmandwatch.model;
 
 import java.time.LocalDateTime;
 

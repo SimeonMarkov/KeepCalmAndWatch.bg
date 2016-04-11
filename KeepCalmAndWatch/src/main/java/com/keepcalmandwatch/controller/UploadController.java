@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpSession;
+
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,15 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.model.User;
-import com.example.model.Video;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 import com.xuggle.xuggler.IContainer;
 import com.xuggle.xuggler.IContainerFormat;
 

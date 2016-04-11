@@ -11,11 +11,11 @@
 		<property name="password" value="rootroot" />
 	</bean>
 
-	<bean id="DBUserDAO" class="com.example.model.dao.DBUserDAO">
+	<bean id="DBUserDAO" class="com.keepcalmandwatch.model.dao.DBUserDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="DBVideoDAO" class="com.example.model.dao.DBVideoDAO">
+	<bean id="DBVideoDAO" class="com.keepcalmandwatch.model.dao.DBVideoDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

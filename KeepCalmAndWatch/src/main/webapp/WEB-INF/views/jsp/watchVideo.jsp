@@ -186,7 +186,7 @@ a:hover {
 				<h2>Предложения:</h2>
 				<br>
 				<div class="col-md-4 ">
-					<c:forEach var="video" items="${sessionScope.AllVideos}">
+					<c:forEach var="video" items="${requestScope.SuggestedVideos}">
 						<div class="row">
 							<li class="col-lg-3 col-sm-4 col-xs-6"><a
 								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
