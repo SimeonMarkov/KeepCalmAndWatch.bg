@@ -51,6 +51,7 @@
 												placeholder="Парола" required="required"/>
 										</div>
 									</div>
+									<a href="#" style="font-size: 15px;">Забравена парола?</a>
 								</div>
 								<input type="submit" value="Вход"
 									class="btn btn-custom btn-block">
