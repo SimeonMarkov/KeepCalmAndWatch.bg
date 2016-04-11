@@ -18,6 +18,10 @@
 	<bean id="DBVideoDAO" class="com.keepcalmandwatch.model.dao.DBVideoDAO">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="DBPlaylistDAO" class="com.keepcalmandwatch.model.dao.DBPlaylistDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 </beans>
 
