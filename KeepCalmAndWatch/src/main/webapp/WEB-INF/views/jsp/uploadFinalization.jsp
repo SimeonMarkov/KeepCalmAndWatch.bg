@@ -17,7 +17,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+<script>
+ //   setTimeout("window.location.href='login.html';",time);
+ //example:
 
+    setTimeout("window.location.href='index';", 8); // seconds
+</script>
 </head>
 <body>
 
@@ -27,8 +32,9 @@
 	<div>
 		<p style="font-size: 20px;">${message}</p>
 		<br> <a href="${pageContext.request.contextPath}/index"
-			style="text-decoration: none; font-size: 20px; color: green;">Back
-			to home page</a>
+			style="text-decoration: none; font-size: 20px; color: green;">Обратно към главната страница. </a>
+			<br>
+			<span style="text-decoration: none; font-size: 20px; color: green;">(ще бъдете автоматично пренасочени след няколко секунди))</span>>
 	</div>
 	</div>
 	</div>

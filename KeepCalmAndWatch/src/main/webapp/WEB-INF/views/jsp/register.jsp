@@ -17,6 +17,7 @@
 <script type="text/javascript" src="js/validateRegistration.js"></script>
 
 </head>
+
 <body>
 
 
