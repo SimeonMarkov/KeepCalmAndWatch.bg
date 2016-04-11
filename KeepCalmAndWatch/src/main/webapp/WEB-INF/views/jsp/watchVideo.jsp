@@ -17,8 +17,7 @@
 	href="${pageContext.request.contextPath}/css/comment_insert.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <title>My video page</title>
 <link href="${pageContext.request.contextPath}/css/headerAndSidenav.css"
 	rel="stylesheet">
@@ -87,63 +86,9 @@ a:hover {
 </script>
 </head>
 <body>
-	<div id="logo">
-		<a href="/KeepCalmAndWatch"><img
-			src="${pageContext.request.contextPath}/img/logo.jpg" width="200px"
-			height="70px" /></a>
-	</div>
 
-	<div class="navbar-collapse collapse" id="navbar-collapsible">
-		<form action="search" method="get">
-			<div class="form-group" style="display: inline;">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<select name="category" class="btn btn-info dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="glyphicon glyphicon-chevron-down"></span>
-							<option value="videos">Клипове</option>
-							<option value="users">Потребители</option>
-						</select>
-					</div>
-					<input type="text" class="form-control"
-						placeholder="What are searching for?" name="searchBar"> <span
-						class="input-group-addon"><span
-						class="glyphicon glyphicon-search"></span> </span>
-				</div>
-			</div>
-		</form>
-	</div>
-	<c:if test="${not empty sessionScope.LoggedUser}">
-		<div id="avatar">
-			<img class="img-circle" alt="N/A" width="50" height="50"
-				src="${LoggedUser.avatar}" />
-		</div>
-	</c:if>
-	<div class="dropdown">
-		<button class="btn btn-default dropdown-toggle" type="button"
-			id="menu1" data-toggle="dropdown">
-			<span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-			<li role="presentation"><a role="menuitem" tabindex="-1"
-				href="${pageContext.request.contextPath}/index">Начална страница</a></li>
-			<c:if test="${not empty sessionScope.LoggedUser}">
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="${pageContext.request.contextPath}/profile">Моят канал</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">Абонаменти</a></li>
-
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="${pageContext.request.contextPath}/logout">Изход</a></li>
-			</c:if>
-			<c:if test="${empty sessionScope.LoggedUser}">
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="${pageContext.request.contextPath}/login">Влез</a></li>
-			</c:if>
-		</ul>
-	</div>
+	<%@include file="header.jsp"%>
+	<h2>${video.title}</h2>
 
 	<div style="position: relative; top: 50px;">
 		<div class="currentVideo"
@@ -214,7 +159,8 @@ a:hover {
 					<c:forEach var="comment" items="${requestScope.comments}">
 						<li class="comment-holder" id="_1">
 							<div class="user-img">
-								<img src="images/photo.png" class="user-img-pic" />
+								<img src="${comment.user.avatar }" width="30px" height="30px"
+									class="user-img-pic" />
 							</div>
 							<div class="coment-body">
 								<h3 class="username-field">${comment.user.channelName}</h3>
@@ -230,27 +176,32 @@ a:hover {
 
 	</div>
 	</div>
-
+	<br>
+	<br>
+	<br>
 	<div class="suggestions">
 
 		<div class="col-sm-3 col-md-2 col-lg-2 sidenav">
-			<ul class="nav nav-pills nav-stacked signin">
-				<c:forEach var="video" items="${sessionScope.AllVideos}">
-					<div class="row">
-						<li class="col-lg-3 col-sm-4 col-xs-6"><a
-							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
-							title="${video.title}"> <img
-								src="${video.thumbnail}" 
-								class="img-responsive" width="auto" height="50px" />
-								<h2>${video.title}</h2> <span
-								class="glyphicon glyphicon-play-circle"></span> <span
-								class="duration">03:15</span>
-						</a></li>
-					</div>
-				</c:forEach>
+			<ul class="nav nav-pills nav-stacked">
+				<h2>Предложения:</h2>
+				<br>
+				<div class="col-md-4 ">
+					<c:forEach var="video" items="${sessionScope.AllVideos}">
+						<div class="row">
+							<li class="col-lg-3 col-sm-4 col-xs-6"><a
+								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+								title="${video.title}"> <img src="${video.thumbnail}"
+									width="150px" height="150px" />
+									<h3>${video.title}</h3> <!-- 									<span class="glyphicon glyphicon-play-circle"></span> -->
+							</a></li>
+						</div>
+					</c:forEach>
+				</div>
+
 			</ul>
 		</div>
 	</div>
+
 
 	<input type="hidden" id="channelName" value="${LoggedUser.channelName}" />
 </body>
