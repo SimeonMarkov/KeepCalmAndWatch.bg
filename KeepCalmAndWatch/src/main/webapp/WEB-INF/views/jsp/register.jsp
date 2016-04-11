@@ -15,44 +15,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/validateRegistration.js"></script>
-<style>
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {
-	height: 1500px
-}
 
-/* Set gray background color and 100% height */
-.sidenav {
-	background-color: #f1f1f1;
-	height: 100%;
-	width: 200px;
-}
-
-/* Set black background color, white text and some padding */
-footer {
-	background-color: #555;
-	color: white;
-	padding: 15px;
-}
-
-/* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
-	.sidenav {
-		height: auto;
-		padding: 15px;
-	}
-	.row.content {
-		height: auto;
-	}
-}
-
-.input-group {
-	width: 500px;
-	position: absolute;
-	top: 10px;
-	left: 400px;
-}
-</style>
 </head>
 <body>
 
@@ -63,17 +26,19 @@ footer {
 	<br>
 	<br>
 	<div class="row centered-form">
+	<div
+			class="col-xs-9 col-sm-9 col-md-3 col-lg-3 "></div>
 		<div
-			class="col-xs-9 col-sm-9 col-md-4 col-sm-offset-3 col-md-offset-13">
+			class="col-xs-9 col-sm-9 col-md-5 col-lg-5 ">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p>
-						<color="red">${fail}</color>
+						<font color="red">${fail}</font>
 					</p>
 					<h3 class="panel-title">Регистрация на потребител</h3>
 				</div>
 				<div class="panel-body">
-					<form:form name="regform" onsubmit="return validateForm()"
+					<form:form name="regform" 
 						method="POST" action="/KeepCalmAndWatch/registerUser" role="form">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
@@ -96,55 +61,12 @@ footer {
 								id="channelName" class="form-control input-sm"
 								placeholder="Име на канала" />
 						</div>
-<<<<<<< Updated upstream
-						<div class="panel-body">
-							<form:form name="regform" onsubmit="return validateForm()"
-								method="POST" action="/KeepCalmAndWatch/registerUser"
-								role="form">
-								<div class="row">
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<form:input path="username" type="text" name="username"
-												id="username" class="form-control input-sm"
-												placeholder="Потребителско име" required="required"/>
-										</div>
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<form:input path="email" type="email" name="email" id="email"
-												class="form-control input-sm" placeholder="Имейл адрес" required="required"/>
-										</div>
-									</div>
-								</div>
-=======
->>>>>>> Stashed changes
+
 
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="form-group">
-<<<<<<< Updated upstream
-									<form:input path="channelName" type="text" name="channelName"
-										id="channelName" class="form-control input-sm"
-										placeholder="Име на канала" reuqired="required"/>
-								</div>
 
-								<div class="row">
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<form:input path="password" type="password" name="password"
-												id="password" class="form-control input-sm"
-												placeholder="Парола" required="required"/>
-										</div>
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6">
-										<div class="form-group">
-											<input path="passwordconfirmation" type="password"
-												name="passwordconfirmation" id="password_confirmation"
-												class="form-control input-sm"
-												placeholder="Потвърдете паролата" required="required">
-										</div>
-									</div>
-=======
 									<form:input path="password" type="password" name="password"
 										id="password" class="form-control input-sm"
 										placeholder="Парола" />
@@ -156,13 +78,12 @@ footer {
 										name="passwordconfirmation" id="password_confirmation"
 										class="form-control input-sm"
 										placeholder="Потвърдете паролата">
->>>>>>> Stashed changes
 								</div>
 							</div>
 						</div>
 
 						<input type="submit" value="Регистрация"
-							class="btn btn-primary btn-block">
+							class="btn btn-custom btn-block">
 
 					</form:form>
 				</div>
@@ -173,27 +94,5 @@ footer {
 	</div>
 
 
-	<div id="small-dialog3" class="mfp-hide">
-
-
-		<div class="signup">
-			<form>
-				<input type="text" class="email" placeholder="Email"
-					required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
-					title="Enter a valid email" /> <input type="password"
-					placeholder="Password" required="required" pattern=".{6,}"
-					title="Minimum 6 characters required" autocomplete="off" /> <input
-					type="text" class="email" placeholder="Mobile Number"
-					maxlength="10" pattern="[1-9]{1}\d{9}"
-					title="Enter a valid mobile number" /> <input type="submit"
-					value="Sign Up" />
-			</form>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-
-	<footer class="container-fluid">
-	<p>Footer Text</p>
-	</footer>
 </body>
 </html>
