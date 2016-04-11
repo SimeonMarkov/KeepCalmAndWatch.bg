@@ -112,4 +112,14 @@ public class Video implements Comparable<Video>{
 		}
 	}
 	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+	
+	@Override
+	public boolean equals(Object video) {
+		return this.id == ((Video) video).id;
+	}
+	
 }

@@ -26,7 +26,6 @@ public class CommentMapper implements RowMapper<Comment> {
 		Video video = new Video();
 		video.setId(rs.getInt("videos_videos_id"));
 		comment.setVideo(video);
-		System.out.println(comment.getId() + "----------------------------------");
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userDao = ((DBUserDAO)context.getBean("DBUserDAO"));
 		User user = userDao.getUserByComment(comment.getId());

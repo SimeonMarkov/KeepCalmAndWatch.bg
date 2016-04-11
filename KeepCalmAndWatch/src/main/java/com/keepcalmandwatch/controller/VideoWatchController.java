@@ -3,6 +3,8 @@ package com.keepcalmandwatch.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -51,17 +53,15 @@ public class VideoWatchController {
 		}
 		List<Comment> commentsToCurrentVideo = videoJDBCTemplate
 				.getCommentsForSingleVideo(id);
+		
+		//get all videos from the same category
+		List<Video> suggestedVideos = videoJDBCTemplate.getVideosByCategory(video.getCategory());
+		suggestedVideos.remove(video);
+		Collections.reverse(suggestedVideos);
+		suggestedVideos.add(video);
 		model.addAttribute("video", video);
 		model.addAttribute("comments", commentsToCurrentVideo);
-		try {
-			if (session.getAttribute("AllVideos") == null) {
-				session.setAttribute("AllVideos",
-						videoJDBCTemplate.listVideos());
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		model.addAttribute("SuggestedVideos", suggestedVideos);
 		return "watchVideo";
 	}
 

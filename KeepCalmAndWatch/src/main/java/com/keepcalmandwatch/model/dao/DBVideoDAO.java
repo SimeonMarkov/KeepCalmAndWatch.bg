@@ -1,13 +1,12 @@
 package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import com.keepcalmandwatch.model.Comment;
 import com.keepcalmandwatch.model.Video;
