@@ -1,4 +1,4 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -9,8 +9,8 @@ import javax.sql.DataSource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.example.model.Comment;
-import com.example.model.User;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
 
 public class DBUserDAO implements IUserDAO {
 	private DataSource dataSource;

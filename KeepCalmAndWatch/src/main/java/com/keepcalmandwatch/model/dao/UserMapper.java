@@ -1,9 +1,11 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
-import com.example.model.User;
+
+import com.keepcalmandwatch.model.User;
 
 public class UserMapper implements RowMapper<User> {
 

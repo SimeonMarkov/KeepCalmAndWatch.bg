@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,15 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.model.Comment;
-import com.example.model.User;
-import com.example.model.Video;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
 @Controller
 @SessionAttributes(value = "{LoggedUser,AllVideos}")

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,10 +29,10 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.example.model.User;
-import com.example.model.Video;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 import com.xuggle.xuggler.IContainer;
 import com.xuggle.xuggler.IContainerFormat;
 

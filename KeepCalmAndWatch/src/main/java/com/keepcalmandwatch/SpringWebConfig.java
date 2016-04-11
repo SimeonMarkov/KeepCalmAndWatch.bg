@@ -1,4 +1,4 @@
-package com.example;
+package com.keepcalmandwatch;
 
 import java.io.IOException;
 import java.util.Locale;

@@ -1,4 +1,4 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-import com.example.model.Comment;
-import com.example.model.Video;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.Video;
 
 public class DBVideoDAO implements IVideoDAO{
 	private DataSource dataSource;

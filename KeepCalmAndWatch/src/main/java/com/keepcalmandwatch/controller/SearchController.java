@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.keepcalmandwatch.controller;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.model.Video;
-import com.example.model.dao.DBUserDAO;
-import com.example.model.dao.DBVideoDAO;
+import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBUserDAO;
+import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
 @Controller
 public class SearchController {

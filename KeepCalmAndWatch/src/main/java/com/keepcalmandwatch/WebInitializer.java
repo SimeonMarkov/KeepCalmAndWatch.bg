@@ -1,4 +1,4 @@
-package com.example;
+package com.keepcalmandwatch;
 
 import org.springframework.web.servlet.support.
 AbstractAnnotationConfigDispatcherServletInitializer;

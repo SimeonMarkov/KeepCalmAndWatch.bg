@@ -1,4 +1,4 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +9,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.example.model.Comment;
-import com.example.model.User;
-import com.example.model.Video;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
 
 public class CommentMapper implements RowMapper<Comment> {
 

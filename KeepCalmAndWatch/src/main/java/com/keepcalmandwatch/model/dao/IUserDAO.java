@@ -1,12 +1,12 @@
-package com.example.model.dao;
+package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.example.model.Comment;
-import com.example.model.User;
+import com.keepcalmandwatch.model.Comment;
+import com.keepcalmandwatch.model.User;
 
 public interface IUserDAO {
 
