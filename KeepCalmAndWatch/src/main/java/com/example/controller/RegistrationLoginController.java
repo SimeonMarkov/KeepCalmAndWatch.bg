@@ -29,7 +29,7 @@ import com.example.model.dao.DBVideoDAO;
 
 
 @Controller
-@SessionAttributes(value={"LoggedUser","AllVideos"})
+@SessionAttributes(value={"LoggedUser", "AllVideos"})
 public class RegistrationLoginController {
 
 	@RequestMapping(value="/index", method = RequestMethod.GET)
@@ -38,9 +38,7 @@ public class RegistrationLoginController {
 		DBVideoDAO dbVideoDao = 
 			      (DBVideoDAO)context.getBean("DBVideoDAO");
 		try {
-			if(session.getAttribute("AllVideos") == null){
-				session.setAttribute("AllVideos",dbVideoDao.listVideos());
-			}
+			session.setAttribute("AllVideos",dbVideoDao.listVideos());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
