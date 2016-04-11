@@ -24,6 +24,8 @@
 			
 	<%@include file="header.jsp"%>		
 			
+			<br><br><br>
+			
 			<c:if test="${not empty LoggedUser}">
 				<p>Hello,${LoggedUser.channelName}</p>
 			</c:if>
@@ -37,7 +39,7 @@
 						</td>
 						<td><a
 							href="${pageContext.request.contextPath}/channel?user=${user.channelName}"><img
-								src="data:image/gif;base64,${user.avatar}" width="50px"
+								src="${user.avatar}" width="50px"
 								height="50px" /></a><br /> <br /></td>
 					</tr>
 				</c:forEach>
@@ -50,7 +52,7 @@
 						<li class="col-lg-3 col-sm-4 col-xs-6"><a
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 							title="${video.title}"> <img
-								src="data:image/gif;base64,${video.thumbnail}" alt="Barca"
+								src="${video.thumbnail}" width="150px" height="150px" alt="Barca"
 								class="img-responsive" width="auto" height="100px" />
 								<h2>${video.title}</h2> <span
 								class="glyphicon glyphicon-play-circle" ></span> <span

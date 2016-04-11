@@ -14,8 +14,6 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/channel.js"></script>
 <link href="${pageContext.request.contextPath}/css/.css"
 	rel="stylesheet">
@@ -24,93 +22,10 @@
 </head>
 <body>
 
-	<div class="container-fluid">
-
-		<div class="row content">
-			<div class="col-md-2 col-lg-2 sidenav">
-				<div id="logo">
-					<a href="/KeepCalmAndWatch"><img
-						src="${pageContext.request.contextPath}/img/logo.jpg"
-						width="200px" height="70px" /></a>
-				</div>
-			</div>
-
-			<div class="col-md-1 col-lg-1 "></div>
-			<div class="col-md-5 col-lg-5 ">
-				<br>
-				<div class="navbar-collapse collapse" id="navbar-collapsible">
-					<form action="search" method="get">
-						<div class="form-group" style="display: inline">
-							<div class="input-group">
-								<div class="input-group-btn">
-									<select name="category" class="btn btn-info dropdown-toggle"
-										data-toggle="dropdown">
-										<span class="glyphicon glyphicon-chevron-down"></span>
-										<option value="videos">Клипове</option>
-										<option value="users">Потребители</option>
-									</select>
-								</div>
-								<input type="text" class="form-control"
-									placeholder="What are searching for?" name="searchBar">
-								<span class="input-group-addon"><span
-									class="glyphicon glyphicon-search"></span> </span>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="col-md-2 col-lg-2 "></div>
-			<div class="col-md-1 col-lg-1 ">
-				<br>
-				<div id="upload">
-					<a href="upload" class="btn btn-primary btn-sm" id="upload"
-						type="submit">Качване</a>
-				</div>
-			</div>
-			<div class="col-md-1 col-lg-1 ">
-
-				<div id="img_container">
-				<c:if test="${not empty LoggedUser}">
-					<div id="avatar">
-						<img class="img-circle" alt="" width="50" height="51"
-							src="data:image/gif;base64,${LoggedUser.avatar}" />
-					</div>
-				</c:if>
-
-					<div class="dropdown">
-						<button class="btn btn-default 	" type="button"
-							data-toggle="dropdown">
-							<br> <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-right" role="menu"
-							aria-labelledby="menu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="index">Начална страница</a></li>
-							<c:if test="${not empty LoggedUser}">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="profile">Моят профил</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="profile">Моят канал</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">Абонаменти</a></li>
-							</c:if>
-							<li role="presentation" class="divider"></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="${pageContext.request.contextPath}/logout">Изход</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-2 col-lg-2 sidenav">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a href="#section1">Начална страница</a></li>
-				<li><a href="#section2">Моят канал</a></li>
-				<li><a href="#section3">Абонаменти</a></li>
-				<li><a href="#section3">История</a></li>
-			</ul>
-		</div>
+	<%@include file="header.jsp"%>
+	
+	<br><br>
+	
 		<div class="col-md-1 col-lg-1"></div>
 		<div class="col-lg-8 col-md-8">
 			<div class="card hovercard">
@@ -120,16 +35,16 @@
 				</div>
 				<div class="useravatar">
 					<img alt=""
-						src="data:image/gif;base64,${ChosenUser.avatar}">
+						src="${ChosenUser.avatar}" height="150px" height="150px">
 				</div>
 
 			</div>
 			<div class="btn-pref btn-group btn-group-justified btn-group-lg"
 				role="group" aria-label="...">
 				<div class="btn-group" role="group">
-					<button type="button" id="stars" class="btn btn-primary"
+					<button type="button" id="favorites" class="btn btn-default"
 						href="#tab1" data-toggle="tab">
-						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 						<div class="hidden-xs">Информация</div>
 					</button>
 				</div>

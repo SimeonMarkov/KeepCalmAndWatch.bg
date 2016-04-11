@@ -105,8 +105,7 @@ a:hover {
 			<div class="description">${video.description}</div>
 		</div>
 	</div>
-	<br>
-	<br>
+
 	<br>
 	<br>
 	<br>
