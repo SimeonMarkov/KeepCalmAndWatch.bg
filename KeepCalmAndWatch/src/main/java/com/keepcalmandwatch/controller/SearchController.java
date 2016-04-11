@@ -54,6 +54,7 @@ public class SearchController {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		model.addAttribute("Category", category);
 		model.addAttribute("VideoSearch", videoDao.getVideosByCategory(category));
 		return "resultFromSearch";
 		

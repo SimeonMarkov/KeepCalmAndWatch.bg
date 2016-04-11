@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Comment;
 import com.keepcalmandwatch.model.Video;
+import com.xuggle.xuggler.IContainer;
 
 public class DBVideoDAO implements IVideoDAO{
 	private DataSource dataSource;
@@ -24,7 +25,11 @@ public class DBVideoDAO implements IVideoDAO{
 	@Override
 	public boolean addVideo(Video video) {
 		 String query = "INSERT INTO videos (title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";        
-		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername(), video.getCategory(), video.getDuration());
+		 IContainer container = IContainer.make();
+		 int result = container.open(video.getPath(), IContainer.Type.READ, null);
+		 long duration = container.getDuration();
+		 
+		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername(), video.getCategory(), duration);
 		 return true;
 
 	}
