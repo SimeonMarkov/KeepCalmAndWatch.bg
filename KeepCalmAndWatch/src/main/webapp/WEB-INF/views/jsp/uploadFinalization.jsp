@@ -25,8 +25,10 @@
 	<br>
 	<br>
 	<div>
-		<p>${message}</p>
-		<br>
+		<p style="font-size: 20px;">${message}</p>
+		<br> <a href="${pageContext.request.contextPath}/index"
+			style="text-decoration: none; font-size: 20px; color: green;">Back
+			to home page</a>
 	</div>
 	</div>
 	</div>
