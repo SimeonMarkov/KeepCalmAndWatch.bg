@@ -125,7 +125,7 @@ a:hover {
 						<textarea id="comment-post-text" class="comment-insert-text"></textarea>
 					</div>
 
-					<div id="comment-post-btn" class="comment-post-btn-wrapper" style="position: absolute; top: -50px; left: 800px; width: 100px;"><a href="favorite?v=${video.id }" style="text-decoration: none; color: white;">Любими</a></div>
+					<div class="comment-post-btn-wrapper" style="position: absolute; top: -50px; left: 800px; width: 100px;"><a href="favorite?v=${video.id }" style="text-decoration: none; color: white;">Любими</a></div>
 					<div id="comment-post-btn" class="comment-post-btn-wrapper"
 						data-toggle="modal" data-target="#myModal" style="width: 90px;">Публикувай</div>
 								
