@@ -101,7 +101,10 @@ a:hover {
 				<source src="${video.path}" type="video/webm" />
 			</video>
 			<div>
+			<br>
 				<h2>${video.title}</h2>
+				<br>
+				
 			</div>
 			<div class="description">${video.description}</div>
 		</div>
@@ -122,9 +125,10 @@ a:hover {
 						<textarea id="comment-post-text" class="comment-insert-text"></textarea>
 					</div>
 
+					<div id="comment-post-btn" class="comment-post-btn-wrapper" style="position: absolute; top: -50px; left: 800px; width: 100px;"><a href="favorite?v=${video.id }" style="text-decoration: none; color: white;">Харесване</a></div>
 					<div id="comment-post-btn" class="comment-post-btn-wrapper"
 						data-toggle="modal" data-target="#myModal">Post</div>
-								<div id="comment-post-btn" class="comment-post-btn-wrapper"><a href="favorite?v=${video.id }">Харесване</a></div>
+								
 					<c:if test="${empty LoggedUser}">
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" role="dialog">
