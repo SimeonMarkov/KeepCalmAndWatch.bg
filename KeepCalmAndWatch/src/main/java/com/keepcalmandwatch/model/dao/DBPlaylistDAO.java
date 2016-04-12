@@ -2,16 +2,20 @@ package com.keepcalmandwatch.model.dao;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.queryGraphDocBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Playlist;
 import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
 
 public class DBPlaylistDAO implements IPlaylistDAO{
 	private DataSource dataSource;
@@ -69,5 +73,23 @@ public class DBPlaylistDAO implements IPlaylistDAO{
 		String query = "INSERT INTO playlists_to_videos (date_added, playlist_id, videos_id) VALUES (?, ?, ?);";
 		jdbcTemplateObject.update(query, Date.valueOf(LocalDate.now()), favorites.getId(), videoID);
 		return true;
+	}
+	
+	public boolean removeFromFavorites(Playlist favorites, int videoID){
+		String query = "DELETE FROM playlists_to_videos WHERE playlist_id=? AND videos_id=?;";
+		jdbcTemplateObject.update(query, favorites.getId(), videoID);
+		return true;
+	}
+	
+	public List<Video> getFavoriteVideos(Playlist favorites){
+		String query = "SELECT videos_id FROM keepcalmandwatch.playlists_to_videos WHERE playlist_id = ?;";
+		List<Integer> videoIDs = jdbcTemplateObject.queryForList(query, Integer.class, favorites.getId());
+		List<Video> videos = new ArrayList<Video>();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		for(Integer i : videoIDs){
+			videos.add(videoDao.getVideo(i));
+		}
+		return videos;
 	}
 }

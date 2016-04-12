@@ -73,9 +73,10 @@ public class UserController {
 			return "error";
 		}
 		List<Video> videosForChannelName = videoDao.getVideosForChannelName(channelName);
-
+		List<Video> favoriteVideosForChannel = playlistDAO.getFavoriteVideos(chosenUser.getFavorites());
 		model.addAttribute("ChosenUser", chosenUser);
 		model.addAttribute("VideosForChannelName", videosForChannelName);
+		model.addAttribute("favorites", favoriteVideosForChannel);
 		if(user != null && chosenUser != null){
 			if(userDao.isSubscribed(chosenUser, user)){
 				model.addAttribute("subscribed", true);

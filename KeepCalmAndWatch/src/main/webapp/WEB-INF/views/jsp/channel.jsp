@@ -59,8 +59,8 @@
 			<div class="btn-group" role="group">
 				<button type="button" id="following" class="btn btn-default"
 					href="#tab3" data-toggle="tab">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<div class="hidden-xs">Плейлисти</div>
+					<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+					<div class="hidden-xs">Любими</div>
 				</button>
 			</div>
 		</div>
@@ -111,7 +111,7 @@
 				</div>
 				<div class="tab-pane fade in" id="tab3">
 					<ul class="list-unstyled video-list-thumbs row">
-						<c:forEach var="video" items="${VideosForChannelName}">
+						<c:forEach var="video" items="${favorites}">
 							<li class="col-lg-3 col-sm-4 col-xs-6"><a
 								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 								title="${video.title}"> <img src="${video.thumbnail}"
