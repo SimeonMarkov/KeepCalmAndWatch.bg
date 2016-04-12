@@ -70,7 +70,7 @@
 						title="${video.title}"> <img
 							src="https://s3.eu-central-1.amazonaws.com/keep-calm-thumbnails/mqdefault.jpg"
 							height="150px" width="150px" />
-					</a></li
+					</a></li>
 				</c:forEach>
 			</div>
 		</div>
