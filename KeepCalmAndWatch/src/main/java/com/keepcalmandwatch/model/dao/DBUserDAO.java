@@ -1,16 +1,20 @@
 package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Comment;
 import com.keepcalmandwatch.model.User;
+import com.keepcalmandwatch.model.Video;
 
 public class DBUserDAO implements IUserDAO {
 	private DataSource dataSource;
@@ -133,5 +137,17 @@ public class DBUserDAO implements IUserDAO {
 		String query = "DELETE FROM keepcalmandwatch.users_subscribers WHERE subscription=(SELECT username FROM users WHERE username=?) AND subscriber=( (SELECT username FROM users WHERE username=?));";
 		jdbcTemplateObject.update(query, subscription.getUsername(), subscriber.getUsername());
 		return true;
+	}
+	
+	public List<User> getSubscriptions(User user){
+		String query = "SELECT subscription FROM users_subscribers WHERE subscriber=?;";
+		List<String> subscriptions = jdbcTemplateObject.queryForList(query, String.class, user.getUsername());
+		List<User> users = new ArrayList<User>();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		for(String sub : subscriptions){
+			users.add(userDao.getUser(sub));
+		}
+		return users;
 	}
 }

@@ -102,7 +102,7 @@
 								<li><a href="index">Начална страница</a></li>
 								<li><a href="profile">Моят профил</a></li>
 								<li><a href="${pageContext.request.contextPath}/channel?user=${LoggedUser.channelName}">Моят канал</a></li>
-								<li><a href="#">Абонаменти</a></li>
+								<li><a href="subscriptions">Абонаменти</a></li>
 								<li><a class="divider"></a></li>
 								<li><a href="${pageContext.request.contextPath}/logout">Изход
 								</a></li>

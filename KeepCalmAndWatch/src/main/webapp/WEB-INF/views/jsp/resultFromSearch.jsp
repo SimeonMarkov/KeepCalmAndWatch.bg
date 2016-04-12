@@ -53,17 +53,16 @@
 						href="${pageContext.request.contextPath}/category?c=News">Новини</a></li>
 				</ul>
 			</div>
-			<c:if test="${not empty LoggedUser}">
+			
 				<p>
-				<h2>Здравейте, ${LoggedUser.channelName}!</h2>
+				<h2>Резултати от търсенето:</h2>
 				</p>
-			</c:if>
-			<c:if test="${empty LoggedUser}">
+		
 				<br>
 				<br>
-			</c:if>
+			
 			<c:if test="${not empty requestScope.VideoSearch}">
-				<p style="font-size: 30px;">${Category}</p>
+				<p style="font-size: 30px;">${displayCategory}</p>
 				<div class="tab-pane fade in" id="tab2">
 					<ul class="list-unstyled video-list-thumbs row">
 						<c:forEach var="video" items="${requestScope.VideoSearch}">

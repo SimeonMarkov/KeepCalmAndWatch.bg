@@ -38,7 +38,7 @@
 						<li><a
 							href="${pageContext.request.contextPath}/channel?user=${LoggedUser.channelName}">Моят
 								канал</a></li>
-						<li><a href="#section3">Абонаменти</a></li>
+						<li><a href="subscriptions">Абонаменти</a></li>
 						<li><a href="favoriteVideos">Любими</a></li>
 					</c:if>
 					<li><a class="divider"></a></li>
