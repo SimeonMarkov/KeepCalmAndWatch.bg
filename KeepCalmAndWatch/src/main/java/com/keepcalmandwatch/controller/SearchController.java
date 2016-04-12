@@ -2,6 +2,8 @@ package com.keepcalmandwatch.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBPlaylistDAO;
 import com.keepcalmandwatch.model.dao.DBUserDAO;
 import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
@@ -60,4 +64,22 @@ public class SearchController {
 		
 	}
 	
+	@RequestMapping(value = "/favoriteVideos", method=RequestMethod.GET)
+	public String favoriteVideos(Model model, HttpSession session){
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		DBPlaylistDAO playlistDAO = (DBPlaylistDAO)context.getBean("DBPlaylistDAO");
+		User user = null;
+		if (session.getAttribute("LoggedUser") != null) {
+			user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+			user.setFavorites(playlistDAO.getFavorites(user));
+		}else{
+			return "redirect:login";
+		}
+		model.addAttribute("VideoSearch", playlistDAO.getFavoriteVideos(user.getFavorites()));
+		return "resultFromSearch";
+		
+	}
 }
