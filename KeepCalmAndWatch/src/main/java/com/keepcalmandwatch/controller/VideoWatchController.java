@@ -45,6 +45,7 @@ public class VideoWatchController {
 		Video video = null;
 		try {
 			video = videoJDBCTemplate.getVideo(id);
+			model.addAttribute("uploader", video.getUploader().getUsername());
 		} catch (EmptyResultDataAccessException e) {
 			model.addAttribute("badUrl", HttpStatus.NOT_FOUND);
 			return "error";

@@ -102,7 +102,7 @@ a:hover {
 			</video>
 			<div>
 			<br>
-				<h2>${video.title}</h2>
+				<h2>Uploaded by ${requestScope.uploader}</h2>
 				<br>
 				
 			</div>
