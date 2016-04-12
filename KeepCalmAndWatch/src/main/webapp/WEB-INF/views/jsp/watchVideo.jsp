@@ -124,6 +124,7 @@ a:hover {
 
 					<div id="comment-post-btn" class="comment-post-btn-wrapper"
 						data-toggle="modal" data-target="#myModal">Post</div>
+								<div id="comment-post-btn" class="comment-post-btn-wrapper"><a href="favorite?v=${video.id }">Харесване</a></div>
 					<c:if test="${empty LoggedUser}">
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" role="dialog">

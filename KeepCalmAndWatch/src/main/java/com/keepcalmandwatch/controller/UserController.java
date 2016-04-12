@@ -31,6 +31,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBPlaylistDAO;
 import com.keepcalmandwatch.model.dao.DBUserDAO;
 import com.keepcalmandwatch.model.dao.DBVideoDAO;
 import com.xuggle.xuggler.IContainer;
@@ -57,15 +58,16 @@ public class UserController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
+		DBPlaylistDAO playlistDAO = (DBPlaylistDAO)context.getBean("DBPlaylistDAO");
 		User user = null;
 		if (session.getAttribute("LoggedUser") != null) {
 			user = (User) session.getAttribute("LoggedUser");
 			model.addAttribute(user);
-			
 		}
 		User chosenUser = null;
 		try {
 			chosenUser = userDao.getUserBChannelName(channelName);
+			chosenUser.setFavorites(playlistDAO.getFavorites(chosenUser));
 		} catch (EmptyResultDataAccessException e) {
 			model.addAttribute("noSuchUser", HttpStatus.NOT_FOUND);
 			return "error";

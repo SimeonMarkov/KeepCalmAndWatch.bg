@@ -30,6 +30,7 @@ import com.google.gson.JsonParser;
 import com.keepcalmandwatch.model.Comment;
 import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
+import com.keepcalmandwatch.model.dao.DBPlaylistDAO;
 import com.keepcalmandwatch.model.dao.DBUserDAO;
 import com.keepcalmandwatch.model.dao.DBVideoDAO;
 
@@ -38,12 +39,9 @@ import com.keepcalmandwatch.model.dao.DBVideoDAO;
 public class VideoWatchController {
 
 	@RequestMapping(value = "/watchVideo", method = RequestMethod.GET)
-	public String watchVideo(Model model, @RequestParam("v") int id,
-			HttpSession session) {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"beans.xml");
-		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context
-				.getBean("DBVideoDAO");
+	public String watchVideo(Model model, @RequestParam("v") int id, HttpSession session) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBVideoDAO videoJDBCTemplate = (DBVideoDAO) context.getBean("DBVideoDAO");
 		Video video = null;
 		try {
 			video = videoJDBCTemplate.getVideo(id);
@@ -51,10 +49,9 @@ public class VideoWatchController {
 			model.addAttribute("badUrl", HttpStatus.NOT_FOUND);
 			return "error";
 		}
-		List<Comment> commentsToCurrentVideo = videoJDBCTemplate
-				.getCommentsForSingleVideo(id);
-		
-		//get all videos from the same category
+		List<Comment> commentsToCurrentVideo = videoJDBCTemplate.getCommentsForSingleVideo(id);
+
+		// get all videos from the same category
 		List<Video> suggestedVideos = videoJDBCTemplate.getVideosByCategory(video.getCategory());
 		suggestedVideos.remove(video);
 		Collections.reverse(suggestedVideos);
@@ -76,25 +73,42 @@ public class VideoWatchController {
 															// int videoId){
 		System.out.println(json);
 
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"beans.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
 		DBVideoDAO videoDao = (DBVideoDAO) context.getBean("DBVideoDAO");
 		JsonObject jsonObjectParsed = (JsonObject) new JsonParser().parse(json);
 		Comment comment = new Comment();
-		System.out.println("json---> "
-				+ jsonObjectParsed.get("text").getAsString());
+		System.out.println("json---> " + jsonObjectParsed.get("text").getAsString());
 		comment.setText(jsonObjectParsed.get("text").getAsString());
 		comment.setDatetime(LocalDateTime.now());
 		comment.setLikes(0);
 		comment.setDislikes(0);
-		
+
 		User user = userDao.getUserBChannelName(jsonObjectParsed.get("channelName").getAsString());
 		comment.setUser(user);
-		
+
 		Video video = videoDao.getVideo(jsonObjectParsed.get("videoId").getAsInt());
 		comment.setVideo(video);
-		
+
 		userDao.addComment(comment);
+	}
+
+	@RequestMapping(value = "/favorite", method = RequestMethod.GET)
+	public String favorite(Model model, @RequestParam("v") int id, HttpSession session) {
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		DBUserDAO userDao = (DBUserDAO) context.getBean("DBUserDAO");
+		DBPlaylistDAO playlistDAO = (DBPlaylistDAO)context.getBean("DBPlaylistDAO");
+		User user = null;
+		if (session.getAttribute("LoggedUser") != null) {
+			user = (User) session.getAttribute("LoggedUser");
+			model.addAttribute(user);
+			user.setFavorites(playlistDAO.getFavorites(user));
+			playlistDAO.addToFavorites(user.getFavorites(), id);
+		}else{
+			return "redirect:login";
+		}
+		
+		return "redirect:watchVideo?v=" + id;
 	}
 }

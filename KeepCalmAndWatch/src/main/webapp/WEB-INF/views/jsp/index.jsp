@@ -54,7 +54,7 @@
 			<div class="tab-pane fade in" id="tab2">
 				<ul class="list-unstyled video-list-thumbs row">
 					<c:forEach var="video" items="${sessionScope.AllVideos}">
-						<li class="col-lg-3 col-sm-4 col-xs-6"><a
+						<li class="col-lg-3 col-sm-4 col-xs-6" style="height: 200px;"><a
 							href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 							title="${video.title}"> <img
 								src="${video.thumbnail}" 

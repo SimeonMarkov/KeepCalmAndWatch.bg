@@ -109,6 +109,20 @@
 						</c:forEach>
 					</ul>
 				</div>
+				<div class="tab-pane fade in" id="tab3">
+					<ul class="list-unstyled video-list-thumbs row">
+						<c:forEach var="video" items="${VideosForChannelName}">
+							<li class="col-lg-3 col-sm-4 col-xs-6"><a
+								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
+								title="${video.title}"> <img src="${video.thumbnail}"
+									alt="Barca" class="img-responsive" height="130px" />
+									<h2>${video.title}</h2> <span
+									class="glyphicon glyphicon-play-circle"></span> <span
+									class="duration">03:15</span>
+							</a></li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 		</div>
 
