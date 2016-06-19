@@ -1,6 +1,5 @@
 package com.keepcalmandwatch.model.dao;
 
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,11 +7,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class VideoMapper implements RowMapper<Video>{
 
-	@SuppressWarnings("restriction")
 	@Override
 	public Video mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Video video = new Video();
@@ -28,8 +25,6 @@ public class VideoMapper implements RowMapper<Video>{
 		User user = new User();
 		user.setUsername(rs.getString("users_username"));
 		video.setUploader(user);
-		video.setCategory(rs.getString("category"));
-		video.setDuration(rs.getDouble("duration"));
 	    return video;
 	}
 

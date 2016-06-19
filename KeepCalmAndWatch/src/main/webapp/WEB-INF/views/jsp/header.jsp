@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="forms" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
@@ -11,6 +11,8 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico"
 	type="image/png" />
+<link href="css/popuo-box.css" rel="stylesheet" type="text/css"
+	media="all" />
 
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -43,7 +45,7 @@
 <body>
 
 	<div class="container-fluid">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-fixed-top"></nav>
 		<div class="navbar-header">
 			<div class="row">
 
@@ -62,10 +64,10 @@
 											<select name="category"
 												class="btn btn-custom dropdown-toggle"
 												data-toggle="dropdown">
-												<span class="glyphicon glyphicon-chevron-down"></span>
+
 												<option value="videos">Клипове</option>
 												<option value="users">Потребители</option>
-											</select>
+											</select> <span class="glyphicon glyphicon-chevron-down"></span>
 										</div>
 										<input type="text" class="form-control"
 											placeholder="Търсене..." name="searchBar"> <span
@@ -94,14 +96,15 @@
 					<div class="dropdown-position">
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button"
-								id="menu1" data-toggle="dropdown"> &nbsp 
-								 <span class="caret"
-									style=""></span>
+								id="menu1" data-toggle="dropdown">
+								<span class="caret" style=""></span>
 							</button>
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="index">Начална страница</a></li>
 								<li><a href="profile">Моят профил</a></li>
-								<li><a href="${pageContext.request.contextPath}/channel?user=${LoggedUser.channelName}">Моят канал</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/channel?user=${LoggedUser.channelName}">Моят
+										канал</a></li>
 								<li><a href="subscriptions">Абонаменти</a></li>
 								<li><a class="divider"></a></li>
 								<li><a href="${pageContext.request.contextPath}/logout">Изход
@@ -122,8 +125,7 @@
 								<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Регистрация</a>
 								<!-- pop-up-box -->
 								<script type="text/javascript" src="js/modernizr.custom.min.js"></script>
-								<link href="css/popuo-box.css" rel="stylesheet" type="text/css"
-									media="all" />
+
 								<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
 								<!--//pop-up-box -->
 								<div id="small-dialog2" class="mfp-hide">
@@ -136,7 +138,7 @@
 													<div class="form-group">
 														<input name="username" id="username"
 															class="form-control input-sm"
-															placeholder="Потребителско име" required="required"/>
+															placeholder="Потребителско име" required="required" />
 													</div>
 												</div>
 												<div class="col-xs-6 col-sm-6 col-md-6">
@@ -145,7 +147,7 @@
 															class="form-control input-sm" placeholder="Имейл адрес"
 															required="required"
 															pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"
-															 required="required"/>
+															required="required" />
 													</div>
 												</div>
 											</div>
@@ -153,7 +155,8 @@
 												<div class="col-xs-6 col-sm-12 col-md-12">
 													<div class="form-group">
 														<input name="channelName" id="channelName"
-															class="form-control input-sm" placeholder="Име на канала" required="required"/>
+															class="form-control input-sm" placeholder="Име на канала"
+															required="required" />
 													</div>
 												</div>
 											</div>
@@ -161,7 +164,8 @@
 												<div class="col-xs-6 col-sm-6 col-md-6">
 													<div class="form-group">
 														<input type="password" name="password" id="password"
-															class="form-control input-sm" placeholder="Парола" required="required"/>
+															class="form-control input-sm" placeholder="Парола"
+															required="required" />
 													</div>
 												</div>
 												<div class="col-xs-6 col-sm-6 col-md-6">
@@ -229,14 +233,12 @@
 						</div>
 					</div>
 				</div>
+			</c:if>
 		</div>
 
-		</c:if>
+
 		<div class="clearfix"></div>
 	</div>
 	<div class="clearfix"></div>
-	</div>
-	</nav>
-	</div>
 </body>
 </html>

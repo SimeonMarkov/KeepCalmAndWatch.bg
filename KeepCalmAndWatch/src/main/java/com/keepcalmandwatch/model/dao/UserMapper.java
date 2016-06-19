@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.keepcalmandwatch.model.Playlist;
 import com.keepcalmandwatch.model.User;
 
 public class UserMapper implements RowMapper<User> {
@@ -20,7 +19,6 @@ public class UserMapper implements RowMapper<User> {
 		user.setDescription(rs.getString("description"));
 		user.setAvatar(rs.getString("avatar"));
 		user.setRegistrationDate(rs.getDate("registration_date"));
-		user.setBackground(rs.getString("background"));
 		return user;
 	}
 

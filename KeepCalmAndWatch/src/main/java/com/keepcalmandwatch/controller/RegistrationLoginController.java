@@ -4,7 +4,6 @@ package com.keepcalmandwatch.controller;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Base64;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +12,6 @@ import org.bouncycastle.jcajce.provider.digest.SHA3.DigestSHA3;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +30,7 @@ import com.keepcalmandwatch.model.dao.DBVideoDAO;
 @SessionAttributes(value={"LoggedUser", "AllVideos"})
 public class RegistrationLoginController {
 
+	@SuppressWarnings("resource")
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String loadHomePage(ModelMap modelMap ,HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -49,6 +48,7 @@ public class RegistrationLoginController {
 	    return "index";
 	}	
 	
+	@SuppressWarnings({ "unused", "resource" })
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView getToLoginPage(ModelMap modelMap, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -58,6 +58,7 @@ public class RegistrationLoginController {
 		return new ModelAndView("login", "command", new User());
 	}	
 	
+	@SuppressWarnings("resource")
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String submitLogin(ModelMap modelMap, HttpSession session, @ModelAttribute("SpringWeb")User user, @RequestParam String username, @RequestParam String password, final RedirectAttributes redirectAttributes) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -73,6 +74,7 @@ public class RegistrationLoginController {
 	    return "redirect:/index";
 	}
 	
+	@SuppressWarnings({ "unused", "resource" })
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 
 	public ModelAndView register(ModelMap modelMap, HttpSession session) {
@@ -83,6 +85,7 @@ public class RegistrationLoginController {
 		return new ModelAndView("register", "command", new User());
 	}
 
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute("SpringWeb") User user, ModelMap modelMap,
 			final RedirectAttributes redirectAttributes) {

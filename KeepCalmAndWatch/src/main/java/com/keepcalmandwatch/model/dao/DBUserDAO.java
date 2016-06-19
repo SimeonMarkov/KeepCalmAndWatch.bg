@@ -14,15 +14,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Comment;
 import com.keepcalmandwatch.model.User;
-import com.keepcalmandwatch.model.Video;
 
 public class DBUserDAO implements IUserDAO {
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
@@ -61,7 +58,7 @@ public class DBUserDAO implements IUserDAO {
 	}
 	
 	public List<User> getAllUsersByChannelName(String channelName){
-		String query = "select username,password,email,channel_name,description,avatar,registration_date,background from users where channel_name like '%" + channelName +"%'";
+		String query = "select username,password,email,channel_name,description,avatar,registration_date from users where channel_name like '%" + channelName +"%'";
 		List<User> users = jdbcTemplateObject.query(query, new UserMapper());
 		return users;
 	}
@@ -83,7 +80,7 @@ public class DBUserDAO implements IUserDAO {
 	public boolean userExist(String username){
 		String query = "SELECT username FROM keepcalmandwatch.users WHERE username = ?";
 			try {
-				String s = jdbcTemplateObject.queryForObject(query, String.class, username);
+				jdbcTemplateObject.queryForObject(query, String.class, username);
 			} catch (EmptyResultDataAccessException e) {
 				return false;
 			}
@@ -93,7 +90,7 @@ public class DBUserDAO implements IUserDAO {
 	public boolean channelExist(String channel){
 		String query = "SELECT email FROM keepcalmandwatch.users WHERE email = ?;";
 		try {
-			String s = jdbcTemplateObject.queryForObject(query, String.class, channel);
+			jdbcTemplateObject.queryForObject(query, String.class, channel);
 		} catch (EmptyResultDataAccessException e) {
 			return false;
 		}
@@ -104,7 +101,7 @@ public class DBUserDAO implements IUserDAO {
 		String query = "SELECT channel_name FROM keepcalmandwatch.users WHERE channel_name = ?;";
 		
 		try {
-			String s = jdbcTemplateObject.queryForObject(query, String.class, email);
+			jdbcTemplateObject.queryForObject(query, String.class, email);
 		} catch (EmptyResultDataAccessException e) {
 			return false;
 		}
@@ -126,7 +123,7 @@ public class DBUserDAO implements IUserDAO {
 	public boolean isSubscribed(User subscription, User subscriber){
 		String query = "SELECT subscription FROM keepcalmandwatch.users_subscribers WHERE subscription=(SELECT username FROM users WHERE username=?) AND subscriber=( (SELECT username FROM users WHERE username=?));";
 		try {
-			String s = jdbcTemplateObject.queryForObject(query, String.class, subscription.getUsername(), subscriber.getUsername());
+			jdbcTemplateObject.queryForObject(query, String.class, subscription.getUsername(), subscriber.getUsername());
 		} catch (EmptyResultDataAccessException e) {
 			return false;
 		}
@@ -139,6 +136,7 @@ public class DBUserDAO implements IUserDAO {
 		return true;
 	}
 	
+	@SuppressWarnings("resource")
 	public List<User> getSubscriptions(User user){
 		String query = "SELECT subscription FROM users_subscribers WHERE subscriber=?;";
 		List<String> subscriptions = jdbcTemplateObject.queryForList(query, String.class, user.getUsername());

@@ -44,21 +44,21 @@
 			role="group" aria-label="...">
 			<div class="btn-group" role="group">
 				<button type="button" id="favorites" class="btn btn-primary"
-					href="#tab1" data-toggle="tab">
+					onclick="location.href='#tab1'" data-toggle="tab">
 					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 					<div class="hidden-xs">Информация</div>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="button" id="favorites" class="btn btn-default"
-					href="#tab2" data-toggle="tab">
+					onclick="location.href='#tab2'" data-toggle="tab">
 					<span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
 					<div class="hidden-xs">Клипове</div>
 				</button>
 			</div>
 			<div class="btn-group" role="group">
 				<button type="button" id="following" class="btn btn-default"
-					href="#tab3" data-toggle="tab">
+					onclick="location.href='#tab3'" data-toggle="tab">
 					<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
 					<div class="hidden-xs">Любими</div>
 				</button>
@@ -70,7 +70,7 @@
 			<div class="tab-content">
 				<div class="tab-pane fade in active" id="tab1">
 					<div class="card-info">
-						<span class="card-title"><h1>${ChosenUser.channelName}</h1></span>
+						<h1><span class="card-title">${ChosenUser.channelName}</span></h1>
 					</div>
 					<c:if test="${not empty LoggedUser && ChosenUser.channelName ne LoggedUser.channelName}">
 						<div id="subscribe">
@@ -98,28 +98,28 @@
 				<div class="tab-pane fade in" id="tab2">
 					<ul class="list-unstyled video-list-thumbs row">
 						<c:forEach var="video" items="${VideosForChannelName}">
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							<li class="col-lg-3 col-sm-4 col-xs-6"><h2><a
 								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 								title="${video.title}"> <img src="${video.thumbnail}"
 									alt="Barca" class="img-responsive" height="130px" />
-									<h2>${video.title}</h2> <span
+									${video.title}<span
 									class="glyphicon glyphicon-play-circle"></span> <span
 									class="duration">03:15</span>
-							</a></li>
+							</a></h2></li>
 						</c:forEach>
 					</ul>
 				</div>
 				<div class="tab-pane fade in" id="tab3">
 					<ul class="list-unstyled video-list-thumbs row">
 						<c:forEach var="video" items="${favorites}">
-							<li class="col-lg-3 col-sm-4 col-xs-6"><a
+							<li class="col-lg-3 col-sm-4 col-xs-6"><h2><a
 								href="${pageContext.request.contextPath}/watchVideo?v=${video.id}"
 								title="${video.title}"> <img src="${video.thumbnail}"
 									alt="Barca" class="img-responsive" height="130px" />
-									<h2>${video.title}</h2> <span
+									${video.title} <span
 									class="glyphicon glyphicon-play-circle"></span> <span
 									class="duration">03:15</span>
-							</a></li>
+							</a></h2></li>
 						</c:forEach>
 					</ul>
 				</div>

@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.queryGraphDocBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,12 +17,10 @@ import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
 
 public class DBPlaylistDAO implements IPlaylistDAO{
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	@Override
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
@@ -53,7 +50,7 @@ public class DBPlaylistDAO implements IPlaylistDAO{
 	public boolean favoritesExists(User user){
 		String query = "SELECT playlist_id FROM playlists WHERE title='Favorites' AND users_username = ?;";
 		try {
-			Integer i = jdbcTemplateObject.queryForObject(query, Integer.class, user.getUsername());
+			jdbcTemplateObject.queryForObject(query, Integer.class, user.getUsername());
 		} catch (EmptyResultDataAccessException e) {
 			return false;
 		}
@@ -81,6 +78,7 @@ public class DBPlaylistDAO implements IPlaylistDAO{
 		return true;
 	}
 	
+	@SuppressWarnings("resource")
 	public List<Video> getFavoriteVideos(Playlist favorites){
 		String query = "SELECT videos_id FROM keepcalmandwatch.playlists_to_videos WHERE playlist_id = ?;";
 		List<Integer> videoIDs = jdbcTemplateObject.queryForList(query, Integer.class, favorites.getId());

@@ -1,26 +1,21 @@
 package com.keepcalmandwatch.model.dao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.keepcalmandwatch.model.Comment;
-import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
 import com.xuggle.xuggler.IContainer;
 
 public class DBVideoDAO implements IVideoDAO{
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 	
 	@Override
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
@@ -28,7 +23,7 @@ public class DBVideoDAO implements IVideoDAO{
 	public boolean addVideo(Video video) {
 		 String query = "INSERT INTO videos (title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";        
 		 IContainer container = IContainer.make();
-		 int result = container.open(video.getPath(), IContainer.Type.READ, null);
+		 container.open(video.getPath(), IContainer.Type.READ, null);
 		 long duration = container.getDuration();
 		 
 		 jdbcTemplateObject.update(query, video.getTitle(), video.getDescription(), video.getPath(), 0, 0, 0, video.getThumbnail(), video.getUploadDate(), video.getUploader().getUsername(), video.getCategory(), duration);
@@ -65,7 +60,7 @@ public class DBVideoDAO implements IVideoDAO{
 	}
 	@Override
 	public List<Video> listVideos() throws SQLException {
-		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username, category, duration from videos";
+		String query = "select videos_id, title, description, path, views, likes, dislikes, thumbnail, upload_date, users_username from videos";
 	      List <Video> videos = jdbcTemplateObject.query(query, 
 	                                new VideoMapper());
 	      return videos;

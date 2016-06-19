@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -34,13 +33,12 @@ import com.keepcalmandwatch.model.Video;
 import com.keepcalmandwatch.model.dao.DBPlaylistDAO;
 import com.keepcalmandwatch.model.dao.DBUserDAO;
 import com.keepcalmandwatch.model.dao.DBVideoDAO;
-import com.xuggle.xuggler.IContainer;
-import com.xuggle.xuggler.IContainerFormat;
 
 @Controller
 @SessionAttributes("LoggedUser")
 public class UserController {
 
+	@SuppressWarnings({ "unused", "resource" })
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -53,6 +51,7 @@ public class UserController {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/channel", method = RequestMethod.GET)
 	public String channel(Model model, @RequestParam("user") String channelName, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -85,6 +84,7 @@ public class UserController {
 		return "channel";
 	}
 
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String updateUser(ModelMap modelMap, HttpSession session, @RequestParam("channelName") String channelName,
 			@RequestParam("email") String email, WebRequest webRequest, @RequestParam("password") String password,
@@ -148,6 +148,7 @@ public class UserController {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/avatarUpdate", method = RequestMethod.POST)
 	public String updateUser(ModelMap modelMap, HttpSession session, WebRequest webRequest,
 			final RedirectAttributes redirectAttributes, @RequestParam("avatar") MultipartFile avatar) {
@@ -198,6 +199,7 @@ public class UserController {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/subscribe", method = RequestMethod.GET)
 	public String subscribe(Model model, @RequestParam("user") String channelName, HttpSession session, WebRequest webRequest){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -227,6 +229,7 @@ public class UserController {
 		return "channel";
 	}
 	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/unSubscribe", method = RequestMethod.GET)
 	public String unSubscribe(Model model, @RequestParam("user") String channelName, HttpSession session, WebRequest webRequest){
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");

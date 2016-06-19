@@ -27,7 +27,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.keepcalmandwatch.model.User;
 import com.keepcalmandwatch.model.Video;
-import com.keepcalmandwatch.model.dao.DBUserDAO;
 import com.keepcalmandwatch.model.dao.DBVideoDAO;
 import com.xuggle.xuggler.IContainer;
 import com.xuggle.xuggler.IContainerFormat;
@@ -37,17 +36,19 @@ import com.xuggle.xuggler.IContainerFormat;
 @SessionAttributes("LoggedUser")
 public class UploadController {
 
+	@SuppressWarnings("resource")
 	@RequestMapping(method = RequestMethod.GET)
 	public String goToUpload(ModelMap modelMap, HttpSession session) {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"beans.xml");
-		DBUserDAO userJDBCTemplate = (DBUserDAO) context.getBean("DBUserDAO");
+		context.getBean("DBUserDAO");
 		if (!(session.getAttribute("LoggedUser") != null)) {
 			return "redirect:/login";
 		}
 		return "upload";
 	}
 
+	@SuppressWarnings("resource")
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView confirmUpload(ModelMap model,
 			@RequestParam("title") String title,
@@ -101,7 +102,7 @@ public class UploadController {
 				thumbfos.write(thumbnail.getBytes());
 				thumbfos.close();
 				IContainer container = IContainer.make();
-				int result = container.open(fos, IContainerFormat.make());
+				container.open(fos, IContainerFormat.make());
 				long duration = container.getDuration();
 				System.out.println(duration);
 			} catch (IOException e1) {
@@ -129,7 +130,7 @@ public class UploadController {
 			video.setDislikes(0);
 			video.setThumbnail(thumbnailPath);
 			video.setUploadDate(Date.valueOf(LocalDate.now()));
-			User user = (User) model.get("LoggedUser");
+			model.get("LoggedUser");
 			video.setUploader((User) model.get("LoggedUser"));
 			video.setCategory(category);
 			

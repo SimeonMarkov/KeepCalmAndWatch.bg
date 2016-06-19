@@ -15,6 +15,7 @@ import com.keepcalmandwatch.model.Video;
 
 public class CommentMapper implements RowMapper<Comment> {
 
+	@SuppressWarnings("resource")
 	@Override
 	public Comment mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Comment comment = new Comment();
